@@ -2,5 +2,5 @@
     <div class="header">Items</div>  {{categoryId}}
     this is a list of category items
     
-    <ch-item ng-repeat="item in items"></ch-item>
+    <ch-item ng-repeat="item in items | filter: {categoryId: categoryId}" url="item.imageUrl" id="item.id" info="item.info" title="item.title" price="item.price"></ch-item>
 </div>

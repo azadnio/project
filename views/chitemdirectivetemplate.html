@@ -1,0 +1,18 @@
+<div>
+    <center><b>{{item.title}}</b></center>
+    <div style="min-height: 3em; padding: 5px; font-size: 14px;">{{item.info}}</div>
+    <span>Price {{item.price}}</span>
+    <div style="position: relative; text-align: center; border: 1px solid; margin: 17px 0;">
+        <div ng-click="imageSlide(true)" class="image-slide-btn" style="height: 100%; width: 20px; background: rgba(0,0,0,.4); left: 0; position: absolute; top: 0;"></div>
+        <img ng-src="{{imgUrl}}">
+        <div ng-click="imageSlide(false)" class="image-slide-btn" style="height: 100%; width: 20px; background: rgba(0,0,0,.4); right: 0; position: absolute; top: 0;"></div>
+    </div>
+    Order Quantity <input type="number" min="1" ng-model="item.qty"><span ng-bind="item.unit"></span>
+    <div style="text-align: right;">
+        <button ng-click="addItemToOrder()" ng-class="{disabled:itemAdded}" class="ctrlButton primary">{{getBtnCaption()}}</button>
+        <button class="ctrlButton secondary">Close</button>
+    </div>
+</div>
+
+
+DELETE MEEEEEEEEEEEEEEE

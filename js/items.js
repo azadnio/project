@@ -86,6 +86,11 @@ app.directive('chItem',[function(){
     return{
         restrict: 'E',
         replace:true,
-        template:'<div>THIS IS AN ITEM</div>'
+        template: '<div class="item-prev-template">'+
+                '<div class="item-title">{{title}}</div>'+
+                '<div class="item-image-wrap"><span class="item-price">{{price}}</span><img ng-src="{{url}}" class="item-prev-image"></div>'+
+                '<div class="item-desc">{{info}}</div>'+
+                '<button ng-if="$parent.userLogedIn" ng-class="{disabled:isItemAddedToOrder()}" class="add-to-order" ng-click="addToOrder()">{{getBtnCaption()}}</button>'+
+                '<a href="" ng-click="viewItem()" style=" color: blue; text-decoration: none; text-transform: uppercase;">View</a></div>'  
     };
 }]);
