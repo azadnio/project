@@ -7,7 +7,7 @@ app.controller('itemsViewController',['$scope','itmesProvider','$routeParams','$
     
     $scope.view = './views/categoryitems.html';
     if($scope.itemId)
-        $scope.view = './views/item.html';
+        $scope.view = './views/itemview.html';
         
     if(!$scope.categoryId)
         $scope.categoryId = $scope.items[0].categoryId;
@@ -82,3 +82,10 @@ app.factory('itmesProvider',[function(){
     };
 }]);
 
+app.directive('chItem',[function(){
+    return{
+        restrict: 'E',
+        replace:true,
+        template:'<div>THIS IS AN ITEM</div>'
+    };
+}]);

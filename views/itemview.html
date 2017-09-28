@@ -1,4 +1,5 @@
 <div ng-controller="itemcontroller" class="item-view">
+    <div ng-if="item">
     <h1>{{item.name}}</h1>
     <img id="clicked-image" title="Click to close">
     <div class="image-slider">
@@ -13,4 +14,10 @@
     </div>
     <div><b>Price - {{item.price}}</b></div>
     <div>{{item.description}}</div>
+    </div>
+    
+    <div>
+        <h1>Oops cannot find the item you looking for</h1>
+        TO DO STYLE it
+    </div>
 </div>
