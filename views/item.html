@@ -1,4 +1,16 @@
-<div ng-controller="itemcontroller">
+<div ng-controller="itemcontroller" class="item-view">
     <h1>{{item.name}}</h1>
+    <img id="clicked-image" title="Click to close">
+    <div class="image-slider">
+        <span id='image-count'>Image {{selectedImageIndex + 1}} of {{item.images.length}}</span>
+        <div class="image-slide-handle-left" ng-click="slide(-1)" ng-if='item.images.length > 1'>
+            <div class="arrow-left"></div>
+        </div>
+        <img class="item-image" ng-class='{"selected": selectedImageIndex === $index}' title="Click to view full size" ng-repeat="image in item.images" ng-src="images/{{image}}" ng-click="zoomImage('images/' + image)">   
+        <div class="image-slide-handle-right" ng-click="slide(1)" ng-if='item.images.length > 1'>
+            <div class="arrow-right"></div>
+        </div>
+    </div>
+    <div><b>Price - {{item.price}}</b></div>
     <div>{{item.description}}</div>
 </div>

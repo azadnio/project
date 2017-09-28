@@ -9,19 +9,43 @@ app.controller('itemsViewController',['$scope','itmesProvider','$routeParams','$
     if($scope.itemId)
         $scope.view = './views/item.html';
         
-    $scope.selectedCategoryId = $scope.items[0].categoryId;
-        
-    $scope.currentPath = $location.absUrl();
+    if(!$scope.categoryId)
+        $scope.categoryId = $scope.items[0].categoryId;
+    
+    
 }]);
 
-app.controller('itemcontroller',['$scope','$routeParams','itmesProvider',function($scope, $routeParams,itmesProvider){
+app.controller('itemcontroller',['$scope','$routeParams','itmesProvider','$element',function($scope, $routeParams,itmesProvider ,$element,$timeout){
         
     var itemId = $routeParams.itemId;
     
     $scope.item = itmesProvider.getItemByItemId(itemId);
-
+    
+    $scope.slide = function(count){
         
+        if($scope.selectedImageIndex + count > $scope.item.images.length -1)
+            $scope.selectedImageIndex = 0;
+        else if($scope.selectedImageIndex + count < 0)
+            $scope.selectedImageIndex = $scope.item.images.length - 1;
+        else 
+            $scope.selectedImageIndex += count;
+    };
+    
+    $scope.selectedImageIndex = 0;
+    
+    
+    //supportive functions and variables for view user clicked image in original/zoomed view
+    var clickedImageHolder = angular.element($element[0].querySelector('#clicked-image'));
+    clickedImageHolder.on('click',function(){
+        clickedImageHolder.removeClass('clicked-image');
+        clickedImageHolder.attr('src', '');
+    });
+    $scope.zoomImage = function(imagePath){
+        clickedImageHolder.attr('src', imagePath);
+        clickedImageHolder.addClass('clicked-image');
+    };
 }]);
+
 
 app.factory('itmesProvider',[function(){
         
@@ -34,7 +58,8 @@ app.factory('itmesProvider',[function(){
             categoryId:'cat_'+i,
             name:'item 1',
             description: 'this siisd sisdvnsdvnvasvasvasdvnavv adfvfvbfav uav auisv avuavvisdfvfv',
-            price:'1000 rs'
+            price:'1000 rs',
+            images:['doorhandle2.jpg','doorhandle.jpg','doorhanle.jpg']
         });
     }
         

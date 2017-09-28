@@ -38,7 +38,7 @@
 .left-view-panel ul a{
     color: #5d0505;
     text-decoration: none;
-        padding: 5px 15px;
+    padding: 5px 15px;
     cursor: pointer;
     font-size: 20px;
     display: block; 
@@ -56,4 +56,95 @@
 
 .selected-category{
     background-color: yellow;
+}
+
+.item-view .image-slider{
+    width: 30em;
+    height: 20em;
+    overflow: hidden;
+    position: relative;
+    background-color: white;
+}
+.item-view .image-slider img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    margin-left: 100%;
+    position: absolute;
+}
+
+.item-view .image-slider img.selected{
+    margin-left: 0;
+}
+
+.image-slide-handle-right,
+.image-slide-handle-left{
+    position: absolute;
+    height: 100%;
+    background-color: #797171;
+    width: 50px;
+    opacity: 0.5;
+    top: 0;
+    transition: 0.2s;
+    z-index: 1;
+}
+
+.image-slide-handle-right{
+    right: -50px;
+    
+}
+
+.image-slide-handle-left{
+    left: -50px;    
+}
+
+.item-view .image-slider:hover .image-slide-handle-right{
+    right: 0;
+}
+
+.item-view .image-slider:hover .image-slide-handle-left{
+    left: 0;
+}
+
+.item-view #clicked-image.clicked-image{
+    background: #5f5d5d ;
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    object-fit: none;
+    display: block;
+}
+.item-view #clicked-image{
+    width: 0;
+    height: 0;
+    margin: 5%;
+    border-radius: 10px;
+    display: none;
+    
+}
+.arrow-right,
+.arrow-left{
+    top: 40%;
+    position: relative;
+    margin: auto;
+    width: 0;
+}
+.arrow-right {
+    border-top: 40px solid transparent;
+    border-bottom: 40px solid transparent;
+    border-left: 30px solid #0a0a0a;
+}
+
+.arrow-left {
+    border-top: 40px solid transparent;
+    border-bottom: 40px solid transparent;
+    border-right:30px solid #0a0a0a; 
+}
+
+#image-count{
+    position: absolute;
+    z-index: 1;
 }
