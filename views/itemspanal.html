@@ -1,0 +1,15 @@
+<div class="flex">
+    
+    <div class="left-view-panel">
+        <div class="header">Category</div>    
+        <ul>
+            <li ng-repeat="item in items | unique : 'category'">
+                
+                <a ng-href="./#/items/{{item.categoryId}}" style="padding: 1px 15px; cursor: pointer;"   ng-class="{'selected-category': categoryId == item.categoryId}" >{{item.category}}</a>
+            </li>
+        </ul>
+        
+    </div>
+    
+    <div ng-include="view"  class="right-selected-panel"></div>
+</div>

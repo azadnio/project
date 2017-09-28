@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Capital Hardware</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <script src="./angular/angular.min.js"></script>
+        <script src="./angular/angular-route.min.js"></script>
+        <script src="./app.js"></script>
+        <script src="./js/items.js"></script>
+        <script src="./js/utils.js"></script>
+    </head> 
+    <body ng-app="app" ng-controller="appController">
+        <div id="logo-container">LOGO COMES HERE</div>
+        <div id="nav-bar">
+            <a href="./">Home</a>
+            <a href="./#/items">Items</a>
+        </div>
+        <section>
+            <div ng-view></div>
+        </section>
+    </body>
+</html>
