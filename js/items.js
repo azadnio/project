@@ -59,7 +59,7 @@ app.factory('itmesProvider',[function(){
             name:'item 1',
             description: 'this siisd sisdvnsdvnvasvasvasdvnavv adfvfvbfav uav auisv avuavvisdfvfv',
             price:'1000 rs',
-            images:['doorhandle2.jpg','doorhandle.jpg','doorhanle.jpg']
+            images:['images/doorhandle2.jpg','images/doorhandle.jpg','images/doorhanle.jpg']
         });
     }
         
@@ -86,11 +86,49 @@ app.directive('chItem',[function(){
     return{
         restrict: 'E',
         replace:true,
-        template: '<div class="item-prev-template">'+
-                '<div class="item-title">{{title}}</div>'+
-                '<div class="item-image-wrap"><span class="item-price">{{price}}</span><img ng-src="{{url}}" class="item-prev-image"></div>'+
-                '<div class="item-desc">{{info}}</div>'+
+        scope: {itemId: '=id',price: '=price',name: '=name', description: '=description', url:'=url', categoryId:'=categoryid'},
+        controller: ['$scope','$element', '$attrs', function ($scope, element, attrs) {
+                
+                //check this item already added to order if it is disable adding again to the order
+                $scope.isItemAddedToOrder = function(){
+                    
+//                    for(var i = 0; i < $scope.$parent.orderedItems.length; i++)
+//                        if($scope.$parent.orderedItems[i].id === $scope.itemId){
+//                            $scope.itemAdded = true;
+//                            return true;
+//                        }
+//                    
+//                    $scope.itemAdded = false;
+                    return false;
+                };
+                
+                $scope.itemAdded = false;
+                
+//                $scope.addToOrder = function(){
+//                    if(!$scope.itemAdded)
+//                    //add to order
+//                        order.addItemToOrder($scope.$parent.orderedItems, $scope.itemId);
+//                    
+//                    else
+//                    //remove item from order
+//                        order.removeItemFromOrder($scope.$parent.orderedItems, $scope.itemId);
+//                    
+//                };
+                
+                $scope.getBtnCaption = function(){
+                    return ($scope.itemAdded) ? "Remove from Order" : "Add to order";
+                };
+                
+        }],
+    
+        template:'<div class="item-prev-template">'+
+                '<div class="item-title">{{name}}</div>'+
+                '<div class="item-image-wrap">'+
+                    '<span class="item-price">{{price}}</span>'+
+                    '<img ng-src="{{url}}" class="item-prev-image">'+
+                '</div>'+
+                '<div class="item-desc">{{description}}</div>'+
                 '<button ng-if="$parent.userLogedIn" ng-class="{disabled:isItemAddedToOrder()}" class="add-to-order" ng-click="addToOrder()">{{getBtnCaption()}}</button>'+
-                '<a href="" ng-click="viewItem()" style=" color: blue; text-decoration: none; text-transform: uppercase;">View</a></div>'  
+                '<a href="./#/items/{{categoryId}}/{{itemId}}" ng-click="viewItem()" style=" color: blue; text-decoration: none; text-transform: uppercase;">View</a></div>'  
     };
 }]);

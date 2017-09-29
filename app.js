@@ -43,4 +43,5 @@ app.controller('appController',['$scope',function($scope){
         
     $scope.test = 'this is home page';
         
+    $scope.userLogedIn = true;
 }]);
