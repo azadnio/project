@@ -1,3 +1,41 @@
-<div>
-    This is my order
+<div ng-controller="myOrdersController">
+    <div>
+        <label>
+            From:
+            <input type="text" ng-model="fDate">
+        </label>
+        <label>
+            To:
+            <input type="text" ng-model="tDate">
+        </label>
+        <button>Filter</button>
+        <label>
+            Status:
+            <select ng-model="filterStatus">
+                <option value="">All</option>
+                <option value="0">Pending</option>
+                <option value="1">Processing</option>
+                <option value="2">Dispatched</option>
+            </select>
+        </label>
+    </div>
+    <table>
+        <tr>
+            <th>Order ID</th>
+            <th>Order Date</th>   
+            <th>Status</th>
+            <th></th>
+            <th></th>
+            <th>Remarks</th>
+        </tr>
+        <tr ng-repeat="order in ordersList = (orders | filter:{status: filterStatus})">
+            <th>{{order.id}}</th>
+            <th>{{order.date}}</th>   
+            <th>{{ (order.status === 0)?'pending':(order.status === 1)?'processing':'dispatched'}}</th>
+            <th><button>view</button></th>
+            <th><button ng-click="cancelOrder(order.id)" ng-if="order.status == 'pending'">cancel</button></th>
+            <th>{{order.remarks}}</th>
+        </tr>
+    </table>
+    
 </div>

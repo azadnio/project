@@ -23,3 +23,24 @@ app.controller('myAccountController',['$scope','$routeParams',function($scope, $
     $scope.view = 'views/' + $scope.selectedSection + '.html';
 
 }]);
+
+app.controller('myOrdersController',['$scope',function($scope){
+
+    $scope.orders = [];
+    for(var i=0; i<10;i++)
+        $scope.orders.push({
+            id: '00' + i,
+            date:'20-01-2017',
+            status: i%3,
+            remarks:'some remarks'
+        });
+    
+    $scope.fDate = '';
+    $scope.tDate = '';
+    $scope.filterStatus = '';
+    
+    $scope.cancelOrder = function(orderId){
+        
+        console.log('cancelling order');
+    };    
+}]);
