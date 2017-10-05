@@ -1,3 +1,7 @@
+body{
+    background-image: url(images/blobkgde.gif);
+}
+
 #logo-container{
     background: activeborder;
     height: 50px;
@@ -23,7 +27,7 @@
 
 .right-selected-panel{
     flex: 1;
-    background: #a9a985;
+    background: rgba(130, 130, 130, 0.5);
 }
 
 .left-view-panel .header,

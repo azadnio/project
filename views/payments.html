@@ -1,3 +1,29 @@
-<div>
-    This is my payment
+<div ng-controller="myPaymentsController">
+    <div>
+        <label>
+            From:
+            <input type="text" ng-model="fDate">
+        </label>
+        <label>
+            To:
+            <input type="text" ng-model="tDate">
+        </label>
+        <button>Filter</button>
+    </div>
+    <table>
+        <tr>
+            <th>Payment ID</th>
+            <th>Received Date</th>   
+            <th>Amount</th>
+            <th></th>
+            <th>Remarks</th>
+        </tr>
+        <tr ng-repeat="payment in payments">
+            <th><a href="./#/account/payments/{{payment.id}}">{{payment.id}}</a></th>
+            <th>{{payment.receivedDate}}</th>  
+            <th>{{payment.amount}}</th> 
+            <th>{{payment.remarks}}</th>
+        </tr>
+    </table>
+    
 </div>

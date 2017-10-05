@@ -1,3 +1,31 @@
-<div>
-    This is my invoices
+<div ng-controller="myInvoicesProvider">
+    <div>
+        <label>
+            From:
+            <input type="text" ng-model="fDate">
+        </label>
+        <label>
+            To:
+            <input type="text" ng-model="tDate">
+        </label>
+        <button>Filter</button>
+    </div>
+    <table>
+        <tr>
+            <th>Invoice ID</th>
+            <th>Order ID</th>   
+            <th>Invoice Date</th>
+            <th>Total</th>
+            <th></th>
+            <th>Remarks</th>
+        </tr>
+        <tr ng-repeat="invoice in invoices">
+            <th><a href="./#/account/invoices/{{invoice.id}}">{{invoice.id}}</a></th>
+            <th>{{invoice.orderId}}</th>  
+            <th>{{invoice.date}}</th> 
+            <th>{{invoice.total}}</th> 
+            <th>{{invoice.remarks}}</th>
+        </tr>
+    </table>
+    
 </div>

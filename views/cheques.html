@@ -1,3 +1,42 @@
-<div>
-    This is my cheques
+<div ng-controller="myChequesController">
+    <div>
+        <label>
+            From:
+            <input type="text" ng-model="fDate">
+        </label>
+        <label>
+            To:
+            <input type="text" ng-model="tDate">
+        </label>
+        <button>Filter</button>
+        <label>
+            Status:
+            <select ng-model="filterStatus">
+                <option value="">All</option>
+                <option value="0">Pending</option>
+                <option value="1">Returned</option>
+                <option value="2">Passed</option>
+            </select>
+        </label>
+    </div>
+    <table>
+        <tr>
+            <th>Payment ID</th>
+            <th>Number</th>   
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th></th>
+            <th>Remarks</th>
+        </tr>
+        <tr ng-repeat="cheque in chequesList = (cheques | filter:{status: filterStatus})">
+            <th><a href="./#/account/payments/{{cheque.paymentId}}">{{cheque.paymentId}}</a></th>
+            <th><a href="./#/account/cheques/{{cheque.number}}-{{cheque.bank}}-{{cheque.accountNo}}">{{cheque.number}}</a></th>   
+            <th>{{cheque.date}}</th>  
+            <th>{{cheque.amount}}</th>  
+            <th>{{ (cheque.status === 0)?'pending':(order.status === 1)?'returned':'passed'}}</th>
+            <th>{{cheque.remarks}}</th>
+        </tr>
+    </table>
+    
 </div>

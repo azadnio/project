@@ -18,6 +18,7 @@
                 <option value="2">Dispatched</option>
             </select>
         </label>
+        <button>Create New Order</button>
     </div>
     <table>
         <tr>
@@ -29,10 +30,9 @@
             <th>Remarks</th>
         </tr>
         <tr ng-repeat="order in ordersList = (orders | filter:{status: filterStatus})">
-            <th>{{order.id}}</th>
+            <th><a href="./#/account/orders/{{order.id}}">{{order.id}}</a></th>
             <th>{{order.date}}</th>   
             <th>{{ (order.status === 0)?'pending':(order.status === 1)?'processing':'dispatched'}}</th>
-            <th><button>view</button></th>
             <th><button ng-click="cancelOrder(order.id)" ng-if="order.status == 'pending'">cancel</button></th>
             <th>{{order.remarks}}</th>
         </tr>
