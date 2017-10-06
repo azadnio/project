@@ -118,9 +118,10 @@ app.controller('myInvoicesProvider',['$scope',function($scope){
     
 }]);
 
-app.controller('orderController',['$scope','$routeParams',function($scope, $routeParams){
+app.controller('orderController',['$scope','$routeParams','accountsProvider',function($scope, $routeParams, accountsProvider){
         
     console.log($routeParams.id);
+    $scope.order = accountsProvider.getOrderDetails();
         
 }]);
 
@@ -146,6 +147,7 @@ app.factory('accountsProvider',[function(){
     return{
         getChequeDetails:function(chequeId){
             return {
+                chequeId: chequeId,
                 customer:'vamsi',
                 amount: 2000,
                 chequeNo: '123123',
@@ -153,7 +155,41 @@ app.factory('accountsProvider',[function(){
                 accountNo: '21412341234',
                 status:'pending',
                 remarks:'this is a test cheque'
-            }
+            };
+        },
+        getOrderDetails:function(orderId){
+            return {
+                orderId: orderId,
+                orderedDate: '20-02-2017',
+                status:1,
+                invoiceNo:'001',
+                remarks: 'this is a test order',
+                orderedItems:[{
+                    itemId:'000',
+                    name:'Test item',
+                    categoryId:'cat_1',
+                    orderedPrice: '5000',
+                    quantity:3
+                },{
+                    itemId:'000',
+                    name:'Test item',
+                    categoryId:'cat_2',
+                    orderedPrice: '5000',
+                    quantity:3
+                },{
+                    itemId:'000',
+                    name:'Test item',
+                    categoryId:'cat_3',
+                    orderedPrice: '5000',
+                    quantity:3
+                },{
+                    itemId:'000',
+                    name:'Test item',
+                    categoryId:'cat_4',
+                    orderedPrice: '5000',
+                    quantity:3
+                }]
+            };
         }
     };
 }]);

@@ -1,3 +1,24 @@
 <div ng-controller="orderController">
-    this an order
+    
+    <div>Order No : {{order.orderId}}</div>
+    <div>Ordered Date : {{order.orderedDate}}</div>
+    <div>Status : {{(order.status === 0)?'pending':(order.status === 1)?'processing':'dispatched'}}</div>
+    <div ng-if="order.status === 2">Invoice No: <a href="">{{order.invoiceNo}}</a></div>
+    <fieldset>
+        <legend>Ordered Items</legend>
+        <table>
+            <tr>
+                <th>Item ID</th>
+                <th>Item Name</th>
+                <th>Ordered Price</th>
+                <th>Quantity</th>
+            </tr>
+            <tr ng-repeat="items in order.orderedItems">
+                <td><a href="./#/items/{{items.categoryId}}/{{items.itemId}}">{{items.itemId}}</td>
+                <td>{{items.name}}</td>
+                <td>{{items.orderedPrice}}</td>
+                <td>{{items.quantity}}</td>
+            </tr>
+        </table>
+    </fieldset>
 </div>
