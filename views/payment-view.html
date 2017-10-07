@@ -1,3 +1,53 @@
 <div ng-controller="paymentController">
-    this a payment
+    <div><a href="./#/account/payments">Back to Payments</a></div>
+    <div>Received Date : <span>{{payment.receivedDate}}</span></div>
+    <div>Payment Type : <span>{{(payment.paymentType === 1)?'Regular Payment':(payment.paymentType === 2)?'Returned Cheques Payment':''}}</span></div>
+    <div>Cash Amount : <span>{{payment.cashAmount}}</span></div>
+    
+    <fieldset ng-if="payment.paymentType === 1 && payment.chequesList.length > 0">
+        
+        <legend>Cheque Payments Total : {{getChquePaymentsTotal()}}</legend>
+        <table>
+            <caption>Received Cheque List</caption>
+                <tr>
+                    <th>Number</th>   
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                </tr>
+                <tr ng-repeat="cheque in payment.chequesList">
+                    <th><a href="./#/account/cheques/{{cheque.number}}-{{cheque.bank}}-{{cheque.accountNo}}">{{cheque.number}}</a></th>   
+                    <th>{{cheque.date}}</th>  
+                    <th>{{cheque.amount}}</th>  
+                    <th>{{ (cheque.status === 0)?'pending':(order.status === 1)?'returned':'passed'}}</th>
+                    <th>{{cheque.remarks}}</th>
+                </tr>
+        </table>
+    </fieldset>
+    
+    <fieldset ng-if="payment.paymentType === 2 && payment.returnedChequesList.length > 0">
+        
+        <legend>Returned Total : {{getReturnedChquePaymentsTotal()}}</legend>
+        <table>
+            <caption>Returned Cheques List which this payment apply</caption>
+                <tr>
+                    <th>Number</th>   
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                </tr>
+                <tr ng-repeat="cheque in payment.returnedChequesList">
+                    <th><a href="./#/account/cheques/{{cheque.number}}-{{cheque.bank}}-{{cheque.accountNo}}">{{cheque.number}}</a></th>   
+                    <th>{{cheque.date}}</th>  
+                    <th>{{cheque.amount}}</th>  
+                    <th>{{ (cheque.status === 0)?'pending':(order.status === 1)?'returned':'passed'}}</th>
+                    <th>{{cheque.remarks}}</th>
+                </tr>
+        </table>
+    </fieldset>
+    <div>
+        <textarea>Remarks..</textarea>
+    </div>
 </div>

@@ -1,3 +1,29 @@
 <div ng-controller="invoiceController">
-    this an invoice
+    <div>Invoice No : <span>{{invoice.invoiceNo}}</span></div>
+    <div>Invoiced Date : <span>{{invoice.invoiceDate}}</span></div>
+    <div>Order No : <span>{{invoice.orderNo}}</span></div>
+    <div>Prepared and Checked By : <span>{{invoice.preparedAndCheckedby}}</span></div>
+    <button>Print</button>
+    <fieldset>
+        <legend>Invoiced Items</legend>
+        <table>
+            <tr>
+                <th>Item No</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Total</th>
+            </tr>
+            <tr ng-repeat="item in invoice.invoicedItems">
+                <td><a href="./#/items/{{item.categoryId}}/{{item.itemId}}">{{item.itemId}}</a></td>
+                <td>{{item.description}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.discount}}</td>
+                <td>{{item.quantity * (item.price - item.discount)}}</td>
+            </tr>            
+        </table>
+        <div>Sub Total : {{getInvoiceSubtotal()}}</div>
+    </fieldset>
 </div>

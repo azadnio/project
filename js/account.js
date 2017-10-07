@@ -131,15 +131,41 @@ app.controller('chequeController',['$scope','$routeParams','accountsProvider',fu
     $scope.cheque = accountsProvider.getChequeDetails($routeParams.id);
 }]);
 
-app.controller('paymentController',['$scope','$routeParams',function($scope, $routeParams){
+app.controller('paymentController',['$scope','$routeParams','accountsProvider',function($scope, $routeParams, accountsProvider){
         
-    console.log($routeParams.id);
+    $scope.payment = accountsProvider.getPaymentDetails($routeParams.id);
+    
+    $scope.getChquePaymentsTotal = function(){
+        var total = null;
+        $scope.payment.chequesList.forEach(function(cheque){
+            total += cheque.amount;
+        });
         
+        return (total)? total : '';
+    };
+    
+    $scope.getReturnedChquePaymentsTotal = function(){
+        var total = null;
+        $scope.payment.returnedChequesList.forEach(function(cheque){
+            total += cheque.amount;
+        });
+        
+        return (total)? total : '';
+    };
+    
 }]);
 
-app.controller('invoiceController',['$scope','$routeParams',function($scope, $routeParams){
+app.controller('invoiceController',['$scope','$routeParams','accountsProvider',function($scope, $routeParams, accountsProvider){
         
     console.log($routeParams.id);
+    
+    $scope.invoice = accountsProvider.getInvoiceDetails();
+    
+    $scope.getInvoiceSubtotal = function(){
+        var total = 'test total';
+        
+        return total;
+    };
         
 }]);
 
@@ -157,6 +183,7 @@ app.factory('accountsProvider',[function(){
                 remarks:'this is a test cheque'
             };
         },
+        
         getOrderDetails:function(orderId){
             return {
                 orderId: orderId,
@@ -188,6 +215,85 @@ app.factory('accountsProvider',[function(){
                     categoryId:'cat_4',
                     orderedPrice: '5000',
                     quantity:3
+                }]
+            };
+        },
+        
+        getPaymentDetails:function(paymentId){
+            return{
+                paymentId:paymentId,
+                paymentType:1,
+                receivedDate: '20-7-2017',
+                cashAmount: '10000',
+                chequesList:[{
+                        id: '001',
+                        date:'20-01-2017',
+                        status: 1,
+                        number: '1231',
+                        amount: 20000,
+                        paymentId: '000',         
+                        bank:'BOC',
+                        accountNo: '00000000',
+                        remarks:'some remarks'
+                },{
+                        id: '002',
+                        date:'20-01-2017',
+                        status: 1,
+                        number: '1233',
+                        amount: 20000,
+                        paymentId: '000',         
+                        bank:'BOC',
+                        accountNo: '00000000',
+                        remarks:'some remarks'
+                },{
+                        id: '003',
+                        date:'20-01-2017',
+                        status: 1,
+                        number: '1234',
+                        amount: 20000,
+                        paymentId: '000',         
+                        bank:'BOC',
+                        accountNo: '00000000',
+                        remarks:'some remarks'
+                }],
+                returnedChequesList: []
+            };
+        },
+        
+        getInvoiceDetails:function(invoiceId){
+            return {
+                invoiceNo:'001',
+                invoiceDate:'20-7-2017',
+                orderNo:'000',
+                preparedAndCheckedBy:'vamsithequeen',
+                invoicedItems:[{
+                        itemId:'000',
+                        categoryId:'cat_1',
+                        description:'test',
+                        quantity:4,
+                        price:2000,
+                        discount:0
+                },{
+                        itemId:'000',
+                        categoryId:'cat_1',
+                        description:'test',
+                        quantity:5,
+                        price:2000,
+                        discount:10
+                },{
+                        itemId:'000',
+                        categoryId:'cat_1',
+                        description:'test',
+                        quantity:3,
+                        price:2000,
+                        discount:5
+                },{
+                        itemId:'000',
+                        categoryId:'cat_1',
+                        description:'test',
+                        quantity:6,
+                        price:2000,
+                        discount:0
                 }]
             };
         }

@@ -1,5 +1,5 @@
 <div ng-controller="orderController">
-    
+    <div><a href="./#/account/orders"> < Back to Orders</a></div>
     <div>Order No : {{order.orderId}}</div>
     <div>Ordered Date : {{order.orderedDate}}</div>
     <div>Status : {{(order.status === 0)?'pending':(order.status === 1)?'processing':'dispatched'}}</div>
@@ -14,7 +14,7 @@
                 <th>Quantity</th>
             </tr>
             <tr ng-repeat="items in order.orderedItems">
-                <td><a href="./#/items/{{items.categoryId}}/{{items.itemId}}">{{items.itemId}}</td>
+                <td><a href="./#/items/{{items.categoryId}}/{{items.itemId}}">{{items.itemId}}</a></td>
                 <td>{{items.name}}</td>
                 <td>{{items.orderedPrice}}</td>
                 <td>{{items.quantity}}</td>
