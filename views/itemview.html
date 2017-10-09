@@ -1,7 +1,7 @@
 <div ng-controller="itemcontroller" class="item-view">
     <div ng-if="item">
         <h1>{{item.name}}</h1>
-        <img id="clicked-image" title="Click to close">
+        <img id="clicked-image" title="Click to close" >
         <div class="image-slider">
             <span id='image-count'>Image {{selectedImageIndex + 1}} of {{item.images.length}}</span>
             <div class="image-slide-handle-left" ng-click="slide(-1)" ng-if='item.images.length > 1'>
