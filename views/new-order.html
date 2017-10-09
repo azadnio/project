@@ -14,11 +14,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="item in newOrder">
-                <th>{{item.itemId}}</th>
-                <th>{{item.description}}</th>
-                <th>{{item.category}}</th>
-                <th>{{item.orderQuantity}}</th>
+            <tr ng-repeat="item in newOrder track by $index">
+                <th><a href=".#/items/{{item.categoryId}}/{{item.id}}" target="blank">{{item.id}}</a></th>
+                <th>{{item.name}}</th>
+                <th><a href=".#/items/{{item.categoryId}}" target="blank">{{item.category}}</a></th>
+                <th><input type="number" ng-model="item.quantity" min="1"></th>
                 <th>{{item.price}}</th>
                 <th>{{item.quantity * item.price}}</th>
                 <th><button ng-click="removeFromOrder(item)">Remove</button></th>
@@ -27,7 +27,7 @@
         <tfoot>
             <tr>
                 <td>Sub total : </td>
-                <td>calc..</td>
+                <td>{{getSubtotal()}}</td>
             </tr>
         </tfoot>
     </table>
