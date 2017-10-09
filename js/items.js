@@ -59,6 +59,7 @@ app.factory('itmesProvider',[function(){
             name:'item 1',
             description: 'this siisd sisdvnsdvnvasvasvasdvnavv adfvfvbfav uav auisv avuavvisdfvfv',
             price:'1000 rs',
+            quantity:1,
             images:['images/doorhandle2.jpg','images/doorhandle.jpg','images/doorhanle.jpg']
         });
     }
@@ -130,5 +131,18 @@ app.directive('chItem',[function(){
                 '<div class="item-desc">{{description}}</div>'+
                 '<button ng-if="$parent.userLogedIn" ng-class="{disabled:isItemAddedToOrder()}" class="add-to-order" ng-click="addToOrder()">{{getBtnCaption()}}</button>'+
                 '<a href="./#/items/{{categoryId}}/{{itemId}}" ng-click="viewItem()" style=" color: blue; text-decoration: none; text-transform: uppercase;">View</a></div>'  
+    };
+}]);
+
+app.directive('chNavigateBack',[function(){
+    return {
+        resctrict:'E',
+        replace:true,
+        controller:['$scope','$element',function($scope,$element){
+            $element.on('click',function(){
+                console.log('go back');
+            });
+        }],
+        template:'<button ng-if="chNavigateCount">Back</button>'
     };
 }]);

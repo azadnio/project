@@ -30,7 +30,12 @@ app.controller('myAccountController',['$scope','$routeParams',function($scope, $
     $scope.id = $routeParams.id;
     if($scope.id){
         switch(view){
-            case 'orders'   : view = 'order-view';     break;
+            case 'orders'   : 
+                if($routeParams.id.toLowerCase() === 'new')
+                    view = 'new-order';
+                else
+                    view = 'order-view';     
+                break;
             case 'payments' : view = 'payment-view';   break;
             case 'cheques'  : view = 'cheque-view';    break;
             case 'invoices' : view = 'invoice-view';   break;
@@ -60,6 +65,44 @@ app.controller('myOrdersController',['$scope',function($scope){
         
         console.log('cancelling order');
     };    
+    
+    
+    
+}]);
+
+app.controller('newOrderController',['$scope','modalDialogProvider','ordersProvider',function($scope, modalDialogProvider, ordersProvider){
+    
+    $scope.newOrder = ordersProvider.getOrderedItems();
+    
+    $scope.removeFromOrder = function(item){
+        ordersProvider.removeItem(item);
+    };
+    
+    $scope.showItemList = function(){
+         modalDialogProvider.showItemListDialog();
+     };
+     
+     
+    
+}]);
+
+app.controller('itemListController',['$scope','modalDialogProvider','itmesProvider','ordersProvider',function($scope, modalDialogProvider, itmesProvider,ordersProvider){
+        
+    $scope.items = itmesProvider.loadItems();
+        
+    $scope.close = function(){
+        modalDialogProvider.closeModalDialog();
+    };
+    
+    $scope.addItemToOrder = function(item){
+        ordersProvider.addItem(item);
+    };
+    
+    $scope.removeItemFromOrder = function(item){
+        ordersProvider.removeItem(item);
+    };
+    
+    $scope.isItemInOrder = ordersProvider.isItemInOrder;
 }]);
 
 app.controller('myChequesController',['$scope',function($scope){
@@ -296,6 +339,37 @@ app.factory('accountsProvider',[function(){
                         discount:0
                 }]
             };
+        }
+    };
+}]);
+
+app.factory('ordersProvider',[function(){
+    var myOrder = [{
+        itemId: '001',
+        name:'test',
+        category:'category',
+        categoryId:'cat_1',
+        price:210,
+        quantity:5
+    }];
+
+    return {
+        getOrderedItems:function(){
+            return myOrder;
+        },
+        addItem:function(item){
+            myOrder.push(item);
+        },
+        
+        removeItem:function(item){
+            myOrder.splice(myOrder.indexOf(item), 1);
+        },
+        isItemInOrder:function(itemId){
+            for (var i = 0; i < myOrder.length; i++) {
+                if(myOrder[i].id === itemId)
+                    return true;
+            }
+            return false;
         }
     };
 }]);

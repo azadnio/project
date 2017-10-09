@@ -32,3 +32,19 @@ app.filter('unique', function() {
       return output;
    };
 });
+
+app.factory('modalDialogProvider',[function(){
+    var ctrlScope;
+    return{
+        setScope:function(_scope){
+            ctrlScope = _scope;
+        },
+        
+        showItemListDialog:function(){
+            ctrlScope.modalDialogUrl = 'views/item-list.html';
+        },
+        closeModalDialog:function(){
+            ctrlScope.modalDialogUrl = '';
+        }
+    };
+}]);

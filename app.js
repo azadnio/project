@@ -39,9 +39,14 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
 }]);
 
 
-app.controller('appController',['$scope',function($scope){
+app.controller('appController',['$scope','modalDialogProvider',function($scope, modalDialogProvider){
         
     $scope.test = 'this is home page';
         
     $scope.userLogedIn = true;
+    
+    $scope.chNavigateCount = 0;
+    
+    $scope.modalDialogUrl = '';
+    modalDialogProvider.setScope($scope);
 }]);
