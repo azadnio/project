@@ -19,7 +19,7 @@ app.controller('myAccountController',['$scope','$routeParams',function($scope, $
     
     //routing templates
     $scope.selectedSection = $routeParams.section;
-    if(!$scope.selectedSection || ['orders','payments','cheques','invoices'].indexOf($scope.selectedSection) === -1)
+    if(!$scope.selectedSection || ['orders','payments','cheques','invoices','ledger'].indexOf($scope.selectedSection) === -1)
         $scope.selectedSection = 'orders'; //default section
     else
         $scope.selectedSection = $scope.selectedSection.toLowerCase();
@@ -212,6 +212,17 @@ app.controller('invoiceController',['$scope','$routeParams','accountsProvider',f
         
 }]);
 
+app.controller('ledgerController',['$scope','accountsProvider',function($scope, accountsProvider){
+    $scope.ledgerData = accountsProvider.getCustomerLedgerData();
+    
+//    transactiontype
+//    1 - invoice
+//    2 - payment
+//    3 - chqRtn
+//    4 - goodsReturn
+    
+}]);
+
 app.factory('accountsProvider',[function(){
     return{
         getChequeDetails:function(chequeId){
@@ -339,7 +350,53 @@ app.factory('accountsProvider',[function(){
                         discount:0
                 }]
             };
-        }
+        },
+        
+        getCustomerLedgerData:function(){
+            return {
+                month:4,
+                year:'2017',
+                bf: 1000,
+                data:[{
+                        date:'1-4-2017',
+                        transaction:'Invoice',
+                        invoiceNo:'000',
+                        amount:1000,
+                        isDebit:true,
+                        type:1
+                    },{
+                        date:'1-5-2017',
+                        transaction:'invoice',
+                        invoiceNo:'001',
+                        amount:1000,
+                        isDebit:true,
+                        type:1
+                    },{
+                        date:'1-5-2017',
+                        transaction:'payment',
+                        paymentNo:'001',
+                        amount:1000,
+                        isDebit:false,
+                        type:2
+                    },{
+                        date:'1-10-2017',
+                        transaction:'cheque return',
+                        chequeId:'000',
+                        bank:'BOC',
+                        accountNo:'21312312',
+                        amount:1000,
+                        isDebit:true,
+                        type:3
+                    },{
+                        date:'1-21-2017',
+                        transaction:'payment',
+                        invoiceNo:'000',
+                        amount:1000,
+                        isDebit:false,
+                        type:2
+                    }]
+            };
+        },
     };
 }]);
 
