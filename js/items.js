@@ -56,9 +56,9 @@ app.factory('itmesProvider',[function(){
             id: '00' + i,
             category:'cat '+i,
             categoryId:'cat_'+i,
-            name:'item 1',
+            name:'item ' + i ,
             description: 'this siisd sisdvnsdvnvasvasvasdvnavv adfvfvbfav uav auisv avuavvisdfvfv',
-            price:'1000 rs',
+            price:'1000',
             quantity:1,
             images:['images/doorhandle2.jpg','images/doorhandle.jpg','images/doorhanle.jpg']
         });

@@ -82,7 +82,13 @@ app.controller('newOrderController',['$scope','modalDialogProvider','ordersProvi
          modalDialogProvider.showItemListDialog();
      };
      
-     
+    $scope.getSubtotal = function(){
+        var total = 0;
+        $scope.newOrder.forEach(function(item){
+            total += item.quantity * item.price;
+        });
+        return total;
+    };
     
 }]);
 
@@ -402,7 +408,7 @@ app.factory('accountsProvider',[function(){
 
 app.factory('ordersProvider',[function(){
     var myOrder = [{
-        itemId: '001',
+        id: '001',
         name:'test',
         category:'category',
         categoryId:'cat_1',
@@ -423,7 +429,7 @@ app.factory('ordersProvider',[function(){
         },
         isItemInOrder:function(itemId){
             for (var i = 0; i < myOrder.length; i++) {
-                if(myOrder[i].id === itemId)
+                if(myOrder[i].id == itemId)
                     return true;
             }
             return false;

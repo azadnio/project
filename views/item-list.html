@@ -1,24 +1,29 @@
-<div class="modal-dialog-wrap" ng-controller="itemListController">
-    <span ng-click="close()">Close</span>
-    <table>
-        <tr>
-            <th>Item No</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th></th>
-        </tr>
-        <tr ng-repeat="item in items track by $index">
-            <th>{{item.id}}</th>
-            <th>{{item.category}}</th>
-            <th>{{item.name}}</th>
-            <th>{{item.price}}</th>
-            <th> <input type="number" ng-model="item.quantity"> </th>
-            <th ng-init="addedToOrder = isItemInOrder(item.id)">
-                <button ng-show="!addedToOrder" ng-click="addItemToOrder()" ng->Add</button>
-                <button ng-show="addedToOrder" ng-click="removeItemFromOrder()">Remove</button>
-            </th>
-        </tr>
-    </table>
+<div class="modal-dialog-wrap" >
+    <div class="modal-dialog-background"></div>
+    <div class="modal-dialog">
+        <span class="modal-dialog-close" ng-click="close()" title="Close">X</span>
+        <div class="modal-dialog-content" ng-controller="itemListController">
+        <table>
+            <tr>
+                <th>Item No</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="item in items track by $index">
+                <th><a href=".#/items/{{item.categoryId}}/{{item.id}}" target="blank">{{item.id}}</a></th>
+                <th><a href=".#/items/{{item.categoryId}}" target="blank">{{item.category}}</a></th>
+                <th>{{item.name}}</th>
+                <th>{{item.price}}</th>
+                <th> <input type="number" ng-model="item.quantity" min="1"> </th>
+                <th>
+                    <button ng-show="!isItemInOrder(item.id)" ng-click="addItemToOrder(item)" ng->Add</button>
+                    <button ng-show="isItemInOrder(item.id)" ng-click="removeItemFromOrder(item)">Remove</button>
+                </th>
+            </tr>
+        </table>
+            </div>
+    </div>
 </div>
