@@ -12,6 +12,10 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
             .when('/account', {
                 templateUrl: 'views/account.html',
                 controller: 'myAccountController'
+            })
+            .when('/profile',{
+                templateUrl: 'views/profile.html',
+                controller: 'profileController'
             });
 }]);
 
@@ -227,6 +231,22 @@ app.controller('ledgerController',['$scope','accountsProvider',function($scope, 
 //    3 - chqRtn
 //    4 - goodsReturn
     
+}]);
+
+app.controller('profileController',['$scope',function($scope){
+        
+    $scope.userData = {
+        name:'azad',
+        address:'test address',
+        city:'matale',
+        telephone:'89923823',
+        mobile:'7879879',
+        email:'test@email.com',
+        username:'username',
+        imageUrl:''
+    };//to do load from server
+    
+    $scope.passwords = { current:'', new1:'', new2:'' };
 }]);
 
 app.factory('accountsProvider',[function(){

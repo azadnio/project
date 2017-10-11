@@ -1,0 +1,15 @@
+<div ng-controller="profileController">
+    <img width="150" height="150" ng-src="userData.imageUrl">
+    <div>Name : <span>{{userData.name}}</span></div>
+    <div>Address : <textarea>{{userData.address}}</textarea></div>
+    <div>City : <span>{{userData.city}}</span></div>
+    <div>Telephone : <span>{{userData.telephone}}</span></div>
+    <div>Mobile : <span>{{userData.mobile}}</span></div>
+    <div>Email : <span>{{userData.email}}</span></div>
+    <fieldset>
+        <legend>Change password</legend>
+        <div><label>Current password :</label> <input type="password" ng-model="password.current"></div>
+        <div><label>New password :</label> <input type="password" ng-model="password.new1"></div>
+        <div><label>re-enter new password :</label> <input type="password" ng-model="password.new2"></div>
+    </fieldset>
+</div>
