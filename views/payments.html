@@ -1,5 +1,12 @@
-<div ng-controller="myPaymentsController">
+<div ng-controller="myPaymentsController" class="right-panel-content">
     <div>
+        <label>
+            Search Payment ID : <input type="text" ng-model="filterId">
+        </label>
+    </div>
+    <fieldset>
+        <legend>Date Range</legend>
+        
         <label>
             From:
             <input type="text" ng-model="fDate">
@@ -9,7 +16,7 @@
             <input type="text" ng-model="tDate">
         </label>
         <button>Filter</button>
-    </div>
+    </fieldset>
     <table>
         <tr>
             <th>Payment ID</th>

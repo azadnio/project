@@ -277,3 +277,11 @@ body{
     right: -15px;
     top: -15px;
 }
+
+.right-panel-content{
+    margin: 1% 5%;
+}
+
+.right-panel-content legend{
+    display: inline-block;
+}
