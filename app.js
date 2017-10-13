@@ -39,7 +39,7 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
 }]);
 
 
-app.controller('appController',['$scope','modalDialogProvider',function($scope, modalDialogProvider){
+app.controller('appController',['$scope','modalDialogProvider','$location',function($scope, modalDialogProvider, $location){
         
     $scope.test = 'this is home page';
         
@@ -49,4 +49,8 @@ app.controller('appController',['$scope','modalDialogProvider',function($scope, 
     
     $scope.modalDialogUrl = '';
     modalDialogProvider.setScope($scope);
+    
+    $scope.isActive =  function(viewLocation){
+        return $location.path().toLowerCase().indexOf(viewLocation) > - 1;
+    };
 }]);
