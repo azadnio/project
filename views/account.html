@@ -1,15 +1,13 @@
 <div class="flex">
     <div class="left-view-panel">
         <div class="header">Customer name</div>    
-        <ul>
-            <li>                
-                <a ng-href="./#/account/orders" style="padding: 1px 15px; cursor: pointer;"   ng-class="{'selected-category': selectedSection == 'orders'}" >Orders</a>
-                <a ng-href="./#/account/payments" style="padding: 1px 15px; cursor: pointer;"   ng-class="{'selected-category': selectedSection == 'payments'}" >Payments</a>
-                <a ng-href="./#/account/cheques" style="padding: 1px 15px; cursor: pointer;"   ng-class="{'selected-category': selectedSection == 'cheques'}" >Cheques</a>
-                <a ng-href="./#/account/invoices" style="padding: 1px 15px; cursor: pointer;"   ng-class="{'selected-category': selectedSection == 'invoices'}" >Invoices</a>
-                <a ng-href="./#/account/ledger" style="padding: 1px 15px; cursor: pointer;"   ng-class="{'selected-category': selectedSection == 'ledger'}" >Ledger</a>
-            </li>
-        </ul>
+        <div class="vertical-menu">              
+            <a ng-href="./#/account/orders" ng-class="{'selected-category': selectedSection == 'orders'}" >Orders</a>
+            <a ng-href="./#/account/payments" ng-class="{'selected-category': selectedSection == 'payments'}" >Payments</a>
+            <a ng-href="./#/account/cheques" ng-class="{'selected-category': selectedSection == 'cheques'}" >Cheques</a>
+            <a ng-href="./#/account/invoices" ng-class="{'selected-category': selectedSection == 'invoices'}" >Invoices</a>
+            <a ng-href="./#/account/ledger" ng-class="{'selected-category': selectedSection == 'ledger'}" >Ledger</a>
+        </div>
     </div>
     <div ng-include="view"  class="right-selected-panel"></div>
 </div>

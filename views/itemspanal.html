@@ -2,14 +2,11 @@
     
     <div class="left-view-panel">
         <div class="header">Category</div>    
-        <ul>
-            <li ng-repeat="item in items | unique : 'category'">
-                
-                <a ng-href="./#/items/{{item.categoryId}}" style="padding: 1px 15px; cursor: pointer;"   ng-class="{'selected-category': categoryId == item.categoryId}" >{{item.category}}</a>
-            </li>
-        </ul>
-        
+        <div class="vertical-menu">            
+            <a ng-repeat="item in items | unique : 'category'" ng-href="./#/items/{{item.categoryId}}" ng-class="{'selected-category': categoryId == item.categoryId}" >{{item.category}}</a>
+        </div>
+           
     </div>
-    
+        
     <div ng-include="view"  class="right-selected-panel"></div>
 </div>
