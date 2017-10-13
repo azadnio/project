@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Capital Hardware Administration</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../index.css">
+        <script src="../angular/angular.min.js"></script>
+        <script src="../angular/angular-route.min.js"></script>
+        <script src="./admin.js"></script>
+        <script src="./controllers.js"></script>
+<!--        <script src="./js/items.js"></script>
+        <script src="./js/account.js"></script>-->
+        <script src="../js/utils.js"></script>
+    </head> 
+    <body ng-app="app" ng-controller="appController">
+        <div id="logo-container">LOGO COMES HERE</div>
+        <div id="nav-bar">
+            <a href="./#/customers" ng-class="{ active: isActive('customers')}">Customers</a>
+            <a href="./#/payments" ng-class="{ active: isActive('payments')}">Payments</a>
+            <a href="./#/cheques" ng-class="{ active: isActive('cheques')}">Cheques</a>
+            <a href="./#/orders" ng-class="{ active: isActive('orders')}">Orders</a>
+            <a href="./#/invoices" ng-class="{ active: isActive('invoices')}">Invoices</a>
+            <a href="./#/reports" ng-class="{ active: isActive('reports')}">Reports</a>
+            <a >Logout</a>
+        </div>
+        <section>
+            <div ng-view></div>
+        </section>
+        <div ng-include="modalDialogUrl"></div>
+    </body>
+</html>
