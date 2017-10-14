@@ -1,0 +1,64 @@
+<div class="flex">
+    
+    <div class="left-view-panel">
+       <button>Create New Invoice</button>
+       <div>total invoices this month</div>
+       <div>total Payments last month</div>
+    </div>
+    
+    <div class="right-selected-panel">
+        
+        <fieldset>
+            <legend>Filter Orders</legend>
+            <label>
+                Customer:<input type="text">
+            </label>
+            <label>
+                From :
+                <input type="text">
+            </label>
+            <label>
+                To : 
+                <input type="text">
+            </label>
+            <label>
+                Status: 
+                <select ng-model="filterOrders.status">
+                    <option value="">All</option>
+                    <option value="0">Pending</option>
+                    <option value="1">Processing</option>
+                    <option value="2">Dispatched</option>
+                </select>
+            </label>
+            
+        </fieldset>
+        <div>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                </tr>
+                <tr ng-repeat="order in orders | filter: {status:filterOrders.status}" >
+                    <td>{{$index + 1}}</td>
+                    <td>{{order.id}}</td>
+                    <td>{{order.date}}</td>
+                    <td>{{order.customerName}}</td>
+                    <td>{{order.total}}</td>
+                    <td ng-switch="order.status">
+                        <span ng-switch-when="0">Pending <button>Invoice</button></span>
+                        <span ng-switch-when="1">Processing</span>
+                        <span ng-switch-when="2">Dispatched</span>
+                    </td>
+                    <td>{{order.remarks}}</td>
+                </tr>
+                    
+            </table>
+        </div>
+    </div>
+    
+</div>

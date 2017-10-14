@@ -1,6 +1,6 @@
 <div ng-controller="ledgerController">
     <div><label>Month : <select></select></label> <label>Year : <select></select></label></div>
-    <table>
+    <table ng-init="balance">
         <caption>Ledger</caption>
         <thead>
             <tr>
@@ -9,10 +9,11 @@
                 <th></th>
                 <th>Debit</th>
                 <th>Credit</th>
+                <th>Balance</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-if="ledgerData.bf">
+            <tr ng-if="ledgerData.bf" ng-init="balance = ledgerData.bf">
                 <td></td>
                 <td>Brought forward</td>
                 <td></td>
@@ -33,6 +34,7 @@
                 <td></td>
                 <td>{{(data.isDebit)?data.amount :''}}</td>
                 <td>{{(!data.isDebit)?data.amount :''}}</td>
+                <td></td>
             </tr>
         </tbody>
         <tfoot>

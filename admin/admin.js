@@ -15,10 +15,10 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
                 templateUrl: 'views/cheques.html',
                 controller: 'chequesController'
             }).
-                when('/orders', {
-//                    templateUrl: 'views/itemspanal.html',
-//            controller: 'itemsViewController'
-        }).
+            when('/orders', {
+                templateUrl: 'views/orders.html',
+                controller: 'ordersController'
+            }).
                 when('/reports', {
 //                    templateUrl: 'views/invoices.html',
 //            controller: 'invoicesController'
