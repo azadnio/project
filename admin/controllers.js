@@ -5,6 +5,36 @@ app.controller('customersController',['$scope','modalDialogProvider','customerPr
     
 }]);
 
+app.controller('chequesController',['$scope','modalDialogProvider','chequesProvider',function($scope, modalDialogProvider, chequesProvider){
+    
+    $scope.cheques = chequesProvider.loadCheques();
+    
+    
+}]);
+
+app.factory('chequesProvider',[function(){
+    
+    var cheques = [];
+        
+    for (var i = 0; i < 15; i++) {
+        cheques.push({
+            id:'00' + i,
+            chequeNo:'00000' + i,
+            customerId: '00' + i,
+            status: i%3,
+            amount: 20000,
+            date: '2-10-2017',
+            customerName:'customer ' + i,
+        });
+    }
+        
+    return{
+        loadCheques:function(){
+            return cheques;
+        },
+    };
+}]);
+
 app.factory('customerProvider',[function(){
     
     var customers = [];

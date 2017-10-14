@@ -3,18 +3,18 @@ var app = angular.module("app", ['ngRoute']);
 app.config(["$routeProvider", "$locationProvider",function($routeProvider, $locationProvider) {
 
         $routeProvider.
-                when('/customers', {
-                    templateUrl: 'views/customers.html',
-            controller: 'customersController'
-        }).
-                when('/payments', {
+            when('/customers', {
+                templateUrl: 'views/customers.html',
+                controller: 'customersController'
+            }).
+            when('/payments', {
 //                    templateUrl: 'views/itemspanal.html',
 //            controller: 'itemsViewController'
         }).
-                when('/cheques', {
-//                    templateUrl: 'views/itemspanal.html',
-//            controller: 'itemsViewController'
-        }).
+            when('/cheques', {
+                templateUrl: 'views/cheques.html',
+                controller: 'chequesController'
+            }).
                 when('/orders', {
 //                    templateUrl: 'views/itemspanal.html',
 //            controller: 'itemsViewController'
