@@ -19,7 +19,7 @@
             </label>
             <label>
                 Status :
-                <select>
+                <select ng-model="filterCheques.status">
                     <option value="">All</option>
                     <option value="0">Pending</option>
                     <option value="1">Returned</option>
@@ -38,7 +38,7 @@
                     <th>Status</th>
                     <th>Customer</th>
                 </tr>
-                <tr ng-repeat="cheque in cheques track by $index" >
+                <tr ng-repeat="cheque in cheques | filter : {status : filterCheques.status}" >
                     <td>{{$index}}</td>
                     <td>{{cheque.id}}</td>
                     <td>{{cheque.chequeNo}}</td>

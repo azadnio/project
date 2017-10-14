@@ -8,9 +8,9 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
                 controller: 'customersController'
             }).
             when('/payments', {
-//                    templateUrl: 'views/itemspanal.html',
-//            controller: 'itemsViewController'
-        }).
+                templateUrl: 'views/payments.html',
+                controller: 'paymentsController'
+            }).
             when('/cheques', {
                 templateUrl: 'views/cheques.html',
                 controller: 'chequesController'
@@ -20,13 +20,13 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
 //            controller: 'itemsViewController'
         }).
                 when('/reports', {
-//                    templateUrl: 'views/itemspanal.html',
-//            controller: 'itemsViewController'
+//                    templateUrl: 'views/invoices.html',
+//            controller: 'invoicesController'
         }).
-                when('/invoices', {
-//                    templateUrl: 'views/itemspanal.html',
-//            controller: 'itemsViewController'
-        }).
+            when('/invoices', {
+                templateUrl: 'views/invoices.html',
+                controller: 'invoicesController'
+            }).
         when('/home', {
 //            templateUrl: 'views/home.html'
         }).

@@ -2,6 +2,11 @@ app.controller('customersController',['$scope','modalDialogProvider','customerPr
     
     $scope.customers = customerProvider.loadCustomers();
     
+    $scope.filterCustomer = {
+        status:'',
+        toDate:'',
+        fromDate:''
+    };
     
 }]);
 
@@ -9,6 +14,11 @@ app.controller('chequesController',['$scope','modalDialogProvider','chequesProvi
     
     $scope.cheques = chequesProvider.loadCheques();
     
+    $scope.filterCheques = {
+        status:'',
+        toDate:'',
+        fromDate:''
+    };
     
 }]);
 
@@ -56,6 +66,73 @@ app.factory('customerProvider',[function(){
     return{
         loadCustomers:function(){
             return customers;
+        },
+    };
+}]);
+
+app.controller('paymentsController',['$scope','modalDialogProvider','paymentsProvider',function($scope, modalDialogProvider, paymentsProvider){
+    
+    $scope.payments = paymentsProvider.loadPayments();
+    
+    $scope.filterCheques = {
+        status:'',
+        toDate:'',
+        fromDate:''
+    };
+    
+}]);
+
+app.factory('paymentsProvider',[function(){
+    
+    var payments = [];
+        
+    for (var i = 0; i < 15; i++) {
+        payments.push({
+            id:'00' + i,
+            customerId: '00' + i,
+            amount: 20000,
+            date: '2-10-2017',
+            customerName:'customer ' + i,
+        });
+    }
+        
+    return{
+        loadPayments:function(){
+            return payments;
+        },
+    };
+}]);
+
+app.controller('invoicesController',['$scope','modalDialogProvider','invoicesProvider',function($scope, modalDialogProvider, invoicesProvider){
+    
+    $scope.invoices = invoicesProvider.loadInvoices();
+    
+    $scope.filterCheques = {
+        status:'',
+        toDate:'',
+        fromDate:''
+    };
+    
+}]);
+
+app.factory('invoicesProvider',[function(){
+    
+    var invoices = [];
+        
+    for (var i = 0; i < 15; i++) {
+        invoices.push({
+            id:'00' + i,
+            customerId: '00' + i,
+            total: 20000,
+            date: '2-10-2017',
+            customerName:'customer ' + i,
+            paymentStatus:i%2,
+        });
+    }
+        
+    return{
+        loadInvoices:function(){
+            return invoices;
         },
     };
 }]);

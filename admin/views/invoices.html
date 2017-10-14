@@ -1,0 +1,49 @@
+<div class="flex">
+    
+    <div class="left-view-panel">
+       <button>Create New Invoice</button>
+       <div>total invoices this month</div>
+       <div>total Payments last month</div>
+    </div>
+    
+    <div class="right-selected-panel">
+        
+        <fieldset>
+            <legend>Filter Invoices</legend>
+            <label>
+                Customer:<input type="text">
+            </label>
+            <label>
+                From :
+                <input type="text">
+            </label>
+            <label>
+                To : 
+                <input type="text">
+            </label>
+            
+        </fieldset>
+        <div>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Invoice Total</th>
+                    <th>Payment Status</th>
+                </tr>
+                <tr ng-repeat="invoice in invoices " >
+                    <td>{{$index + 1}}</td>
+                    <td>{{invoice.id}}</td>
+                    <td>{{invoice.date}}</td>
+                    <td>{{invoice.customerName}}</td>
+                    <td>{{invoice.amount}}</td>
+                    <td>{{(invoice.paymentStatus === 1)?'Paid':'Pending'}}</td>
+                </tr>
+                    
+            </table>
+        </div>
+    </div>
+    
+</div>

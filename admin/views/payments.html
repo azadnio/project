@@ -1,0 +1,47 @@
+<div class="flex">
+    
+    <div class="left-view-panel">
+       <button>Add new payment</button>
+       <div>total Payments this month</div>
+       <div>total Payments last month</div>
+    </div>
+    
+    <div class="right-selected-panel">
+        
+        <fieldset>
+            <legend>Filter payments</legend>
+            <label>
+                Customer:<input type="text">
+            </label>
+            <label>
+                From :
+                <input type="text">
+            </label>
+            <label>
+                To : 
+                <input type="text">
+            </label>
+            
+        </fieldset>
+        <div>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Amount</th>
+                </tr>
+                <tr ng-repeat="payment in payments " >
+                    <td>{{$index + 1}}</td>
+                    <td>{{payment.id}}</td>
+                    <td>{{payment.date}}</td>
+                    <td>{{payment.customerName}}</td>
+                    <td>{{payment.amount}}</td>
+                </tr>
+                    
+            </table>
+        </div>
+    </div>
+    
+</div>
