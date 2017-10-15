@@ -1,0 +1,68 @@
+<div class="flex">
+    
+    <div class="left-view-panel">
+       <button>Create an Order</button>
+       <button>Create a payment</button>
+    </div>
+    
+    <div class="right-selected-panel">
+        
+        <div><a href="./#/customers">Back to Customers</a></div>
+        
+        <form>
+            
+            <fieldset>
+                <legend>Personal Info</legend>
+                <label>
+                    Name : <input type="text" ng-model="customerInfo.name" > 
+                </label>
+                <label>
+                    Address: <textarea></textarea>
+                </label>
+                <label>
+                    City : <input type="text" ng-model="customerInfo.city" > 
+                </label>
+                <label>
+                    Telephone : <input type="text" ng-model="customerInfo.telephone" > 
+                </label>
+                <label>
+                    Mobile : <input type="text" ng-model="customerInfo.mobile" > 
+                </label>
+                <label>
+                    E-mail : <input type="text" ng-model="customerInfo.email" > 
+                </label>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Account Summary</legend>
+                <label>
+                    Credit Limit: <input type="text" ng-model="customerInfo.creditLimit">
+                </label>
+                <label ng-if="!addingNewCustomer">
+                    Return Cheques Total: <input type="text" ng-model="customerInfo.returnChequesTotal">
+                </label>
+                <label ng-if="!addingNewCustomer">
+                    Payment Balance: <input type="text" ng-model="customerInfo.paymentBalance">
+                </label>
+            </fieldset>
+            
+            <fieldset ng-if="!addingNewCustomer">
+                <legend>Other Info</legend>
+                <div>Added Date: {{customerInfo.addedDate}}</div>
+                <div>Added By: {{customerInfo.addedby}}</div>
+            </fieldset>
+            
+            <div ng-if="!addingNewCustomer">
+                <button>Update</button>
+            </div>
+            
+            <div ng-if="addingNewCustomer">
+                <button>Clear</button>
+                <button ng-click="addNew()">Save</button>
+            </div>
+                
+            
+        </form>        
+    </div>
+    
+</div>

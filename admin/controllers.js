@@ -1,12 +1,42 @@
-app.controller('customersController',['$scope','modalDialogProvider','customerProvider',function($scope, modalDialogProvider, customerProvider){
+app.controller('customersController',['$scope','$routeParams','customerProvider','$location',function($scope, $routeParams, customerProvider, $location){
     
-    $scope.customers = customerProvider.loadCustomers();
+    if($routeParams.id){
+        
+        if($routeParams.id.toLowerCase() === 'new'){
+            //adding a new customer
+            $scope.addingNewCustomer = true;
+        }
+        else{
+            //viewing customer info by id
+            $scope.customerInfo = customerProvider.getCustomerInfo($routeParams.id);
+            $scope.addingNewCustomer = false;
+        }        
+    }
+    else{
+        
+        $scope.customers    = customerProvider.loadCustomers();    
+        
+        //table sorting controls(accending or decending by property)
+        $scope.sort         = 'id';
+        $scope.reverse      = true;
+    }
     
     $scope.filterCustomer = {
         status:'',
         toDate:'',
         fromDate:''
     };
+    
+    $scope.addNew = function(){
+        if($scope.addingNewCustomer){
+            customerProvider.addNewCustomer($scope.customerInfo);
+            $location.path('/customers/' + $scope.customerInfo.id || '000')
+        }
+    };
+    
+    $scope.upadate = function(){
+        
+    }
     
 }]);
 
@@ -62,11 +92,32 @@ app.factory('customerProvider',[function(){
             
         });
     }
-        
     return{
         loadCustomers:function(){
             return customers;
         },
+        
+        getCustomerInfo:function(id){
+            return {
+                id:id,
+                name:'vamsi',
+                city:'matale',
+                telephone:'4505455',
+                mobile:'55452105',
+                email:'vamsi@test.com',
+                creditLimit:100000,
+                returnChequesTotal:20000,
+                paymentBalance:10000,
+                address:'the is a test address',
+                addedDate:'',
+                addedby:'',
+                status:1,
+            };
+        },
+        
+        addNewCustomer:function(customerData){
+            customers.push(customerData);
+        }
     };
 }]);
 
@@ -202,6 +253,40 @@ app.factory('ordersProvider',[function(){
     return{
         loadOrders:function(){
             return orders;
+        },
+    };
+}]);
+
+app.controller('itemsController',['$scope','modalDialogProvider','invoicesProvider',function($scope, modalDialogProvider, invoicesProvider){
+    
+    $scope.invoices = invoicesProvider.loadInvoices();
+    
+    $scope.filterCheques = {
+        status:'',
+        toDate:'',
+        fromDate:''
+    };
+    
+}]);
+
+app.factory('itemsProvider',[function(){
+    
+    var invoices = [];
+        
+    for (var i = 0; i < 15; i++) {
+        invoices.push({
+            id:'00' + i,
+            customerId: '00' + i,
+            total: 20000,
+            date: '2-10-2017',
+            customerName:'customer ' + i,
+            paymentStatus:i%2,
+        });
+    }
+        
+    return{
+        loadInvoices:function(){
+            return invoices;
         },
     };
 }]);
