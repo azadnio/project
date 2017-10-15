@@ -7,6 +7,10 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
                 templateUrl: 'views/customers.html',
                 controller: 'customersController'
             }).
+            when('/customers/:id', {
+                templateUrl: 'views/customer-view.html',
+                controller: 'customersController'
+            }).
             when('/payments', {
                 templateUrl: 'views/payments.html',
                 controller: 'paymentsController'
@@ -26,6 +30,10 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
             when('/invoices', {
                 templateUrl: 'views/invoices.html',
                 controller: 'invoicesController'
+            }).
+            when('/items', {
+                templateUrl: 'views/items.html',
+                controller: 'itemsController'
             }).
         when('/home', {
 //            templateUrl: 'views/home.html'

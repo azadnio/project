@@ -48,3 +48,31 @@ app.factory('modalDialogProvider',[function(){
         }
     };
 }]);
+
+app.directive('chTableSort',[function(){
+    //the parent controller must have sorting variable (sort, reverse) 
+    //those variables accessed by this directive
+    return {
+        resctrict:'E',
+        replace:true,
+        scope:{
+            text:'@',
+            value:'@'
+        },
+        controller:['$scope','$element',function($scope,$element){
+            $element.on('click',function(){
+                
+                if($scope.$parent.sort !== $scope.value){
+                    $scope.$parent.sort     = $scope.value;
+                    $scope.$parent.reverse  = false;
+                }
+                else{
+                    $scope.$parent.reverse = !$scope.$parent.reverse;
+                }
+                
+                $scope.$apply();
+            });
+        }],
+        template:'<a href="" class="table-sort" ng-class="{\'arrow-up\':$parent.reverse,\'arrow-down\':!$parent.reverse}">{{text}}<span ng-show="$parent.sort == value"></span></a>'
+    };
+}]);

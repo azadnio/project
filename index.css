@@ -297,3 +297,33 @@ body{
 .right-panel-content legend{
     display: inline-block;
 }
+
+.table-sort > span{
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    top: 5px;
+    position: absolute;
+    margin-left: 7px;
+    right: 0;
+}
+
+.arrow-up span{
+    border-bottom: 5px solid black;    
+}
+
+.arrow-down span{
+    border-top: 5px solid black;
+}
+
+.table-sort{
+    color: #01188d;
+    text-decoration: none;
+    position: relative;
+    padding-right: 14px;
+}
+
+.table-sort:hover{
+    text-decoration: underline;
+}
