@@ -22,14 +22,15 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
                 when('/reports', {
 //                    templateUrl: 'views/invoices.html',
 //            controller: 'invoicesController'
-        }).
+            }).
             when('/invoices', {
                 templateUrl: 'views/invoices.html',
                 controller: 'invoicesController'
             }).
-        when('/home', {
-//            templateUrl: 'views/home.html'
-        }).
+            when('/accounts', {
+                templateUrl: 'views/accounts.html',
+                controller: 'accountsController'
+            }).
                 //    when('/customer',{templateUrl: 'views/tabs/customer.php', 
         //        controller: 'customerController'
         //    }).

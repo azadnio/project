@@ -1,0 +1,45 @@
+<div class="flex">
+    
+    <div class="left-view-panel">
+       
+       <div><button>Create New Invoice</button></div>
+       <div><button>Create New Payment</button></div>
+    </div>
+    
+    <div class="right-selected-panel">
+        
+        <fieldset>
+            <legend>Filter Accounts</legend>
+            <label>
+                Customer:<input type="text">
+            </label>
+            <label>
+                <input type="checkbox">
+                Include Deleted Customers
+            </label>
+            
+        </fieldset>
+        <div>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Account ID</th>
+                    <th>Customer</th>
+                    <th>Balance</th>                    
+                    <th>Last Invoice Date</th>
+                    <th>Last Payment Date</th>
+                </tr>
+                <tr ng-repeat="account in accounts " >
+                    <td>{{$index + 1}}</td>
+                    <td>{{account.id}}</td>
+                    <td>{{account.customerName}}</td>
+                    <td>{{account.balance}}</td>
+                    <td>{{account.lastInvoiceDate}}</td>
+                    <td>{{account.lastPaymentDate}}</td>
+                </tr>
+                    
+            </table>
+        </div>
+    </div>
+    
+</div>

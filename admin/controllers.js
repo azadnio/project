@@ -149,6 +149,40 @@ app.controller('ordersController',['$scope','modalDialogProvider','ordersProvide
     
 }]);
 
+app.factory('accountsProvider',[function(){
+    
+    var accounts = [];
+        
+    for (var i = 0; i < 15; i++) {
+        accounts.push({
+            id:'00' + i,
+            customerId: '00' + i,
+            balance: 20000,
+            lastInvoiceDate: '2-10-2017',
+            lastPaymentDate: '2-10-2017',
+            customerName:'customer ' + i,
+        });
+    }
+        
+    return{
+        loadAccounts:function(){
+            return accounts;
+        },
+    };
+}]);
+
+app.controller('accountsController',['$scope','modalDialogProvider','accountsProvider',function($scope, modalDialogProvider, accountsProvider){
+    
+    $scope.accounts = accountsProvider.loadAccounts();
+    
+    $scope.filterOrders = {
+        status:'',
+        toDate:'',
+        fromDate:''
+    };
+    
+}]);
+
 app.factory('ordersProvider',[function(){
     
     var orders = [];
