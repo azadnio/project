@@ -7,6 +7,10 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
                 templateUrl: 'views/customers.html',
                 controller: 'customersController'
             }).
+            when('/customers/:id', {
+                templateUrl: 'views/customer-view.html',
+                controller: 'customersController'
+            }).
             when('/payments', {
                 templateUrl: 'views/payments.html',
                 controller: 'paymentsController'

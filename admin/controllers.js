@@ -5,11 +5,15 @@ app.controller('customersController',['$scope','$routeParams','customerProvider'
         if($routeParams.id.toLowerCase() === 'new'){
             //adding a new customer
             $scope.addingNewCustomer = true;
+            $scope.customerInfo = {};
+            $scope.customerInfo.id = '020';
+            $scope.customerInfo.status = 0;
         }
         else{
             //viewing customer info by id
             $scope.customerInfo = customerProvider.getCustomerInfo($routeParams.id);
             $scope.addingNewCustomer = false;
+            
         }        
     }
     else{
