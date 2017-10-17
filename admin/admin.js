@@ -52,7 +52,7 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
     }]);
 
 
-app.controller('appController',['$scope','modalDialogProvider','$location',function($scope, modalDialogProvider, $location){
+app.controller('appController',['$scope','modalDialogProvider','$location','messageDialog',function($scope, modalDialogProvider, $location, messageDialog){
         
         $scope.test = 'this is home page';
         
@@ -65,5 +65,13 @@ app.controller('appController',['$scope','modalDialogProvider','$location',funct
     
         $scope.isActive =  function(viewLocation){
             return $location.path().toLowerCase().indexOf(viewLocation) > - 1;
+        };
+        
+        $scope.test = function(){
+            messageDialog.ok(' ok message').then(function(){
+                console.log('yes');
+            },function(){
+                console.log('reject');
+            });
         };
     }]);

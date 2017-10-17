@@ -327,3 +327,46 @@ body{
 .table-sort:hover{
     text-decoration: underline;
 }
+
+/*message box styles*/
+.ch-message.message-wrap{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 9999;
+}
+
+.ch-message .message-overlay{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: black;
+    opacity: 0.5;
+}
+
+.ch-message .message-box{
+    background: white;
+    max-width: 300px;
+    min-width: 200px;
+    border-radius: 5px;
+    left: 50%;
+    top: 25%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+}
+
+.ch-message .message-header{
+    background: red;
+    border-radius: 5px 5px 0 0px;
+    padding: 5px;
+}
+
+.ch-message .message-text{
+    padding: 10px 5px;
+}
+
+.ch-message .message-buttons{
+        padding: 5px;
+    text-align: right;
+}

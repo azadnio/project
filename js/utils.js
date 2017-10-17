@@ -76,3 +76,82 @@ app.directive('chTableSort',[function(){
         template:'<a href="" class="table-sort" ng-class="{\'arrow-up\':$parent.reverse,\'arrow-down\':!$parent.reverse}">{{text}}<span ng-show="$parent.sort == value"></span></a>'
     };
 }]);
+
+app.factory('messageDialog',['$compile','$rootScope','$q',function($compile,$rootScope,$q){
+    var deferred;
+    function _appendDialog(text, dialogType){
+        deferred = $q.defer();
+        angular.element(document.body).append($compile("<ch-message-dialog type="+ dialogType +" message="+ text + "></ch-message-dialog>")($rootScope));
+        return deferred.promise;
+    }
+        
+    return{
+        ok:function(text){
+            return _appendDialog(text, 'oc');
+        },
+        yesNo:function(text){
+            return _appendDialog(text, 'yn');
+        },
+        okCancel:function(text){
+            return _appendDialog(text, 'oc');
+        },
+        yesNoCancel:function(text){
+            return _appendDialog(text, 'ync');
+        },
+        
+        //calling these functions from diretive which depends on user selection
+        setPromiseSuccess:function(value){
+            //when promise successed pass value true or false
+            if(deferred){
+                deferred.resolve(value);
+                deferred = null;
+            }
+        },
+        
+        setPromiseFails:function(){
+            //when user cancelled the message
+            if(deferred){
+                deferred.reject();
+                deferred = null;
+            }
+        }
+    };
+}]);
+
+app.directive('chMessageDialog',[function(){
+    return{
+        restrict:'EA',
+        replace:true,
+        scope:{
+            type:'@', //posible types (oc, ync, yn)
+            message:'@',
+            success: '&',
+            fails: '&'
+        },
+        controller:['$scope','messageDialog',function($scope, messageDialog){
+                
+            $scope.ok = function(){
+                messageDialog.setPromiseSuccess(true);
+            };
+            $scope.cancel = function(){
+                messageDialog.setPromiseFails(false);
+            };
+            $scope.no = function(){
+                messageDialog.setPromiseSuccess(false);
+            };
+        }],
+        template:   '<div class="ch-message message-wrap">'+
+                        '<div class="message-overlay"></div>'+
+                        '<div class="message-box">'+
+                            '<div class="message-header"><img src="" alt="Logo"/></div>'+
+                            '<div class="message-text">{{message}}</div>'+
+                            '<div class="message-buttons">'+
+                                '<button ng-click="ok()" ng-if="type=\'oc\'">Ok</button>'+
+                                '<button ng-click="ok()" ng-if="type==\'ync\' || type==\'yn\'">Yes</button>'+
+                                '<button ng-click="no()" ng-if="type==\'ync\' || type==\'yn\'">No</button>'+
+                                '<button ng-click="cancel()" ng-if="type==\'ync\' || type==\'oc\'">Cacel</button>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>'
+    };
+}]);
