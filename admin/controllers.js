@@ -158,9 +158,29 @@ app.factory('paymentsProvider',[function(){
     };
 }]);
 
-app.controller('invoicesController',['$scope','modalDialogProvider','invoicesProvider',function($scope, modalDialogProvider, invoicesProvider){
+app.controller('invoicesController',['$scope','$routeParams','invoicesProvider',function($scope, $routeParams, invoicesProvider){
     
-    $scope.invoices = invoicesProvider.loadInvoices();
+    if($routeParams.id){
+        
+        if($routeParams.id.toLowerCase() === 'new'){
+            //adding a new customer
+            $scope.addingNewInvoice = true;
+            $scope.invoiceInfo = {};
+            $scope.invoiceInfo.id = '020';
+            $scope.invoiceInfo.status = 0;
+        }
+        else{
+            //viewing customer info by id
+            $scope.invoiceInfo = invoicesProvider.getInvoeiceInfo($routeParams.id);
+            $scope.addingNewCustomer = false;
+            
+        }        
+    }
+    else{
+        $scope.invoices = invoicesProvider.loadInvoices();
+    }
+    
+    
     
     $scope.filterCheques = {
         status:'',
@@ -188,6 +208,45 @@ app.factory('invoicesProvider',[function(){
     return{
         loadInvoices:function(){
             return invoices;
+        },
+        getInvoeiceInfo:function(id){
+          return{
+              id: id,
+              customerId:'000',
+              customerName:'test name',
+              remarks:'test rearks',
+              created:'2017-7-2',
+              createdBy:'user',
+              items:[{
+                    itemId:'000',
+                    name:'Test item',
+                    categoryId:'cat_1',
+                    price: '5000',
+                    discount:'14',
+                    quantity:3
+                },{
+                    itemId:'000',
+                    name:'Test item',
+                    categoryId:'cat_2',
+                    price: '5000',
+                    discount:'14',
+                    quantity:3
+                },{
+                    itemId:'000',
+                    name:'Test item',
+                    categoryId:'cat_3',
+                    price: '5000',
+                    discount:'14',
+                    quantity:3
+                },{
+                    itemId:'000',
+                    name:'Test item',
+                    categoryId:'cat_4',
+                    price: '5000',
+                    discount:'14',
+                    quantity:3
+                }]
+          };  
         },
     };
 }]);
