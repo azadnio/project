@@ -7,7 +7,7 @@
     
     <div class="right-selected-panel">
         
-        <div><a href="./#/orders">Back to Orders</a></div>
+        <div><a href="./#/invoices">Back to Orders</a></div>
         
             <fieldset>
                 <legend>Invoice Info</legend>
@@ -16,7 +16,7 @@
                 </label>
                 <label>
                     Customer ID: <input ng-if="addingNewInvoice" type="text" ng-model="invoiceInfo.customerId" readonly> 
-                    <a ng-if="!addingNewInvoice" href="./#/customers/{{invoiceInfo.customerId}}">{{invoiceInfo.customerId}}</a>
+                    <a ng-if="!addingNewInvoice" target="_  blank" href="./#/customers/{{invoiceInfo.customerId}}">{{invoiceInfo.customerId}}</a>
                 </label>
                 <label>
                     Invoice Date : <input type="text" ng-model="invoiceInfo.invoiceDate" > 

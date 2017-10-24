@@ -78,11 +78,20 @@ app.directive('chTableSort',[function(){
 }]);
 
 app.factory('messageDialog',['$compile','$rootScope','$q',function($compile,$rootScope,$q){
-    var deferred;
+    var deferred, $messageDialog;
     function _appendDialog(text, dialogType){
+        $messageDialog = $compile("<ch-message-dialog type="+ dialogType +" message="+ text + "></ch-message-dialog>")($rootScope);
         deferred = $q.defer();
-        angular.element(document.body).append($compile("<ch-message-dialog type="+ dialogType +" message="+ text + "></ch-message-dialog>")($rootScope));
+        angular.element(document.body).append($messageDialog);
         return deferred.promise;
+    }
+    
+    //removing message dialog from DOM
+    function removeDilaog(){
+        if($messageDialog){
+            $messageDialog.remove();
+            $messageDialog = null;
+        }
     }
         
     return{
@@ -105,6 +114,7 @@ app.factory('messageDialog',['$compile','$rootScope','$q',function($compile,$roo
             if(deferred){
                 deferred.resolve(value);
                 deferred = null;
+                removeDilaog();
             }
         },
         
@@ -113,6 +123,7 @@ app.factory('messageDialog',['$compile','$rootScope','$q',function($compile,$roo
             if(deferred){
                 deferred.reject();
                 deferred = null;
+                removeDilaog();
             }
         }
     };

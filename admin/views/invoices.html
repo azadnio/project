@@ -35,7 +35,7 @@
                 </tr>
                 <tr ng-repeat="invoice in invoices " >
                     <td>{{$index + 1}}</td>
-                    <td>{{invoice.id}}</td>
+                    <td><a href="./#/invoices/{{invoice.id}}">{{invoice.id}}</a></td>
                     <td>{{invoice.date}}</td>
                     <td>{{invoice.customerName}}</td>
                     <td>{{invoice.amount}}</td>
