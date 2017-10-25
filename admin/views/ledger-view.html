@@ -1,0 +1,56 @@
+<div class="flex">
+    
+    <div class="left-view-panel">
+        <button>Create an Order</button>
+        <button>Create a payment</button>
+    </div>
+        
+    <div class="right-selected-panel">
+        <a href="./#/accounts">Back to Accounts</a>
+        <div><label>Month : <select></select></label> <label>Year : <select></select></label></div>
+        <table ng-init="balance">
+            <caption>Ledger</caption>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Transaction</th>
+                    <th></th>
+                    <th>Debit</th>
+                    <th>Credit</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="ledgerData.bf" ng-init="balance = ledgerData.bf">
+                    <td></td>
+                    <td>Brought forward</td>
+                    <td></td>
+                    <td>{{(ledgerData.bf > 0)?ledgerData.bf:''}}</td>
+                    <td>{{(ledgerData.bf < 0)?ledgerData.bf:''}}</td>
+                    <td></td>
+                </tr>
+                
+                <tr ng-repeat="data in ledgerData.data track by $index">
+                    <td>{{data.date}}</td>
+                    
+                    <td ng-switch="data.type">
+                        <a ng-switch-when="1" href="./#/account/invoices/{{data.invoiceNo}}">{{data.transaction + ' '+ data.invoiceNo}}</a>
+                        <a ng-switch-when="2" href="./#/account/payments/{{data.paymentNo}}">{{data.transaction + ' '+ data.paymentNo}}</a>
+                        <a ng-switch-when="3" href="./#/account/cheques/{{data.chequeId}}-{{data.bank}}-{{data.accountNo}}">{{'Returned Cheque ' + data.chequeId}}</a>
+                        <a ng-switch-default>{{data.transaction}}</a>
+                        <!--<a ng-switch-when="4" href="./#/account/invoices/{{data.invoiceNo}}">{{data.transaction + ' '+ data.invoiceNo}}</a>-->
+                    </td>
+                    <td></td>
+                    <td>{{(data.isDebit)?data.amount :''}}</td>
+                    <td>{{(!data.isDebit)?data.amount :''}}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                
+            </tfoot>
+            
+        </table>
+    </div>
+    
+</div>
