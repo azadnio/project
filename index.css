@@ -241,7 +241,34 @@ body{
     font-weight: bold;
 }
 
-/*--------------modal dialog -------------------*/
+/*--------------modal dialogs -------------------*/
+
+.ch-modal-dialog, .ch-modal-dialog .overlay{
+    width: 100%;
+    height: 100%; 
+    top:0;
+}
+
+.ch-modal-dialog{
+    position: fixed;    
+    z-index: 1000;
+}
+
+.ch-modal-dialog cheque-dialog{
+    width: 400px;
+    background: white;
+    position: relative;
+    margin: auto;
+    top: 30%;
+}
+
+.ch-modal-dialog .overlay{
+    background: black;
+    opacity: 0.5;
+    position: absolute;
+    z-index: -1;
+}
+
 .modal-dialog-wrap{
     z-index: 9999;
     
@@ -289,6 +316,9 @@ body{
     right: -15px;
     top: -15px;
 }
+
+
+
 
 .right-panel-content{
     margin: 1% 5%;

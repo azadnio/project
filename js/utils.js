@@ -166,3 +166,57 @@ app.directive('chMessageDialog',[function(){
                     '</div>'
     };
 }]);
+
+app.factory('modalDialog',['$rootScope','$compile',function($rootScope, $compile, $q){
+        
+    var $dialog, deferred;
+        
+    return{
+        showModalDialog(url, title, dialogClass){
+        $dialog = $compile("<ch-modal-dialog title="+ title +" dialogurl="+ url +" userclass="+ dialogClass +"></ch-modal-dialog>")($rootScope);
+        deferred = $q.defer();
+        angular.element(document.body).append($dialog);
+        return deferred.promise;
+        },
+         setPromiseSuccess:function(value){
+            //when promise successed pass value true or false
+            if(deferred){
+                deferred.resolve(value);
+                deferred = null;
+                removeDilaog();
+            }
+        },
+        
+        setPromiseFails:function(){
+            //when user cancelled the message
+            if(deferred){
+                deferred.reject();
+                deferred = null;
+                removeDilaog();
+            }
+        }
+    };
+}]);
+
+app.directive('chModalDialog',[function(){
+    return{
+        restrict: 'E',
+        replace: true,
+        scope:{
+            dialogurl: '=',
+            userclass: '='
+        },
+        controller:['$scope','$element',function($scope, $element){
+                
+            $scope.closeDialog = function(){
+                $element.remove();
+            };
+            
+        }],
+        template: '<div class="ch-modal-dialog">'+
+                        '<div class="overlay"></div>'+
+                        '<div class="content" ng-class="userclass" ng-include="dialogurl"></div>'+
+                        '</div>'+
+                    '</div>'
+    };
+}]);

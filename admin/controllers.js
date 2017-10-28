@@ -125,9 +125,61 @@ app.factory('customerProvider',[function(){
     };
 }]);
 
-app.controller('paymentsController',['$scope','modalDialogProvider','paymentsProvider',function($scope, modalDialogProvider, paymentsProvider){
+app.controller('paymentsController',['$scope','$routeParams','paymentsProvider',function($scope, $routeParams, paymentsProvider){
     
-    $scope.payments = paymentsProvider.loadPayments();
+    $scope.showAddNewChequeDialog = false;
+    
+    if($routeParams.id){
+        
+        if($routeParams.id.toLowerCase() === 'new'){
+            //adding a new customer
+            $scope.addingNewPayments = true;
+            $scope.payment = {
+                chequesList: [],
+                paymentType: 1,
+                returnedChequesList: []
+                
+            };
+        }
+        else{
+            //viewing payments info by id
+            $scope.payment = paymentsProvider.getPaymentDetails($routeParams.id);
+            $scope.addingNewPayments = false;
+            
+        }        
+    }
+    else{
+        
+        $scope.payments = paymentsProvider.loadPayments();
+    }
+    
+    $scope.addNewCheque = function(){
+        var $dialog = $compile("<ch-modal-dialog  dialogurl=''views/modal-dialogs/cheque.html'' userclass=''cheque-content''></ch-modal-dialog>")($scope);
+        $element.append($dialog);
+        
+    };
+    
+    $scope.removeCheque = function(chq){
+        console.log(chq);
+    };
+    
+    $scope.getChquePaymentsTotal = function(){
+        var total = null;
+        $scope.payment.chequesList.forEach(function(cheque){
+            total += cheque.amount;
+        });
+        
+        return (total)? total : '';
+    };
+    
+    $scope.getReturnedChquePaymentsTotal = function(){
+        var total = null;
+        $scope.payment.returnedChequesList.forEach(function(cheque){
+            total += cheque.amount;
+        });
+        
+        return (total)? total : '';
+    };
     
     $scope.filterCheques = {
         status:'',
@@ -154,6 +206,47 @@ app.factory('paymentsProvider',[function(){
     return{
         loadPayments:function(){
             return payments;
+        },
+        
+        getPaymentDetails:function(paymentId){
+            return{
+                paymentId:paymentId,
+                paymentType:1,
+                date: '20-7-2017',
+                cashAmount: '10000',
+                chequesList:[{
+                        id: '001',
+                        date:'20-01-2017',
+                        status: 1,
+                        number: '1231',
+                        amount: 20000,
+                        paymentId: '000',         
+                        bank:'BOC',
+                        accountNo: '00000000',
+                        remarks:'some remarks'
+                },{
+                        id: '002',
+                        date:'20-01-2017',
+                        status: 1,
+                        number: '1233',
+                        amount: 20000,
+                        paymentId: '000',         
+                        bank:'BOC',
+                        accountNo: '00000000',
+                        remarks:'some remarks'
+                },{
+                        id: '003',
+                        date:'20-01-2017',
+                        status: 1,
+                        number: '1234',
+                        amount: 20000,
+                        paymentId: '000',         
+                        bank:'BOC',
+                        accountNo: '00000000',
+                        remarks:'some remarks'
+                }],
+                returnedChequesList: []
+            };
         },
     };
 }]);

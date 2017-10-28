@@ -1,0 +1,74 @@
+<div class="flex">
+    
+    <!--checques modal view-->
+    <div ng-include="'views/modal-dialogs/cheque.html'" class="ch-modal-dialog"></div>
+    
+    <div class="left-view-panel">
+        <button>Create an Order</button>
+        <button>Create a payment</button>
+    </div>
+        
+    <div class="right-selected-panel">
+        
+        <div><a href="./#/payments">Back to Payments</a></div>
+        <div>Received Date : <input type="text" ng-model="payment.date"></div>
+        <div>
+            <select ng-model="payment.paymentType">
+                <option value="1">Regular payment</option>
+                <option value="2">Returned Cheques Payment</option>
+            </select>
+        </div>
+        <div>Cash Amount : <input type="text" ng-model="payment.cashAmount"></div>
+        
+        <fieldset ng-show="payment.paymentType == 1">
+            
+            <legend>Cheque Payments Total : {{getChquePaymentsTotal()}}</legend>
+            <table>
+                <div><button ng-click="addNewCheque()">Add New Cheque</button></div>
+                <tr>
+                    <th>Number</th>   
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                </tr>
+                <tr ng-repeat="cheque in payment.chequesList">
+                    <th><a href="./#/account/cheques/{{cheque.number}}-{{cheque.bank}}-{{cheque.accountNo}}">{{cheque.number}}</a></th>   
+                    <th>{{cheque.date}}</th>  
+                    <th>{{cheque.amount}}</th>  
+                    <th>{{ (cheque.status === 0)?'pending':(order.status === 1)?'returned':'passed'}}</th>
+                    <th>{{cheque.remarks}}</th>
+                </tr>
+            </table>
+        </fieldset>
+        
+        <fieldset ng-if="payment.paymentType == 2">
+            
+            <legend>Returned Total : {{getReturnedChquePaymentsTotal()}}</legend>
+            <table>
+                <caption>Returned Cheques List which this payment apply</caption>
+                <tr>
+                    <th>Number</th>   
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="cheque in payment.returnedChequesList">
+                    <th><a href="./#/account/cheques/{{cheque.number}}-{{cheque.bank}}-{{cheque.accountNo}}">{{cheque.number}}</a></th>   
+                    <th>{{cheque.date}}</th>  
+                    <th>{{cheque.amount}}</th>  
+                    <th>{{ (cheque.status === 0)?'pending':(order.status === 1)?'returned':'passed'}}</th>
+                    <th>{{cheque.remarks}}</th>
+                    <th><button ng-clik="removeCheque(cheque)">Remove</button></th>
+                </tr>
+            </table>
+        </fieldset>
+        <div>
+            <textarea>Remarks..</textarea>
+        </div>
+        
+    </div>
+        
+</div>

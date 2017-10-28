@@ -15,6 +15,10 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
                 templateUrl: 'views/payments.html',
                 controller: 'paymentsController'
             }).
+            when('/payments/:id', {
+                templateUrl: 'views/payment-view.html',
+                controller: 'paymentsController'
+            }).
             when('/cheques', {
                 templateUrl: 'views/cheques.html',
                 controller: 'chequesController'
@@ -67,7 +71,7 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
 app.controller('appController',['$scope','modalDialogProvider','$location','messageDialog',function($scope, modalDialogProvider, $location, messageDialog){
         
         $scope.test = 'this is home page';
-        
+        $scope.fn = function(){console.log('test');};
         $scope.userLogedIn = true;
     
         $scope.chNavigateCount = 0;
