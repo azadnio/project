@@ -167,19 +167,27 @@ app.directive('chMessageDialog',[function(){
     };
 }]);
 
-app.factory('modalDialog',['$rootScope','$compile',function($rootScope, $compile, $q){
+app.factory('modalDialog',['$rootScope','$compile','$q',function($rootScope, $compile, $q){
         
     var $dialog, deferred;
         
+     function removeDilaog(){
+        if($dialog){
+            $dialog.remove();
+            $dialog = null;
+        }
+    }
+        
     return{
-        showModalDialog(url, title, dialogClass){
-        $dialog = $compile("<ch-modal-dialog title="+ title +" dialogurl="+ url +" userclass="+ dialogClass +"></ch-modal-dialog>")($rootScope);
-        deferred = $q.defer();
-        angular.element(document.body).append($dialog);
-        return deferred.promise;
+        showModalDialog: function(url,dialogClass){
+            $dialog = $compile("<ch-modal-dialog dialogurl="+ url +" userclass="+ dialogClass +"></ch-modal-dialog>")($rootScope);
+            deferred = $q.defer();
+            angular.element(document.body).append($dialog);
+            return deferred.promise;
         },
+        
          setPromiseSuccess:function(value){
-            //when promise successed pass value true or false
+            //when promise successed pass value
             if(deferred){
                 deferred.resolve(value);
                 deferred = null;
@@ -202,21 +210,19 @@ app.directive('chModalDialog',[function(){
     return{
         restrict: 'E',
         replace: true,
-        scope:{
-            dialogurl: '=',
-            userclass: '='
-        },
-        controller:['$scope','$element',function($scope, $element){
-                
-            $scope.closeDialog = function(){
-                $element.remove();
+        controller:['$scope','$attrs','modalDialog',function($scope,$attrs, modalDialog){
+                    
+            $scope.dialogurl = $attrs.dialogurl;
+            $scope.userclass = $attrs.userclass; 
+            
+            $scope.close = function(){
+                modalDialog.setPromiseFails();
             };
             
         }],
-        template: '<div class="ch-modal-dialog">'+
-                        '<div class="overlay"></div>'+
+        template:   '<div class="ch-modal-dialog">'+
+                        '<div class="overlay" ng-dbclick="close()" title="Double Click To Close the Dialog"></div>'+
                         '<div class="content" ng-class="userclass" ng-include="dialogurl"></div>'+
-                        '</div>'+
                     '</div>'
     };
 }]);

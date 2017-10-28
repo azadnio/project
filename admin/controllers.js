@@ -73,9 +73,23 @@ app.factory('chequesProvider',[function(){
     }
         
     return{
+        
+        //cheque object
+        cheque: function(){
+            this.id = '';
+            this.chequeNo = '';
+            this.customerId = '';
+            this.status='';
+            this.amount ='';
+            this.date = '';
+            this.customerName = '';
+            this.remarks = '';
+        },
+        
         loadCheques:function(){
             return cheques;
         },
+        
     };
 }]);
 

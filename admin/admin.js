@@ -68,7 +68,7 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
     }]);
 
 
-app.controller('appController',['$scope','modalDialogProvider','$location','messageDialog',function($scope, modalDialogProvider, $location, messageDialog){
+app.controller('appController',['$scope','modalDialogProvider','$location','messageDialog','modalDialog',function($scope, modalDialogProvider, $location, messageDialog, modalDialog){
         
         $scope.test = 'this is home page';
         $scope.fn = function(){console.log('test');};
@@ -83,6 +83,8 @@ app.controller('appController',['$scope','modalDialogProvider','$location','mess
             return $location.path().toLowerCase().indexOf(viewLocation) > - 1;
         };
         
+        modalDialog.showModalDialog('views/modal-dialogs/cheque.html', 'cheque-dialog');
+                
         $scope.test = function(){
             messageDialog.ok(' ok message').then(function(){
                 console.log('yes');

@@ -254,7 +254,7 @@ body{
     z-index: 1000;
 }
 
-.ch-modal-dialog cheque-dialog{
+.ch-modal-dialog .cheque-dialog{
     width: 400px;
     background: white;
     position: relative;
