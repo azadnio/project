@@ -83,7 +83,7 @@ app.controller('appController',['$scope','modalDialogProvider','$location','mess
             return $location.path().toLowerCase().indexOf(viewLocation) > - 1;
         };
         
-        modalDialog.showModalDialog('views/modal-dialogs/cheque.html', 'cheque-dialog');
+        
                 
         $scope.test = function(){
             messageDialog.ok(' ok message').then(function(){

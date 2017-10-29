@@ -4,13 +4,22 @@
         <legend>Enter Cheque Details</legend>
         <div><label>Customer: <input type="text" ng-model="cheque.customer"></label></div>
         <div><label>Amount: <input type="text" ng-model="cheque.amount"></label></div>
-        <div><label>Amount: <input type="text" ng-model="cheque.amount"></label></div>
-        <div><label>Amount: <input type="text" ng-model="cheque.amount"></label></div>
-        <div><label>Amount: <input type="text" ng-model="cheque.amount"></label></div>
-        <div><label>Amount: <input type="text" ng-model="cheque.amount"></label></div>
-        <div><label>Amount: <input type="text" ng-model="cheque.amount"></label></div>
+        <div><label>Cheque No: <input type="text" ng-model="cheque.chequeNo"></label></div>
+        <div><label>Bank: <input type="text" ng-model="cheque.bank"></label></div>
+        <div><label>Account No: <input type="text" ng-model="cheque.accountNo"></label></div>
+        <div>
+            <label>
+                Status: 
+                <select ng-model="cheque.status">
+                    <option value="0">Pending</option>
+                    <option value="1">Returned</option>
+                    <option value="2">Passed</option>
+                </select>
+            </label>
+        </div>
+        <div><label><div>Remarks:</div> <textarea ng-model="cheque.remarks"></textarea></label></div>
     </fieldset>
-    <div>
+    <div class="footer">
         <button ng-click="ok()">Ok</button><button ng-click="cancel()">Close</button>
     </div>
 </div>

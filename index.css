@@ -241,6 +241,14 @@ body{
     font-weight: bold;
 }
 
+th{
+    padding: 5px;
+}
+
+td{
+    padding: 2px;
+}
+
 /*--------------modal dialogs -------------------*/
 
 .ch-modal-dialog, .ch-modal-dialog .overlay{
@@ -254,12 +262,50 @@ body{
     z-index: 1000;
 }
 
+.ch-modal-dialog .customer-list{
+    width: 900px;
+    max-height: 80%;
+    top:10%;
+}
+
+.ch-modal-dialog .customer-list table{
+    margin: auto;
+}
+
+.ch-modal-dialog .customer-list tr:nth-child(2n){
+    background-color: #e9e9e9;
+}
+
+.ch-modal-dialog .customer-list tr.selected{
+    background: #d3df22;
+    font-weight: bold;
+}
+
+.ch-modal-dialog .customer-list tr{
+    cursor: pointer;
+}
+
+.ch-modal-dialog .customer-list tr:not(.selected):hover{
+    background: #b6d8f2;
+}
+
+.ch-modal-dialog .customer-list th{
+    border-bottom: 1px solid black;
+}
+
 .ch-modal-dialog .cheque-dialog{
     width: 400px;
+    top: 30%;
+}
+
+.ch-modal-dialog .customer-list,
+.ch-modal-dialog .cheque-dialog{    
     background: white;
     position: relative;
     margin: auto;
-    top: 30%;
+    
+    overflow: hidden;
+    border-radius: 5px;
 }
 
 .ch-modal-dialog .overlay{
@@ -267,6 +313,23 @@ body{
     opacity: 0.5;
     position: absolute;
     z-index: -1;
+}
+
+.ch-modal-dialog .header{
+    padding: 10px;
+    background: black;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.ch-modal-dialog .footer{
+    padding: 10px;
+    text-align: right;
+}
+
+.footer button{
+    margin: 0 2px;
 }
 
 .modal-dialog-wrap{

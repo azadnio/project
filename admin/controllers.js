@@ -79,7 +79,7 @@ app.factory('chequesProvider',[function(){
             this.id = '';
             this.chequeNo = '';
             this.customerId = '';
-            this.status='';
+            this.status = 0;
             this.amount ='';
             this.date = '';
             this.customerName = '';
@@ -139,7 +139,7 @@ app.factory('customerProvider',[function(){
     };
 }]);
 
-app.controller('paymentsController',['$scope','$routeParams','paymentsProvider',function($scope, $routeParams, paymentsProvider){
+app.controller('paymentsController',['$scope','$routeParams','paymentsProvider','modalDialog',function($scope, $routeParams, paymentsProvider, modalDialog){
     
     $scope.showAddNewChequeDialog = false;
     
@@ -167,10 +167,17 @@ app.controller('paymentsController',['$scope','$routeParams','paymentsProvider',
         $scope.payments = paymentsProvider.loadPayments();
     }
     
+    $scope.selectCutomer = function(){
+        modalDialog.showModalDialog('views/modal-dialogs/customer-list.html', 'customer-list').then(function(selectedCustomer){
+            console.log(selectedCustomer);
+            $scope.payment.customerName = selectedCustomer.name;
+        });
+    };
+    
     $scope.addNewCheque = function(){
-        var $dialog = $compile("<ch-modal-dialog  dialogurl=''views/modal-dialogs/cheque.html'' userclass=''cheque-content''></ch-modal-dialog>")($scope);
-        $element.append($dialog);
-        
+        modalDialog.showModalDialog('views/modal-dialogs/cheque.html', 'cheque-dialog').then(function(cheque){
+            $scope.payment.chequesList.push(cheque);
+        });
     };
     
     $scope.removeCheque = function(chq){

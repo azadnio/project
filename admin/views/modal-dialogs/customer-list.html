@@ -1,0 +1,48 @@
+<div ng-controller="customersModalDialog">
+    <div class="header">Select A Customer</div>
+    <fieldset>
+        <legend>Filter customer</legend>
+        <label>
+            Name :
+            <input type="text">
+        </label>
+        <label>
+            City : 
+            <input type="text">
+        </label>
+    </fieldset>
+    
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <th><ch-table-sort sort="sort" value="id" reverse="reverse" text="ID"></ch-table-sort></th>
+            <th><ch-table-sort sort="sort" value="name" reverse="reverse" text="Name"></ch-table-sort></th>
+            <th>City</th>
+            <th>Mobile</th>
+            <th>Uncleared Cheques</th>
+            <th>Returned Cheques</th>
+            <th>Payment Balance</th>
+            <th><ch-table-sort sort="sort" value="paymentBalance" reverse="reverse" text="Total Pyament Balance"></ch-table-sort></th>                    
+            <th>Credit Limit</th>  
+            </tr>
+            <tr ng-click="selectCustomer(customer)" 
+                ng-if="customer.status !== 0" 
+                ng-class="{selected: selectedCustomer.id == customer.id}" 
+                ng-dblclick="selectAndClose(customer)"
+                ng-repeat="customer in customers |orderBy:sort:reverse | filter : {status:filterCustomer.status} track by $index" >
+                
+                <td><a href="./#/customers/{{customer.id}}">{{customer.id}}</a></td>
+                <td>{{customer.name}}</td>
+                <td>{{customer.city}}</td>
+                <td>{{customer.mobile}}</td>
+                <td>{{customer.unclearedCheques}}</td>
+                <td>{{customer.returnedCheques}}</td>
+                <td>{{customer.paymentBalance}}</td>
+                <td>{{customer.returnedCheques + customer.paymentBalance}}</td>
+                <td>{{customer.creditLimit}}</td>
+            </tr>
+                
+        </table>
+    <div class="footer">
+        <button ng-click="ok()" ng-disabled="!selectedCustomer">Ok</button><button ng-click="cancel()">Close</button>
+    </div>
+</div>
