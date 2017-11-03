@@ -55,9 +55,14 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
                 templateUrl: 'views/accounts.html',
                 controller: 'accountsController'
             }).
-                //    when('/customer',{templateUrl: 'views/tabs/customer.php', 
-        //        controller: 'customerController'
-        //    }).
+            when('/items', {
+                templateUrl: 'views/items.html',
+                controller: 'itemsController'
+            }).
+            when('/items/:id', {
+                templateUrl: 'views/item-view.html',
+                controller: 'itemsController'
+            }).
         otherwise('/home',{
         
         });

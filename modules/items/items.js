@@ -60,7 +60,7 @@ app.factory('itmesProvider',[function(){
             description: 'this siisd sisdvnsdvnvasvasvasdvnavv adfvfvbfav uav auisv avuavvisdfvfv',
             price:'1000',
             quantity:1,
-            images:['images/doorhandle2.jpg','images/doorhandle.jpg','images/doorhanle.jpg']
+            images:['assets/images/items/doorhandle2.jpg','assets/images/items/doorhandle.jpg','assets/images/items/doorhanle.jpg']
         });
     }
         

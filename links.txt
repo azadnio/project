@@ -3,3 +3,6 @@ https://css-tricks.com/snippets/css/css-triangle/
 
 sort list
 https://codepen.io/sevilayha/pen/AmFLE?editors=1010
+
+directory structure
+https://scotch.io/tutorials/angularjs-best-practices-directory-structure

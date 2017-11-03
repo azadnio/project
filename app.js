@@ -4,15 +4,15 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
 
     $routeProvider.
     when('/items', {
-        templateUrl: 'views/itemspanal.html',
+        templateUrl: 'modules/items/itemspanal.html',
         controller: 'itemsViewController'
     }).
     when('/items/:categoryId', {
-        templateUrl: 'views/itemspanal.html',
+        templateUrl: 'modules/items/itemspanal.php',
         controller: 'itemsViewController'
     }).
     when('/items/:categoryId/:itemId', {
-        templateUrl: 'views/itemspanal.html',
+        templateUrl: 'modules/items/itemspanal.php',
         controller: 'itemsViewController'
     }).
 //    when('/newarivals', {
@@ -53,4 +53,6 @@ app.controller('appController',['$scope','modalDialogProvider','$location',funct
     $scope.isActive =  function(viewLocation){
         return $location.path().toLowerCase().indexOf(viewLocation) > - 1;
     };
+    
+    $scope.user = 'customer';
 }]);

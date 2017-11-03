@@ -226,3 +226,29 @@ app.directive('chModalDialog',[function(){
                     '</div>'
     };
 }]);
+
+//constant value for status of items, customer, cheques, payments, ..
+app.constant('status',{
+    
+    items:{
+        deleted: 0,
+        active: 1        
+    },
+    
+    ccustomer:{
+        deleted: 0,
+        active: 1
+    },
+    
+    payments:{
+        pending:0,
+        paid:1        
+    },
+    
+    cheques:{
+        pending: 0,
+        passed: 1,
+        returned: 2        
+    }
+    
+});

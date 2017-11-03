@@ -491,11 +491,34 @@ app.factory('ordersProvider',[function(){
     };
 }]);
 
-app.controller('itemsController',['$scope','modalDialogProvider','invoicesProvider',function($scope, modalDialogProvider, invoicesProvider){
+app.controller('itemsController',['$scope','status','itemsProvider','$routeParams',function($scope, status, itemsProvider, $routeParams){
     
-    $scope.invoices = invoicesProvider.loadInvoices();
+    if($routeParams.id){
+        
+        if($routeParams.id.toLowerCase() === 'new'){
+            //adding a new customer
+            $scope.addingNewCustomer = true;
+            $scope.customerInfo = {};
+            $scope.customerInfo.id = '020';
+            $scope.customerInfo.status = 0;
+        }
+        else{
+            //viewing customer info by id
+            $scope.customerInfo = itemsProvider.getCustomerInfo($routeParams.id);
+            $scope.addingNewCustomer = false;
+            
+        }        
+    }
+    else{
+        
+        $scope.customers    = itemsProvider.loadItems();    
+        
+        //table sorting controls(accending or decending by property)
+        $scope.sort         = 'id';
+        $scope.reverse      = true;
+    }
     
-    $scope.filterCheques = {
+    $scope.filterItems = {
         status:'',
         toDate:'',
         fromDate:''
@@ -505,22 +528,23 @@ app.controller('itemsController',['$scope','modalDialogProvider','invoicesProvid
 
 app.factory('itemsProvider',[function(){
     
-    var invoices = [];
+    var items = [];
         
     for (var i = 0; i < 15; i++) {
-        invoices.push({
+        items.push({
             id:'00' + i,
-            customerId: '00' + i,
-            total: 20000,
-            date: '2-10-2017',
-            customerName:'customer ' + i,
-            paymentStatus:i%2,
+            description: 'Item ' + i,
+            status: 1,
+            price: 2000,
+            category: 'cat '+ i % 3,
+            categoryId: i % 3,
+            imageUrl: '../doorguard.jpg'
         });
     }
         
     return{
-        loadInvoices:function(){
-            return invoices;
+        loadItems:function(){
+            return items;
         },
     };
 }]);
