@@ -1,72 +1,66 @@
-<div class="flex">
+<div class="item-view item-edit" ng-controller="itemcontroller">
     
-    <div class="left-view-panel">
-       <button>Create an Order</button>
-       <div class="header">Category</div>    
-        <div class="vertical-menu">            
-            <a ng-repeat="item in items | unique : 'category'" ng-href="./#/items/{{item.categoryId}}" ng-class="{'selected-category': categoryId == item.categoryId}" >{{item.category}}</a>
+    <h2>
+        <span>Item No/ID:</span> {{item.id}}      
+    </h2>
+    
+    <label>
+        <span>Item Name:</span> 
+        <input type="text" ng-model="item.item">        
+    </label>
+    
+    <label>
+        <span>Item Price: </span> 
+        <input type="text" ng-model="item.price">        
+    </label>
+    
+    <label>
+        <span>Item Category:</span> 
+        <input list="categories" ng-model="selectedCategory">
+        <datalist id="categories">            
+            <option ng-repeat="item in categories" value="{{item.category}}"></option>
+        </datalist>
+        <button ng-click="renameCategory()" >Rename Category</button>
+    </label>
+    
+    <label>
+        <span>Description: </span>
+        <textarea ng-model="item.description"></textarea>
+    </label>
+    
+    <label>
+        <span>Pictures (max 4): </span>  
+        <input onchange="angular.element(this).scope().selectImageFile(this)" accept="image/*" type="file" id='item-image-select-file'>
+        
+    </label>
+    
+    <div class="edit-images-wrap">
+        <div class="item-edit-image" ng-repeat="image in item.images">
+            <span class="modal-dialog-close" ng-click="deleteImage(image)">X</span>
+            <img ng-src='{{$parent.imageFolderPath + image}}'/>
         </div>
+        <div class="item-edit-image" ng-repeat="image in newImagesFiles">
+            <span class="modal-dialog-close" ng-click="deleteImageFile(image)" >X</span>
+            <img ng-src='{{image.bs64}}'/>
+        </div>        
     </div>
     
-    <div class="right-selected-panel">
+    <div class="promotion-wrap">
+        <fieldset>
+            <legend><input type="checkbox" ng-model="item.promoted">Promote</legend>
+            <label>
+            <span>Promotional Price: </span> 
+            <input type="text" ng-model="item.promotionPrice">        
+        </label>
+        <label>
+            <span>Pormotion text: </span>
+            <textarea ng-model="item.promotionDescription"></textarea>
+        </label>
+        </fieldset>
         
-        <div><a href="./#/invoices">Back to Orders</a></div>
-        
-            <fieldset>
-                <legend>Invoice Info</legend>
-                <label>
-                    Customer Name : <input type="text" ng-model="invoiceInfo.customerName" > 
-                </label>
-                <label>
-                    Customer ID: <input ng-if="addingNewInvoice" type="text" ng-model="invoiceInfo.customerId" readonly> 
-                    <a ng-if="!addingNewInvoice" target="_  blank" href="./#/customers/{{invoiceInfo.customerId}}">{{invoiceInfo.customerId}}</a>
-                </label>
-                <label>
-                    Invoice Date : <input type="text" ng-model="invoiceInfo.invoiceDate" > 
-                </label>
-            </fieldset>
-            
-            <fieldset>
-                <table>
-                    <tr>
-                        <th></th>
-                        <th>Item No</th>
-                        <th>Description</th>
-                        <th>price</th>
-                        <th>Quantity</th>
-                        <th>Discount</th>
-                        <th>Total</th>
-                    </tr>
-                    <tr ng-repeat="item in invoiceInfo.items">
-                        <td>{{$index + 1}}</td>
-                        <td><a href=".#/items/{{item.categoryId}}/{{item.id}}" target="blank">{{item.id}}</a></td>
-                        <td>{{item.description}}</td>
-                        <td>{{item.price}}</td>
-                        <td>{{item.quantity}}</td>
-                        <td>{{item.discount}}</td>
-                        <td>{{(item.price - item.discount) * item.quantity}}</td>
-                    </tr>
-                </table>
-            </fieldset>
-        <div>
-            <textarea>{{invoiceInfo.remarks}}</textarea>
-        </div>
-            
-            <fieldset ng-if="!addingNewInvoice">
-                <legend>Other Info</legend>
-                <div>Added Date: {{invoiceInfo.addedDate}}</div>
-                <div>Added By: {{invoiceInfo.addedby}}</div>
-            </fieldset>
-            
-            <div ng-if="!addingNewInvoice">
-                <button>Update</button>
-            </div>
-            
-            <div ng-if="addingNewInvoice">
-                <button>Clear</button>
-                <button ng-click="addNew()">Save</button>
-            </div>
-                       
     </div>
     
+    <div class="footer" style="margin-top: 20px;">
+        <button>Back</button> <button>Edit</button>
+    </div>
 </div>

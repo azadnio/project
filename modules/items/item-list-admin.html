@@ -7,44 +7,8 @@
     
     <div class="right-selected-panel">
         
-        <fieldset>
-            <legend>Filter items</legend>
-            <label>
-                Description :
-                <input type="text">
-            </label>
-            <label>
-                ID : 
-                <input type="text">
-            </label>
-            <label>
-                <input type="checkbox" ng-model="filterItems.status" ng-value-true="" ng-value-false="1">
-                Include deleted
-            </label>
-        </fieldset>
-        <div>
-            <table cellspacing="0" cellpadding="0">
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th><ch-table-sort sort="sort" value="id" reverse="reverse" text="ID"></ch-table-sort></th>
-                    <th><ch-table-sort sort="sort" value="description" reverse="reverse" text="Description"></ch-table-sort></th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th></th>
-                </tr>
-                <tr ng-repeat="item in items |orderBy:sort:reverse | filter : {status:filterItem.status} track by $index" >
-                    <td><img class="item-image-small" ng-src="item.imageUrl"></td>
-                    <td>{{$index}}</td>
-                    <td><a href="./#/items/{{item.id}}">{{item.id}}</a></td>
-                    <td>{{item.description}}</td>
-                    <td>{{item.price}}</td>
-                    <td>{{(item.status === 0)?'Deleted':'Active'}}</td>
-                    <td></td>
-                </tr>
-                    
-            </table>
-        </div>
+        
+        
     </div>
     
 </div>

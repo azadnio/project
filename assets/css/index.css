@@ -39,6 +39,10 @@ body{
     display: flex;
 }
 
+.views{
+    background-color: white;
+}
+
 .left-view-panel{
     width: 15em;
     background-color: blue;
@@ -72,6 +76,76 @@ body{
 
 .vertical-menu .selected-category{
     background-color: yellow;
+}
+
+.item-view.item-edit{
+    
+    padding: 20px 100px;
+}
+
+.item-edit label{
+    display: block;
+    padding: 5px;
+}
+
+.item-edit label span{
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 3px 0;
+}
+
+.item-edit label textarea,
+.item-edit label select,
+.item-edit label input:not(input[type=file]){
+    padding: 1px 5px;
+    font-size: 15px;
+    width: 482px;
+}
+
+.item-view item-view{
+    text-align: center;
+    text-transform: capitalize;
+    
+}
+
+.item-view .edit-images-wrap {
+    width: 482px;
+}
+
+
+.item-edit label textarea{
+    min-height: 75px;
+}
+
+.item-edit label textarea,
+.item-edit label select,
+.item-edit label input{
+    width: 450px;
+}
+
+.edit-images-wrap{
+    border: 1px solid #b6acac;
+    min-height: 110px;
+    
+}
+
+.item-edit .item-edit-image img,
+.item-edit .item-edit-image {
+    width: 100px;
+    height: 100px;
+}
+
+
+.item-edit .item-edit-image {
+    border: 1px solid #b6acac;
+    margin: 18px 10px; 
+    position: relative;
+    display: inline-block;
+}
+
+.item-edit label select{
+    width: 471px;
 }
 
 .item-view .image-slider{
@@ -120,6 +194,11 @@ body{
 
 .item-view .image-slider:hover .image-slide-handle-left{
     left: 0;
+}
+
+.item-description{
+    width: 200px;
+    overflow: hidden;
 }
 
 .item-view #clicked-image.clicked-image{
@@ -464,6 +543,6 @@ td{
 }
 
 .ch-message .message-buttons{
-        padding: 5px;
+    padding: 5px;
     text-align: right;
 }

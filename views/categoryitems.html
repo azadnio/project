@@ -1,6 +1,0 @@
-<div>
-    <div class="header">Items {{categoryId}}</div>  
-    
-    <ch-item ng-repeat="item in items | filter: {categoryId: categoryId}" 
-             url="item.images[0]" id="item.id" description="item.description" categoryid="item.categoryId" name="item.name" price="item.price"></ch-item>
-</div>

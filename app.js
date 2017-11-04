@@ -4,15 +4,15 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
 
     $routeProvider.
     when('/items', {
-        templateUrl: 'modules/items/itemspanal.html',
+        templateUrl: 'modules/items/itemspanel.php',
         controller: 'itemsViewController'
     }).
     when('/items/:categoryId', {
-        templateUrl: 'modules/items/itemspanal.php',
+        templateUrl: 'modules/items/itemspanel.php',
         controller: 'itemsViewController'
     }).
     when('/items/:categoryId/:itemId', {
-        templateUrl: 'modules/items/itemspanal.php',
+        templateUrl: 'modules/items/itemspanel.php',
         controller: 'itemsViewController'
     }).
 //    when('/newarivals', {
@@ -55,4 +55,6 @@ app.controller('appController',['$scope','modalDialogProvider','$location',funct
     };
     
     $scope.user = 'customer';
+    
+    $scope.imageFolderPath = './assets/images/items/';
 }]);

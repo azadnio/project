@@ -1,25 +1,65 @@
 app.controller('itemsViewController',['$scope','itmesProvider','$routeParams','$location',function($scope, itmesProvider, $routeParams, $location){
         
+    $scope.parentScope = $scope.$parent;
+        
     $scope.items = itmesProvider.loadItems();
     
     $scope.categoryId   = $routeParams.categoryId;
     $scope.itemId       = $routeParams.itemId;
     
-    $scope.view = './views/categoryitems.html';
-    if($scope.itemId)
-        $scope.view = './views/itemview.html';
+    //set relative path for modules folder
+    var pathPre = ($scope.$parent.user === 'admin')?'../':'./';
+    
+    $scope.view = pathPre + 'modules/items/categoryitems.php';
+    if($scope.itemId){
+        
+        if($scope.parentScope.user === 'admin')
+            //view for item administration
+                $scope.view = pathPre + 'modules/items/item-view-admin.html';
+        else
+            //view for customers, online users
+            $scope.view = pathPre + 'modules/items/itemview.html';
+    }
+        
+    $scope.newImagesFiles = [];
+    $scope.selectImageFile = function(target){
+        var reader = new FileReader();
+        reader.onload = function(loadEvent) {
+            $scope.$apply(function() {
+                $scope.newImagesFiles.push({
+                    file: target.files[0], 
+                    bs64: loadEvent.target.result,
+                    name: target.files[0].name
+                });
+            });
+        };
+        reader.readAsDataURL(target.files[0]);
+    };
         
     if(!$scope.categoryId)
         $scope.categoryId = $scope.items[0].categoryId;
     
-    
+    //view items as list or blocks
+    //get previous value from local storage
+    $scope.itemListView = localStorage.getItem("itemListView") === 'true';
+    $scope.toggleView = function(){
+        $scope.itemListView = !$scope.itemListView;
+        //set it to local storage
+        localStorage.setItem('itemListView', $scope.itemListView);
+    };
 }]);
 
 app.controller('itemcontroller',['$scope','$routeParams','itmesProvider','$element',function($scope, $routeParams,itmesProvider ,$element,$timeout){
         
     var itemId = $routeParams.itemId;
     
+    $scope.selectedCategory = '';
+    
+    
+    $scope.categories = itmesProvider.getItemCatgories();
+    
     $scope.item = itmesProvider.getItemByItemId(itemId);
+    $scope.selectedCategory = $scope.item.category;
     
     $scope.slide = function(count){
         
@@ -30,9 +70,8 @@ app.controller('itemcontroller',['$scope','$routeParams','itmesProvider','$eleme
         else 
             $scope.selectedImageIndex += count;
     };
-    
+        
     $scope.selectedImageIndex = 0;
-    
     
     //supportive functions and variables for view user clicked image in original/zoomed view
     var clickedImageHolder = angular.element($element[0].querySelector('#clicked-image'));
@@ -56,18 +95,32 @@ app.factory('itmesProvider',[function(){
             id: '00' + i,
             category:'cat '+i,
             categoryId:'cat_'+i,
-            name:'item ' + i ,
+            item:'item ' + i ,
             description: 'this siisd sisdvnsdvnvasvasvasdvnavv adfvfvbfav uav auisv avuavvisdfvfv',
             price:'1000',
             quantity:1,
-            images:['assets/images/items/doorhandle2.jpg','assets/images/items/doorhandle.jpg','assets/images/items/doorhanle.jpg']
+            unit: 'Nos',
+            images:['doorhandle2.jpg','doorhandle.jpg','doorhanle.jpg']
         });
     }
         
     return{
         
         loadItems:function(){
+            //request php
             return items;
+        },
+        
+        getItemCatgories: function(){
+            //request php
+            var op = [];
+            for (var i = 0; i < 5; i++) {
+                op.push({
+                    id: 'cat_'+ i,
+                    category:'cat '+i
+                });
+            }
+            return op;
         },
         
         getItemByItemId:function(itemId){
@@ -125,8 +178,8 @@ app.directive('chItem',[function(){
         template:'<div class="item-prev-template">'+
                 '<div class="item-title">{{name}}</div>'+
                 '<div class="item-image-wrap">'+
-                    '<span class="item-price">{{price}}</span>'+
-                    '<img ng-src="{{url}}" class="item-prev-image">'+
+                    '<span class="item-price">Rs {{price}}</span>'+
+                    '<img ng-src="{{$parent.imageFolderPath + url}}" class="item-prev-image">'+
                 '</div>'+
                 '<div class="item-desc">{{description}}</div>'+
                 '<button ng-if="$parent.userLogedIn" ng-class="{disabled:isItemAddedToOrder()}" class="add-to-order" ng-click="addToOrder()">{{getBtnCaption()}}</button>'+

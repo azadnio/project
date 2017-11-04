@@ -56,12 +56,16 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
                 controller: 'accountsController'
             }).
             when('/items', {
-                templateUrl: 'views/items.html',
-                controller: 'itemsController'
+                templateUrl: '../modules/items/itemspanel.php',
+                controller: 'itemsViewController'
             }).
-            when('/items/:id', {
-                templateUrl: 'views/item-view.html',
-                controller: 'itemsController'
+            when('/items/:categoryId', {
+                templateUrl: '../modules/items/itemspanel.php',
+                controller: 'itemsViewController'
+            }).
+            when('/items/:categoryId/:itemId', {
+                templateUrl: '../modules/items/itemspanel.php',
+                controller: 'itemsViewController'
             }).
         otherwise('/home',{
         
@@ -97,4 +101,7 @@ app.controller('appController',['$scope','modalDialogProvider','$location','mess
                 console.log('reject');
             });
         };
+        
+        $scope.user = 'admin';
+        $scope.imageFolderPath = '../assets/images/items/';
     }]);
