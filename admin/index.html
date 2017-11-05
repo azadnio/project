@@ -20,7 +20,7 @@
     </head> 
     <body ng-app="app" ng-controller="appController">
     
-        <div id="logo-container">LOGO COMES HERE<button ng-click="test()">Test</button>
+        <div id="logo-container">LOGO COMES HERE<button ng-click="test()">Test</button></div>
         
         <div id="nav-bar">
             <a href="./#/customers" ng-class="{ active: isActive('customers')}">Customers</a>
@@ -38,5 +38,8 @@
         </section>
         <div ng-include="modalDialogUrl"></div>
     
+        <div id='login' ng-if='!userLoggedIn' style="background: red; height: 400px;">
+            <h2>this is the login screen</h2>
+        </div>
     </body>
 </html>

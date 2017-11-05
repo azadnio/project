@@ -56,5 +56,7 @@ app.controller('appController',['$scope','modalDialogProvider','$location',funct
     
     $scope.user = 'customer';
     
+    $scope.userLoggedIn = false;
+    
     $scope.imageFolderPath = './assets/images/items/';
 }]);

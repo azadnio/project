@@ -20,7 +20,7 @@
                 <th></th>
             </tr>
             
-            <tr ng-repeat="item in items |orderBy:sort:reverse | filter: {categoryId: categoryId} | filter : {status:filterItem.status} track by $index" >
+            <tr ng-class-even="even-row" ng-class-odd="odd-row" ng-repeat="item in items |orderBy:sort:reverse | filter: {categoryId: categoryId} | filter : {status:filterItem.status} track by $index" >
                 <td>{{$index}}</td>
                 <td><img class="item-image-small" ng-src="{{$parent.imageFolderPath + item.images[0]}}"></td>
                 <td><a href="./#/items/{{item.categoryId}}/{{item.id}}">{{item.id}}</a></td>

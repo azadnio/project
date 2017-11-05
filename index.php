@@ -29,6 +29,12 @@
         <section>
             <div ng-view></div>
         </section>
+        <div id='login' ng-if='!userLoggedIn' style="background: red; height: 400px;">
+            <h2>this is the login screen</h2>
+        </div>
+        <div id='about' style="background: green; height: 400px;">
+            <h2>this is the about us  screen</h2>
+        </div>
         <div ng-include="modalDialogUrl"></div>
     </body>
 </html>

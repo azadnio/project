@@ -92,7 +92,7 @@ app.controller('appController',['$scope','modalDialogProvider','$location','mess
             return $location.path().toLowerCase().indexOf(viewLocation) > - 1;
         };
         
-        
+        $scope.userLoggedIn = false;
                 
         $scope.test = function(){
             messageDialog.ok(' ok message').then(function(){
