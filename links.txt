@@ -9,3 +9,6 @@ https://scotch.io/tutorials/angularjs-best-practices-directory-structure
 
 editable combo box
 http://jsfiddle.net/nwH8A/
+
+js  css minify-compress
+http://plugins.netbeans.org/plugin/49666/js-css-minify-compress

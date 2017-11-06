@@ -3,9 +3,10 @@
     <div class="left-view-panel">
         <div class="" ng-if="parentScope.user === 'admin'"><button>Add New</button></div>
             
-        <div class="header">Category</div>    
-        <div class="vertical-menu">            
-            <a ng-repeat="item in items | unique : 'category'" ng-href="./#/items/{{item.categoryId}}" ng-class="{'selected-category': categoryId == item.categoryId}" >{{item.category}}</a>
+        <div class="header">Categories</div>    
+        <div class="vertical-menu">   
+            <a ng-repeat="item in categories | orderBy:'category'" ng-href="./#/items/{{item.categoryId}}" ng-class="{'selected-category': categoryId == item.categoryId}" >{{item.category}}</a>
+            <!--<a ng-repeat="item in items | unique : 'category'" ng-href="./#/items/{{item.categoryId}}" ng-class="{'selected-category': categoryId == item.categoryId}" >{{item.category}}</a>-->
         </div>
             
     </div>

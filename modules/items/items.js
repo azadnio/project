@@ -7,6 +7,22 @@ app.controller('itemsViewController',['$scope','itmesProvider','$routeParams','$
     $scope.categoryId   = $routeParams.categoryId;
     $scope.itemId       = $routeParams.itemId;
     
+    $scope.categories = [
+        {categoryId: 0, category: 'WINDOW ACCESSORIES'},
+        {categoryId: 1, category: 'DOOR LOCK'},
+        {categoryId: 2, category: 'PAD LOCK'},
+        {categoryId: 3, category: 'SCREW NAILS'},
+        {categoryId: 4, category: 'PVC BALL VALVE'},
+        {categoryId: 5, category: 'ROLLER BRUSH'},
+        {categoryId: 6, category: 'PAINT BRUSH'},
+        {categoryId: 7, category: 'CROW BAR'},
+        {categoryId: 8, category: 'ANCHOR BALTS'},
+        {categoryId: 9, category: 'CONCRETE NAILS'},
+        {categoryId: 10, category: 'SAW'},
+        {categoryId: 11, category: 'TILE CUTTER'},
+        {categoryId: 12, category: 'WATER TAP'}
+    ];
+    
     //set relative path for modules folder
     var pathPre = ($scope.$parent.user === 'admin')?'../':'./';
     
@@ -140,34 +156,42 @@ app.directive('chItem',[function(){
     return{
         restrict: 'E',
         replace:true,
-        scope: {itemId: '=id',price: '=price',name: '=name', description: '=description', url:'=url', categoryId:'=categoryid'},
+        scope: {itm: '=itm'},
         controller: ['$scope','$element', '$attrs', function ($scope, element, attrs) {
+                
+                $scope.$watch('itm', function(item) {
+                    $scope.item = item; 
+                });
                 
                 //check this item already added to order if it is disable adding again to the order
                 $scope.isItemAddedToOrder = function(){
                     
-//                    for(var i = 0; i < $scope.$parent.orderedItems.length; i++)
-//                        if($scope.$parent.orderedItems[i].id === $scope.itemId){
-//                            $scope.itemAdded = true;
-//                            return true;
-//                        }
-//                    
-//                    $scope.itemAdded = false;
-                    return false;
+                    for(var i = 0; i < $scope.$parent.orderedItems.length; i++)
+                        if($scope.$parent.orderedItems[i].id === $scope.itemId){
+                            $scope.itemAdded = true;
+                            return true;
+                        }
+                    
+                    $scope.itemAdded = false;
                 };
                 
                 $scope.itemAdded = false;
                 
-//                $scope.addToOrder = function(){
-//                    if(!$scope.itemAdded)
-//                    //add to order
-//                        order.addItemToOrder($scope.$parent.orderedItems, $scope.itemId);
-//                    
-//                    else
-//                    //remove item from order
-//                        order.removeItemFromOrder($scope.$parent.orderedItems, $scope.itemId);
-//                    
-//                };
+                $scope.addToOrder = function(){
+                    if(!$scope.itemAdded)
+                    //add to order
+                        $scope.$parent.orderedItems.push($scope.item);
+                    
+                    else
+                    //remove item from order
+                        for(var i = 0 ; i < $scope.$parent.orderedItems.length; i++)
+                            if($scope.$parent.orderedItems[i].id == $scope.item.id){
+                                $scope.$parent.orderedItems.splice(i, 1);
+                                break;
+                            }
+                    
+                    $scope.itemAdded = !$scope.itemAdded;
+                };
                 
                 $scope.getBtnCaption = function(){
                     return ($scope.itemAdded) ? "Remove from Order" : "Add to order";
@@ -176,14 +200,19 @@ app.directive('chItem',[function(){
         }],
     
         template:'<div class="item-prev-template">'+
-                '<div class="item-title">{{name}}</div>'+
-                '<div class="item-image-wrap">'+
-                    '<span class="item-price">Rs {{price}}</span>'+
-                    '<img ng-src="{{$parent.imageFolderPath + url}}" class="item-prev-image">'+
+                '<div class="item-title">'+
+                '<a href="./#/items/{{item.categoryId}}/{{item.itemId}}">{{item.item}}</a>'+
                 '</div>'+
-                '<div class="item-desc">{{description}}</div>'+
-                '<button ng-if="$parent.userLogedIn" ng-class="{disabled:isItemAddedToOrder()}" class="add-to-order" ng-click="addToOrder()">{{getBtnCaption()}}</button>'+
-                '<a href="./#/items/{{categoryId}}/{{itemId}}" ng-click="viewItem()" style=" color: blue; text-decoration: none; text-transform: uppercase;">View</a></div>'  
+                '<div class="item-image-wrap">'+
+                    '<span class="item-price" ng-hide="item.oldPrice">Rs. {{item.price}}</span>'+
+                    '<img ng-src="{{$parent.imageFolderPath + item.images[0]}}" class="item-prev-image">'+
+                '</div>'+
+                '<div class="offer-price"><span class="item-old-price">Rs. {{item.oldPrice}}</span>/<span class="item-new-price">Rs. {{item.price}}</span></div>'+
+                '<div class="item-offer">{{item.offerText}}</div>'+
+                '<button ng-if="$parent.userLogedIn" ng-class="{\'added-to-order\':itemAdded}" class="add-to-order" ng-click="addToOrder()">'+
+                    '<i class="fa" ng-class="itemAdded?\'fa-cart-arrow-down\':\'fa-cart-plus\'" aria-hidden="true"></i>{{getBtnCaption()}}'+
+                '</button>'+
+                '</div>'  
     };
 }]);
 

@@ -248,7 +248,7 @@ app.constant('status',{
     cheques:{
         pending: 0,
         passed: 1,
-        returned: 2        
+        returned: 2       
     }
     
 });

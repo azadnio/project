@@ -1,5 +1,5 @@
-<div>
-    
-    THIS IS HOME PAGE
-    {{test}}
-</div>
+<div ng-if="offerItems.length > 0">
+    <h1 style="margin-left: 10px;">Clearance Promotional Items</h1>
+<ch-item ng-repeat="item in offerItems" 
+             url="item.images[0]" id="item.id" itm="item"></ch-item>
+    </div>

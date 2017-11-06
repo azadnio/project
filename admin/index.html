@@ -38,8 +38,27 @@
         </section>
         <div ng-include="modalDialogUrl"></div>
     
-        <div id='login' ng-if='!userLoggedIn' style="background: red; height: 400px;">
-            <h2>this is the login screen</h2>
+        <div id='login' ng-if='!userLoggedIn'>
+            <div class="main">
+                <div class="login-form">
+                    <h1>User Login</h1>
+                    <div class="head">
+                        <img src="../assets/images/app/user.png" alt="">
+                    </div>
+                    <form>
+                        <input type="text" class="text" value="USERNAME" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}">
+                        <input type="password" value="Password">
+                        <div class="submit">
+                            <input type="submit" onclick="myFunction()" value="LOGIN">
+                        </div>	
+                        <label><input type="checkbox">Remember me</label>
+                        <p><a href="#">Forgot Password ?</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id='about' style="background: green; height: 400px;">
+            <h2>this is the about us  screen</h2>
         </div>
     </body>
 </html>

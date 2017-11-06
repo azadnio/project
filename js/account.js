@@ -13,7 +13,7 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
                 templateUrl: 'views/account.html',
                 controller: 'myAccountController'
             })
-            .when('/profile',{
+            .when('/profile',{ 
                 templateUrl: 'views/profile.html',
                 controller: 'profileController'
             });
