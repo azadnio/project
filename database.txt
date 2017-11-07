@@ -1,0 +1,57 @@
+admin-user
+
+id/	name/	role/	created/	username/	password/	status/
+
+
+customer
+id/	name/	address/	city/	telephone/	mobile/		email/	nic/	imageurl/	creditlimit/	username/	password/ status/
+
+
+payment
+id/	cusid/	date/	type/	cash/	remarks/
+
+
+payment-invoice
+id/	payid/	invoiceNo/
+
+
+cheques
+id/	customerid/	amount/		payid/	chqNo/	bank/	accountno/	status/		remarks/ user/
+
+
+chque-return
+id/	chqid/	return-reason/
+
+
+invoice
+id/	date/	custid/		user/	remark/	
+
+
+invoice-item
+id/	invid/		itemid/		itemprice/	qty/
+
+
+items
+id/	name/	description/	price/		status/ 	catid/
+
+
+item-promoted
+id/	itemid/		oldprice/
+
+
+item-category
+id/	description/
+
+
+invoice-order
+id/	invoice-id/	order-id/
+
+
+order
+id/ 	cusid/		date/ 	remarks/
+
+
+order-item
+id/	orderid/	itemid/		price/ 	qty/
+
+

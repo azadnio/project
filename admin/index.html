@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <title>Capital Hardware Administration</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.min.css">
         <script src="../assets/js/angular.min.js"></script>
         <script src="../assets/js/angular-route.min.js"></script>
-        
+         <script src="../data.js"></script>
         <!--date picker-->        
         <script type="text/javascript" src="../lib/datepicker/js/angular-datepicker.js"></script>
         <link rel="stylesheet" type="text/css" href="../lib/datepicker/css/angular-datepicker.css">
@@ -40,6 +41,7 @@
             <a href="./#/items" ng-class="{ active: isActive('items')}">Items</a>
             <a href="./#/reports" ng-class="{ active: isActive('reports')}">Reports</a>
             <a style="font-weight: bold;color: red;">Logout</a>
+            <a style="float: right; font-style: italic; color: #3c3a3a;" href=""><i class="fa fa-user"></i>User : S.H.M Silmy</a>
         </div>
         <section>
             <div ng-view></div>

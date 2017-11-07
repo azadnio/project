@@ -11,20 +11,18 @@
         <table ng-init="balance">
             <caption>Ledger</caption>
             <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Transaction</th>
-                    <th></th>
-                    <th>Debit</th>
-                    <th>Credit</th>
-                    <th>Balance</th>
+                <tr class="table-header ">
+                    <th style="width:80px;">Date</th>
+                    <th style="width: 250px;">Transaction</th>
+                    <th style="width:85px;">Debit</th>
+                    <th style="width:85px;">Credit</th>
+                    <th style="width:85px;">Balance</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-if="ledgerData.bf" ng-init="balance = ledgerData.bf">
                     <td></td>
                     <td>Brought forward</td>
-                    <td></td>
                     <td>{{(ledgerData.bf > 0)?ledgerData.bf:''}}</td>
                     <td>{{(ledgerData.bf < 0)?ledgerData.bf:''}}</td>
                     <td></td>

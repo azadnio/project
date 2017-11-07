@@ -465,16 +465,17 @@ app.factory('accountsProvider',[function(){
 
 app.controller('accountsController',['$scope','$routeParams','accountsProvider',function($scope, $routeParams, accountsProvider){
     
+    $scope.customers = customers;
     
     if($routeParams.id){
         
-        $scope.ledgerData = accountsProvider.getCustomerLedgerData($routeParams.id);
+        
     }
     else{
         $scope.accounts = accountsProvider.loadAccounts();
     }
     
-    
+    $scope.ledgerData = accountsProvider.getCustomerLedgerData($routeParams.id );
     
     
     

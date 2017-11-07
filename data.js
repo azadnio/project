@@ -38,61 +38,61 @@ var orders = [{
     ,
     {
             id:'005',
-            customerId: '00' + i,
+            customerId: '00',
             total: 20000,
             date: '2-10-2017',
-            customerName:'customer ' + i,
-            status:i%3,
+            customerName:'customer ',
+            status:3,
             remarks:'send it today'
         }
     ,
     {
-            id:'00' + i,
-            customerId: '00' + i,
+            id:'00',
+            customerId: '00',
             total: 20000,
             date: '2-10-2017',
-            customerName:'customer ' + i,
-            status:i%3,
+            customerName:'customer ',
+            status:3,
             remarks:'send it today'
         }
     ,
     {
-            id:'00' + i,
-            customerId: '00' + i,
+            id:'00',
+            customerId: '00',
             total: 20000,
             date: '2-10-2017',
-            customerName:'customer ' + i,
-            status:i%3,
+            customerName:'customer ' ,
+            status:3,
             remarks:'send it today'
         }
     ,
     {
-            id:'00' + i,
-            customerId: '00' + i,
+            id:'00' ,
+            customerId: '00',
             total: 20000,
             date: '2-10-2017',
-            customerName:'customer ' + i,
-            status:i%3,
+            customerName:'customer ' ,
+            status:3,
             remarks:'send it today'
         }
     ,
     {
-            id:'00' + i,
-            customerId: '00' + i,
+            id:'00',
+            customerId: '00',
             total: 20000,
             date: '2-10-2017',
-            customerName:'customer ' + i,
-            status:i%3,
+            customerName:'customer ' ,
+            status:3,
             remarks:'send it today'
         }
     ,
     {
-            id:'00' + i,
-            customerId: '00' + i,
+            id:'00' ,
+            customerId: '00',
             total: 20000,
             date: '2-10-2017',
-            customerName:'customer ' + i,
-            status:i%3,
+            customerName:'customer ',
+            status:3,
             remarks:'send it today'
         }];
 
@@ -275,3 +275,13 @@ var invoices = [{
         total:"20000.00",
         remarks:"test remarks"
     }];
+
+var customers = [{id:'CU1',name:'Anuruddha Distributors', city:'Kalutara'},
+    {id:'CU2',name:'Gajindu Distributors', city:'Anuradhapura'},
+    {id:'CU3',name:'Upali Harsware', city:'Peradeniya'},
+    {id:'CU4',name:'Metro Hardware', city:'Kandy'},
+{id:'CU5',name:'Matale Hardware', city:'Matale'},
+{id:'CU6',name:'Mr. Hussain', city:'Galioya'},
+{id:'CU7',name:'United Hardware', city:'Matale'},
+{id:'CU8',name:'Mr. Ariyapala', city:'Kurunegala'},
+{id:'CU9',name:'Golden Glass', city:'Kurunegala'},{id:'CU10',name:'Kandy Hardware', city:'Kandy'}];
