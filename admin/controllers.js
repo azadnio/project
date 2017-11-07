@@ -1,4 +1,4 @@
-app.controller('customersController',['$scope','$routeParams','customerProvider','$location',function($scope, $routeParams, customerProvider, $location){
+app.controller('customersController',['$scope','$routeParams','customerProvider','$location','modalDialog', function($scope, $routeParams, customerProvider, $location, modalDialog){
     
     if($routeParams.id){
         
@@ -22,7 +22,7 @@ app.controller('customersController',['$scope','$routeParams','customerProvider'
         
         //table sorting controls(accending or decending by property)
         $scope.sort         = 'id';
-        $scope.reverse      = true;
+        $scope.reverse      = false;
     }
     
     $scope.filterCustomer = {
@@ -38,9 +38,11 @@ app.controller('customersController',['$scope','$routeParams','customerProvider'
         }
     };
     
-    $scope.upadate = function(){
-        
-    }
+    $scope.addNewCustomer = function(){
+        modalDialog.showModalDialog('views/modal-dialogs/customer-view.html', 'customer-dialog').then(function(cheque){
+            $scope.payment.chequesList.push(cheque);
+        });
+    };
     
 }]);
 
@@ -166,6 +168,10 @@ app.controller('paymentsController',['$scope','$routeParams','paymentsProvider',
         
         $scope.payments = paymentsProvider.loadPayments();
     }
+    
+    //table sorting controls(accending or decending by property)
+        $scope.sort         = 'id';
+        $scope.reverse      = false;
     
     $scope.selectCutomer = function(){
         modalDialog.showModalDialog('views/modal-dialogs/customer-list.html', 'customer-list').then(function(selectedCustomer){
@@ -368,7 +374,19 @@ app.factory('invoicesProvider',[function(){
 app.controller('ordersController',['$scope','modalDialogProvider','ordersProvider',function($scope, modalDialogProvider, ordersProvider){
     
     $scope.orders = ordersProvider.loadOrders();
-    
+    //table sorting controls(accending or decending by property)
+        $scope.sort         = 'id';
+        $scope.reverse      = false;
+        
+    $scope.tot = 0;
+    $scope.getTotal = function(){
+        var tot = 0;
+        $scope.orders.forEach(function(item){
+            tot += item.total;
+        });
+        return tot;
+    };
+        
     $scope.filterOrders = {
         status:'',
         toDate:'',
@@ -482,7 +500,28 @@ app.factory('ordersProvider',[function(){
             status:i%3,
             remarks:'send it today'
         });
+        
+        
     }
+    orders.push({
+            id:'010',
+            customerId: '00' + i,
+            total: 20000,
+            date: '2-10-2017',
+            customerName:'customer ' + i,
+            status:i%3,
+            remarks:'send it today'
+        });
+        
+        orders.push({
+            id:'011',
+            customerId: '00' + i,
+            total: 20000,
+            date: '2-10-2017',
+            customerName:'customer ' + i,
+            status:i%3,
+            remarks:'send it today'
+        });
         
     return{
         loadOrders:function(){

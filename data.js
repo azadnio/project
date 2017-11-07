@@ -1,3 +1,101 @@
+var orders = [{
+            id:'001',
+            customerId: '001',
+            total: 22000,
+            date: '20-10-2017',
+            customerName:'Anuruddha Distributors',
+            status:0,
+            remarks:'Please arrange goods we will inform you where to send.'
+        },
+    {
+            id:'002',
+            customerId: '002',
+            total: 18000,
+            date: '20-10-2017',
+            customerName:'Upali Hardware',
+            status:0,
+            remarks:'Deleveri lorry'
+        },
+    {
+            id:'003',
+            customerId: '004',
+            total: 15000,
+            date: '20-10-2017',
+            customerName:'Gajindu Distributors',
+            status:0,
+            remarks:''
+        }
+    ,
+    {
+            id:'004',
+            customerId: '006',
+            total: 1200,
+            date: '20-10-2017',
+            customerName:'Senarath Hardware',
+            status:1,
+            remarks:'Deleveri lorry'
+        }
+    ,
+    {
+            id:'005',
+            customerId: '00' + i,
+            total: 20000,
+            date: '2-10-2017',
+            customerName:'customer ' + i,
+            status:i%3,
+            remarks:'send it today'
+        }
+    ,
+    {
+            id:'00' + i,
+            customerId: '00' + i,
+            total: 20000,
+            date: '2-10-2017',
+            customerName:'customer ' + i,
+            status:i%3,
+            remarks:'send it today'
+        }
+    ,
+    {
+            id:'00' + i,
+            customerId: '00' + i,
+            total: 20000,
+            date: '2-10-2017',
+            customerName:'customer ' + i,
+            status:i%3,
+            remarks:'send it today'
+        }
+    ,
+    {
+            id:'00' + i,
+            customerId: '00' + i,
+            total: 20000,
+            date: '2-10-2017',
+            customerName:'customer ' + i,
+            status:i%3,
+            remarks:'send it today'
+        }
+    ,
+    {
+            id:'00' + i,
+            customerId: '00' + i,
+            total: 20000,
+            date: '2-10-2017',
+            customerName:'customer ' + i,
+            status:i%3,
+            remarks:'send it today'
+        }
+    ,
+    {
+            id:'00' + i,
+            customerId: '00' + i,
+            total: 20000,
+            date: '2-10-2017',
+            customerName:'customer ' + i,
+            status:i%3,
+            remarks:'send it today'
+        }];
+
 var items = [{
         id: '001',
         category:'Window Accessories',

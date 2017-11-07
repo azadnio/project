@@ -1,8 +1,12 @@
 <div class="flex">
     
     <div class="left-view-panel">
-       <button>Add new Customer</button>
-       Stats
+        <button class="new-button" ng-click="addNewCustomer()">Add new Customer</button>
+        <p class="tips">
+           Click on Customer Id for view/Edit Customer Details
+       </p>
+       <p class="tips">
+           Click on Blue Coloured Headers to sort selected column to be ascending or descending order </p>
     </div>
     
     <div class="right-selected-panel">
@@ -22,19 +26,20 @@
                 Include deleted
             </label>
         </fieldset>
+        
         <div>
-            <table cellspacing="0" cellpadding="0">
-                <tr>
-                    <th></th>
-                    <th><ch-table-sort sort="sort" value="id" reverse="reverse" text="ID"></ch-table-sort></th>
-                    <th><ch-table-sort sort="sort" value="name" reverse="reverse" text="Name"></ch-table-sort></th>
-                    <th>City</th>
-                    <th>Mobile</th>
+            <table cellspacing="0" cellpadding="0" style="font-size: 14px;">
+                <tr class="table-header">
+                    <th style="width: 4%;"></th>
+                    <th style="width: 6%;"><ch-table-sort sort="sort" value="id" reverse="reverse" text="ID"></ch-table-sort></th>
+                    <th  style="width: 18%;"><ch-table-sort sort="sort" value="name" reverse="reverse" text="Name"></ch-table-sort></th>
+                    <th style="width: 14%;">City</th>
+                    <th  style="width: 12%;">Mobile</th>
                     <th>Uncleared Cheques</th>
                     <th>Returned Cheques</th>
                     <th>Payment Balance</th>
                     <th><ch-table-sort sort="sort" value="paymentBalance" reverse="reverse" text="Total Pyament Balance"></ch-table-sort></th>                    
-                    <th>Credit Limit</th>                    
+                    <th style="width: 76px;"></th>                    
                     <th>Status</th>
                     <th></th>
                     <th></th>
@@ -46,11 +51,14 @@
                     <td>{{customer.name}}</td>
                     <td>{{customer.city}}</td>
                     <td>{{customer.mobile}}</td>
-                    <td>{{customer.unclearedCheques}}</td>
-                    <td>{{customer.returnedCheques}}</td>
-                    <td>{{customer.paymentBalance}}</td>
-                    <td>{{customer.returnedCheques + customer.paymentBalance}}</td>
-                    <td>{{customer.creditLimit}}</td>
+                    <td class="fnt-12">Rs. {{customer.unclearedCheques}}</td>
+                    <td class="fnt-12">Rs. {{customer.returnedCheques}}</td>
+                    <td class="fnt-12">Rs. {{customer.paymentBalance}}</td>
+                    <td class="fnt-12">Rs. {{customer.returnedCheques + customer.paymentBalance}}</td>
+                    <td class="tst">
+                        <i class="fa fa-money" aria-hidden="true" title="Creat A Payment"></i>
+                        <i class="fa fa-file-text-o" aria-hidden="true" title="Create A Invoice"></i>
+                    </td>
                     <td>{{(customer.status === 0)?'Deleted':'Active'}}</td>
                     <td></td>
                     <td></td>

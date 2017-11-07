@@ -1,35 +1,51 @@
-<div class="flex">
-       
+    <div class="flex">
+        
     <div class="left-view-panel">
-        <button>Create an Order</button>
-        <button>Create a payment</button>
+        <button style="margin-left: 16px;
+                margin-top: 25px;
+                padding: 9px;" class="new-button"><i style="margin-right: 4px;" class="fa fa-user-circle-o" aria-hidden="true"></i>Create New Customer</button>
+                    
     </div>
         
     <div class="right-selected-panel">
         
-        <div><a href="./#/payments">Back to Payments</a></div>
-        <div>
-            <label>Received Date : <input type="text" ng-model="payment.customerName" readonly="true"></label><button ng-click="selectCutomer()">Select </button>
-            <label>Received Date : <input type="text" ng-model="payment.date"></label>
-        </div>
-        <div>Payment Type:
-            <select ng-model="payment.paymentType">
-                <option value="1">Regular payment</option>
-                <option value="2">Returned Cheques Payment</option>
-            </select>
-        </div>
-        <div>Cash Amount : <input type="text" ng-model="payment.cashAmount"></div>
-        
-        <fieldset ng-show="payment.paymentType == 1">
+        <div style="padding: 10px;margin: 12px 0px;"><a style="    color: #0666b2;
+                                                        font-weight: bold;" href="./#/invoices"><i style="" class="fa fa-chevron-left" aria-hidden="true"></i>Go to Payments</a> <p style="DISPLAY: inline-block;
+                                                        margin-left: 56px;
+                                                        font-weight: bold;">CREATE NEW PAYMENT</p></div>
+        <fieldset style="margin: 10px 0px;">
+            <label>Customer Name : <input style="width: 190px;" type="text" ng-model="payment.customerName" readonly="true"></label>
+            <button ng-click="selectCutomer()" style="background: #1798d3;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Select Customer</button>
+                
+            <div style="display: inline-block;">
+                Received Date :<div style="display: inline-block;    margin-left: 32px;width: 90px;top: 5px;position: relative;">
+                    <datepicker date-format="dd-MM-yy">
+                        <input ng-model="invoiceDate" style="width: 170px;" type="text"/>
+                    </datepicker>
+                </div>
+            </div>
+            <div>Payment Type:
+                <select style="margin-left: 19px;" ng-model="payment.paymentType">
+                    <option value="1">Regular payment</option>
+                    <option value="2">Returned Cheques Payment</option>
+                </select>
+            </div>
+            <div style="margin-top: 2px;">Cash Amount : <input style="margin-left: 20px;
+                                                               width: 190px;" type="text" ng-model="payment.cashAmount"></div>
+        </fieldset>
+        <fieldset ng-show="payment.paymentType == 1"  style="margin: 10px 0px;">
             
-            <legend>Cheque Payments Total : {{getChquePaymentsTotal()}}</legend>
-            <table>
-                <div><button ng-click="addNewCheque()">Add New Cheque</button></div>
-                <tr>
-                    <th>Number</th>   
-                    <th>Date</th>
-                    <th>Amount</th>
-                    <th>Status</th>
+            <legend>Cheque Total : {{getChquePaymentsTotal()}}</legend>
+            <table cellspacing="0" cellpadding="0" style="width: 100%;font-size: 14px;">
+                <div>
+                    <button style="border:none; padding: 5px 40px;margin: 10px 0;
+                            border-radius: 4px;
+                            background: #F44336;"><i class="fa fa-credit-card-alt fa-lg" aria-hidden="true"></i>ADD CHEQUE</button></div>
+                <tr class="table-header">
+                    <th style="width: 15%;">Number</th>   
+                    <th style="width: 15%;">Date</th>
+                    <th style="width: 20%;">Amount</th>
+                    <th style="width: 20%;">Status</th>
                     <th>Remarks</th>
                 </tr>
                 <tr ng-repeat="cheque in payment.chequesList">
@@ -39,15 +55,37 @@
                     <th>{{ (cheque.status === 0)?'pending':(order.status === 1)?'returned':'passed'}}</th>
                     <th>{{cheque.remarks}}</th>
                 </tr>
+                <tr style="height: 20px;">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr style="height: 20px;">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr style="height: 20px;">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
             </table>
         </fieldset>
         
-        <fieldset ng-if="payment.paymentType == 2">
+        
+        <fieldset ng-if="payment.paymentType == 2" style="margin: 10px 0px;">
             
             <legend>Returned Total : {{getReturnedChquePaymentsTotal()}}</legend>
-            <table>
+            <table cellspacing="0" cellpadding="0" style="width: 100%;font-size: 14px;">
                 <caption>Returned Cheques List which this payment apply</caption>
-                <tr>
+                <tr class="table-header">
                     <th>Number</th>   
                     <th>Date</th>
                     <th>Amount</th>
@@ -65,8 +103,52 @@
                 </tr>
             </table>
         </fieldset>
+        
+        <fieldset ng-show="payment.paymentType == 1" style="margin: 10px 0px;">
+            
+            <legend>Customer Invoices :</legend>
+            <table cellspacing="0" cellpadding="0" style="width: 100%;font-size: 14px;">                
+                <tr class="table-header">
+                    <th>Invoice ID</th>   
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Invoice Total</th>
+                </tr>
+                <tr ng-repeat="cheque in payment.chequesList">
+                    <th><a href="./#/account/cheques/{{cheque.number}}-{{cheque.bank}}-{{cheque.accountNo}}">{{cheque.number}}</a></th>   
+                    <th>{{cheque.date}}</th>  
+                    <th>{{cheque.amount}}</th>  
+                    <th>{{ (cheque.status === 0)?'pending':(order.status === 1)?'returned':'passed'}}</th>
+                    
+                </tr>
+                <tr style="height: 20px;">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr style="height: 20px;">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr style="height: 20px;">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </fieldset>
+        
+        
         <div>
-            <textarea>Remarks..</textarea>
+            Remarks: 
+            <textarea style="width: 99%;min-height: 65px;"></textarea>
         </div>
         
     </div>

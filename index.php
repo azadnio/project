@@ -15,6 +15,7 @@
         <script src="assets/js/angular.min.js"></script>
         <script src="assets/js/angular-route.min.js"></script>
         
+        
         <!--include js file extensions and version-->
         <script src="./app<?php echo $jsExtension ?>.js?v=<?php echo $version?>"></script>
         <script src="./modules/items/items<?php echo $jsExtension ?>.js?v=<?php echo $version?>"></script>
@@ -33,7 +34,7 @@
             <a href="./#/items" ng-class="{ active: isActive('items')}">Items</a>
             <a href="./#/account" ng-class="{ active: isActive('account')}">My Account</a>
             <a href="./#/profile" ng-class="{ active: isActive('profile')}">Profile</a>
-            <a href="./#/orders" style="color: green;font-weight: bold;" ng-if="orderedItems.length > 0">GO TO MY ORDER</a>
+            <a href="./#/orders" style="color: green;font-weight: bold;" ng-if="orderedItems.length > 0"><i class="fa fa-truck" aria-hidden="true" style="margin-right: 8px;"></i>GO TO MY ORDER</a>
             <a href="./#/contact" class="float-r" ng-class="{ active: isActive('contact')}">Contact Us</a>
             <a href="./#/about" class="float-r" ng-class="{ active: isActive('about')}">About Us</a>
             <a href="./#/logout" style="color: red;font-weight: bold;" class="float-r" ng-class="{ active: isActive('about')}">LOGOUT</a>

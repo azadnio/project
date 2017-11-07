@@ -9,7 +9,10 @@
         <script src="../assets/js/angular.min.js"></script>
         <script src="../assets/js/angular-route.min.js"></script>
         
-        
+        <!--date picker-->        
+        <script type="text/javascript" src="../lib/datepicker/js/angular-datepicker.js"></script>
+        <link rel="stylesheet" type="text/css" href="../lib/datepicker/css/angular-datepicker.css">
+            
         <script src="./admin.js"></script>
         <script src="../modules/items/items.js"></script>
         <script src="./controllers.js"></script>
@@ -20,7 +23,12 @@
     </head> 
     <body ng-app="app" ng-controller="appController">
     
-        <div id="logo-container">LOGO COMES HERE<button ng-click="test()">Test</button></div>
+        <div id="logo">   
+            <div>
+                <img src="../assets/images/app/logo.png" style="    height: 100px;">
+                <img src="../assets/images/app/header.png" style="top: -20px; position: relative;     height: 75px;">
+            </div>
+        </div>
         
         <div id="nav-bar">
             <a href="./#/customers" ng-class="{ active: isActive('customers')}">Customers</a>
@@ -31,7 +39,7 @@
             <a href="./#/accounts" ng-class="{ active: isActive('accounts')}">Accounts</a>
             <a href="./#/items" ng-class="{ active: isActive('items')}">Items</a>
             <a href="./#/reports" ng-class="{ active: isActive('reports')}">Reports</a>
-            <a >Logout</a>
+            <a style="font-weight: bold;color: red;">Logout</a>
         </div>
         <section>
             <div ng-view></div>

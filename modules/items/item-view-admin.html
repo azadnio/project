@@ -1,7 +1,7 @@
 <div class="item-view item-edit" ng-controller="itemcontroller">
     
     <h2>
-        <span>Item No/ID:</span> {{item.id}}      
+        <span>ADD NEW ITEM</span> {{item.id}}      
     </h2>
     
     <label>
@@ -20,7 +20,7 @@
         <datalist id="categories">            
             <option ng-repeat="item in categories" value="{{item.category}}"></option>
         </datalist>
-        <button ng-click="renameCategory()" >Rename Category</button>
+        <i class="fa fa-pencil-square fa-lg" aria-hidden="true" title="Rename category"></i>
     </label>
     
     <label>
@@ -46,7 +46,10 @@
     </div>
     
     <div class="promotion-wrap">
-        <fieldset>
+        <fieldset style="display: inline-block;    display: inline-block;
+    border-color: green;
+    color: green;
+    font-weight: bold;">
             <legend><input type="checkbox" ng-model="item.promoted">Promote</legend>
             <label>
             <span>Promotional Price: </span> 
@@ -60,7 +63,7 @@
         
     </div>
     
-    <div class="footer" style="margin-top: 20px;">
-        <button>Back</button> <button>Edit</button>
+    <div class="footer" style="margin-top: 20px; text-align: right;">
+        <button class="btn red-btn">Back</button> <button class="btn gray-btn">Clear</button> <button class="btn blue-btn">Save</button>
     </div>
 </div>

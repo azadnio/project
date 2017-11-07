@@ -1,15 +1,20 @@
 <div class="flex">
     
     <div class="left-view-panel">
-       <button>Create an Order</button>
-       <button>Create a payment</button>
+        <button style="margin-left: 16px;
+    margin-top: 25px;
+    padding: 9px;" class="new-button"><i style="margin-right: 4px;" class="fa fa-user-circle-o" aria-hidden="true"></i>Create New Customer</button>
+        
     </div>
     
     <div class="right-selected-panel">
         
-        <div><a href="./#/invoices">Back to Orders</a></div>
+        <div style="padding: 10px;margin: 12px 0px;"><a style="    color: #0666b2;
+                                                        font-weight: bold;" href="./#/invoices"><i style="" class="fa fa-chevron-left" aria-hidden="true"></i>Go to Orders</a> <p style="DISPLAY: inline-block;
+    margin-left: 56px;
+    font-weight: bold;">CREATE NEW INVOICE</p></div>
         
-            <fieldset>
+            <fieldset  style="margin: 10px0;">
                 <legend>Invoice Info</legend>
                 <label>
                     Customer Name : <input type="text" ng-model="invoiceInfo.customerName" > 
@@ -18,17 +23,27 @@
                     Customer ID: <input ng-if="addingNewInvoice" type="text" ng-model="invoiceInfo.customerId" readonly> 
                     <a ng-if="!addingNewInvoice" target="_  blank" href="./#/customers/{{invoiceInfo.customerId}}">{{invoiceInfo.customerId}}</a>
                 </label>
-                <label>
-                    Invoice Date : <input type="text" ng-model="invoiceInfo.invoiceDate" > 
+                <button style="background: #1798d3;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Select Customer</button>
+                <div >
+                Invoice Date :<div style="display: inline-block;    margin-left: 32px;width: 90px;top: 5px;position: relative;">
+                    <datepicker date-format="dd-MM-yy">
+                        <input ng-model="invoiceDate" style="width: 170px;" type="text"/>
+                    </datepicker>
+                </div>
+                <label style="margin-left: 107px;">
+                    Order ID : <input type="text" ng-model="invoiceInfo.customerName" > 
                 </label>
+                <button style="background: #1798d3;padding: 5px 30px;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Select Order</button>
+                
+            </div>
             </fieldset>
             
-            <fieldset>
-                <table>
-                    <tr>
+            <fieldset  style="margin: 10px 0px;">
+                <table cellspacing="0" cellpadding="0" style="width: 100%;font-size: 14px;">
+                    <tr class="table-header">
                         <th></th>
-                        <th>Item No</th>
-                        <th>Description</th>
+                        <th style="width: 10%;">Item No</th>
+                        <th style="width: 35%;">Description</th>
                         <th>price</th>
                         <th>Quantity</th>
                         <th>Discount</th>
@@ -43,10 +58,42 @@
                         <td>{{item.discount}}</td>
                         <td>{{(item.price - item.discount) * item.quantity}}</td>
                     </tr>
+                    <tr style="height: 20px;">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr style="height: 20px;">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr style="height: 20px;">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </table>
             </fieldset>
+        <div><button style="border:none; padding: 5px 40px;
+    border-radius: 4px;
+    background: #F44336;"><i class="fa fa-cart-plus fa-lg" aria-hidden="true"></i>ADD ITEMS</button></div>
+        <div style="margin: 10px 0px; text-align: right;"><b>Sub Total: 0.0</b></div>
         <div>
-            <textarea>{{invoiceInfo.remarks}}</textarea>
+            Remarks :
+            <textarea style="width: 99%;min-height: 65px;">{{invoiceInfo.remarks}}</textarea>
         </div>
             
             <fieldset ng-if="!addingNewInvoice">
@@ -59,9 +106,10 @@
                 <button>Update</button>
             </div>
             
-            <div ng-if="addingNewInvoice">
-                <button>Clear</button>
-                <button ng-click="addNew()">Save</button>
+        <div ng-if="addingNewInvoice" style="text-align: right;">
+                <button class="btn gray-btn">Clear</button> 
+                <button class="btn blue-btn">Save</button>
+ 
             </div>
                        
     </div>

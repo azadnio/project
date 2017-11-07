@@ -1,43 +1,66 @@
 <div class="flex">
     
     <div class="left-view-panel">
-       <button>Add new payment</button>
-       <div>total Payments this month</div>
-       <div>total Payments last month</div>
+        <button class="new-button">Add new payment</button>
+        <div class="pad7"><a href="#" class="link" style="padding: 0; margin: 0;">this month Payments : 10</a></div>
+        <div class="pad7"><a href="#" class="link" style="padding: 0; margin: 0;">Todays Payments : 0</a></div>
+        <p class="tips">
+            Click on Payment Id for view/Edit Payment Details
+        </p>
+        <p class="tips">
+        Click on Blue Coloured Headers to sort selected column to be ascending or descending order 
+        </p>
+               
     </div>
     
     <div class="right-selected-panel">
         
-        <fieldset>
-            <legend>Filter payments</legend>
+        <fieldset style="    display: inline-block;
+    padding: 10px 30px;
+    position: relative;
+    top: -4px;">
+            <legend>Customer</legend>
             <label>
-                Customer:<input type="text">
+                Name: <input type="text">
             </label>
-            <label>
-                From :
-                <input type="text">
-            </label>
-            <label>
-                To : 
-                <input type="text">
-            </label>
-            
+            <button>Search</button>
         </fieldset>
+        
+        <fieldset style="display: inline-block;padding: 10px 30px;">
+            <legend>Filter Date</legend>
+            <div style="display: inline-block;">
+                From :<div style="display: inline-block;width: 90px;top: 5px;position: relative;">
+                    <datepicker date-format="dd-MM-yy">
+                        <input ng-model="filterOrders.fromDate" style="width: 75px;" type="text"/>
+                    </datepicker>
+                </div>
+                To :<div style="display: inline-block;width: 90px;top: 5px;position: relative;">
+                    <datepicker date-format="dd-MM-yy">
+                        <input ng-model="filterOrders.toDate" style="width: 75px;" type="text"/>
+                    </datepicker>
+                </div>
+            </div>
+                
+                
+        </fieldset>
+                
         <div>
-            <table>
-                <tr>
+            <table cellspacing="0" cellpadding="0" style="font-size: 14px;">
+                <tr  class="table-header">
                     <th></th>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Customer</th>
-                    <th>Amount</th>
+                    <th><ch-table-sort sort="sort" value="id" reverse="reverse" text="Payment ID"></ch-table-sort></th>
+                <th>Date</th>
+                <th style="width:40%;"><ch-table-sort sort="sort" value="customerName" reverse="reverse" text="Customer"></ch-table-sort></th>
+                <th style="width:15%;">Amount</th>
+                <th style="width:18%;">Added By</th>
                 </tr>
-                <tr ng-repeat="payment in payments " >
+                <tr ng-repeat="payment in payments |orderBy:sort:reverse " >
                     <td>{{$index + 1}}</td>
                     <td>{{payment.id}}</td>
                     <td>{{payment.date}}</td>
                     <td>{{payment.customerName}}</td>
-                    <td>{{payment.amount}}</td>
+                    <td>Rs. {{payment.amount}}</td>
+                    <td>S.H.M Silmy</td>
                 </tr>
                     
             </table>

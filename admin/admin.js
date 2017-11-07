@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngRoute']);
+var app = angular.module("app", ['ngRoute', '720kb.datepicker']);
 
 app.config(["$routeProvider", "$locationProvider",function($routeProvider, $locationProvider) {
 
@@ -20,6 +20,10 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
                 controller: 'paymentsController'
             }).
             when('/cheques', {
+                templateUrl: 'views/cheques.html',
+                controller: 'chequesController'
+            }).
+            when('/cheques/:id', {
                 templateUrl: 'views/cheques.html',
                 controller: 'chequesController'
             }).

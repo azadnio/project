@@ -1,45 +1,56 @@
 <div class="flex">
     
     <div class="left-view-panel">
-        <h4>Sumerized list of Customer Ledger Accounts</h4>
-       <div><button>Create New Invoice</button></div>
-       <div><button>Create New Payment</button></div>
+        <div><button class="new-button" style="margin-left: 20px;"><i style="margin-right: 4px;" class="fa fa-file-text-o" aria-hidden="true" title="Create A Invoice"></i>Create New Invoice</button></div>
+        <div><button class="new-button" style="background: #935a5a;margin-left: 15px;"><i style="margin-right: 4px;" class="fa fa-money" aria-hidden="true" title="Creat A Payment"></i>Create New Payment</button></div>
+        <p class="tips">
+            Click on Account ID for view Customer Account transactions
+        </p>
+        <p class="tips">
+            Click on Blue Coloured Headers to sort selected column to be ascending or descending order 
+        </p>
     </div>
-    
-    <div class="right-selected-panel">
-       
+        
+        <div class="right-selected-panel">
+        
         <fieldset>
-            <legend>Filter Accounts</legend>
+            <legend>Customer</legend>
             <label>
-                Customer:<input type="text">
+                Name : <input type="text">
             </label>
+            <button>Search</button>
             <label>
                 <input type="checkbox">
                 Include Deleted Customers
             </label>
-            
+                
         </fieldset>
         <div>
-            <table>
-                <tr>
+            <table cellspacing="0" cellpadding="0" style="font-size: 14px;">
+                <tr class="table-header">
                     <th></th>
-                    <th>Account ID</th>
-                    <th>Customer</th>
-                    <th>Balance</th>                    
-                    <th>Last Invoice Date</th>
-                    <th>Last Payment Date</th>
+                    <th style="width: 10%"><ch-table-sort sort="sort" value="id" reverse="reverse" text="Account ID"></ch-table-sort></th>
+                <th style="width: 30%;text-align: left;"><ch-table-sort sort="sort" value="customerName" reverse="reverse" text="Customer"></ch-table-sort></th>
+                <th style="width: 12%"><ch-table-sort sort="sort" value="balance" reverse="reverse" text="Balance"></ch-table-sort></th>                    
+                <th>Last Invoice Date</th>
+                <th>Last Payment Date</th>
+                <th></th>
                 </tr>
                 <tr ng-repeat="account in accounts " >
-                    <td>{{$index + 1}}</td>
-                    <td><a href="./#/accounts/{{account.id}}">{{account.id}}</a></td>
-                    <td>{{account.customerName}}</td>
-                    <td>{{account.balance}}</td>
+                    <td >{{$index + 1}}</td>
+                    <td ><a href="./#/accounts/{{account.id}}">{{account.id}}</a></td>
+                    <td style="text-align: left">{{account.customerName}}</td>
+                    <td >Rs. {{account.balance}}</td>
                     <td>{{account.lastInvoiceDate}}</td>
                     <td>{{account.lastPaymentDate}}</td>
+                    <td class="tst">
+                        <i class="fa fa-money" aria-hidden="true" title="Creat A Payment"></i>
+                        <i class="fa fa-file-text-o" aria-hidden="true" title="Create A Invoice"></i>
+                    </td>
                 </tr>
-                    
+                
             </table>
         </div>
     </div>
-    
+        
 </div>

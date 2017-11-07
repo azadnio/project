@@ -1,22 +1,45 @@
 <div class="flex">
     
     <div class="left-view-panel">
-       <button>Add new payment</button>
-       Stats
+       <button class="new-button">add New payment</button>
+        <div class="pad7"><a href="#" class="link" style="padding: 0; margin: 0;">to days clearences: 0</a></div>
+        <div class="pad7"><a href="#" class="link" style="padding: 0; margin: 0;">this month cheques: 2</a></div>
+        <div class="pad7"><a href="#" class="link" style="padding: 0; margin: 0;">returned cheques: 0</a></div>
+        <p class="tips">
+            Click on Cheque ID for view/Edit Cheques Details
+        </p>
+        <p class="tips">
+        Click on Blue Coloured Headers to sort selected column to be ascending or descending order 
+        </p>
     </div>
     
     <div class="right-selected-panel">
         
-        <fieldset>
-            <legend>Filter cheques</legend>
+        <fieldset style="    display: inline-block;
+                  padding: 10px 30px;
+                  position: relative;
+                  top: -4px;">
+            <legend>Customer</legend>
             <label>
-                From :
-                <input type="text">
+                Name: <input type="text">
             </label>
-            <label>
-                To : 
-                <input type="text">
-            </label>
+            <button>Search</button>
+        </fieldset>
+        
+        <fieldset style="display: inline-block;padding: 9px 23px;">
+            <legend>Filter</legend>
+            <div style="display: inline-block;">
+                From :<div style="display: inline-block;width: 90px;top: 5px;position: relative;">
+                    <datepicker date-format="dd-MM-yy">
+                        <input ng-model="filterOrders.fromDate" style="width: 75px;" type="text"/>
+                    </datepicker>
+                </div>
+                To :<div style="display: inline-block;width: 90px;top: 5px;position: relative;">
+                    <datepicker date-format="dd-MM-yy">
+                        <input ng-model="filterOrders.toDate" style="width: 75px;" type="text"/>
+                    </datepicker>
+                </div>
+            </div>
             <label>
                 Status :
                 <select ng-model="filterCheques.status">
@@ -28,28 +51,30 @@
             </label>
         </fieldset>
         <div>
-            <table>
-                <tr>
+            <table  cellspacing="0" cellpadding="0" style="font-size: 14px;">
+                <tr class="table-header" style="text-align: center;">
                     <th></th>
-                    <th>ID</th>
+                    <th style="width: 15%;"><ch-table-sort sort="sort" value="id" reverse="reverse" text="ID"></ch-table-sort></th>
                     <th>Cheque No</th>
-                    <th>Date</th>
-                    <th>Amount</th>
-                    <th>Status</th>
+                    <th style="width:20%"><ch-table-sort sort="sort" value="name" reverse="reverse" text="Date"></ch-table-sort></th>
+                    <th><ch-table-sort sort="sort" value="name" reverse="reverse" text="Amount"></ch-table-sort></th>                    
                     <th>Customer</th>
+                    <th>Status</th>
+                    <th>Added By</th>
                 </tr>
-                <tr ng-repeat="cheque in cheques | filter : {status : filterCheques.status}" >
+                <tr ng-class="(cheque.status==0)?'pending':(cheque.status==1)?'returned':'passed'" ng-repeat="cheque in cheques | filter : {status : filterCheques.status}" >
                     <td>{{$index}}</td>
-                    <td>{{cheque.id}}</td>
+                    <td><a href="">{{cheque.id}}<a></td>
                     <td>{{cheque.chequeNo}}</td>
                     <td>{{cheque.date}}</td>
-                    <td>{{cheque.amount}}</td>
+                    <td style="width: 17%;">Rs. {{cheque.amount}}</td>
+                    <td style="width:28%">{{cheque.customerName}}</td>
                     <td ng-switch="cheque.status">
                         <span ng-switch-when="0">Pending</span>
                         <span ng-switch-when="1">Returned</span>
                         <span ng-switch-when="2">Passed</span>
                     </td>
-                    <td>{{cheque.customerName}}</td>
+                    <th>S.H.M Silmy</th>
                 </tr>
                     
             </table>

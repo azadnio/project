@@ -1,45 +1,71 @@
 <div class="flex">
     
     <div class="left-view-panel">
-       <button>Create New Invoice</button>
-       <div>total invoices this month</div>
-       <div>total Payments last month</div>
+        <button class="new-button">Create New invoice</button>
+        <div class="pad7"><a href="#" class="link" style="padding: 0; margin: 0;">this month Invoices : 10</a></div>
+        <div class="pad7"><a href="#" class="link" style="padding: 0; margin: 0;">Todays Invoices : 0</a></div>
+        <p class="tips">
+            Click on Invoice Id for view/Edit Invoice Details
+        </p>
+        <p class="tips">
+        Click on Blue Coloured Headers to sort selected column to be ascending or descending order 
+        </p>
     </div>
     
     <div class="right-selected-panel">
         
-        <fieldset>
-            <legend>Filter Invoices</legend>
+        <fieldset style="    display: inline-block;
+                  padding: 10px 20px;
+                  position: relative;
+                  top: -4px;">
+            <legend>Customer</legend>
             <label>
-                Customer:<input type="text">
+                Name: <input type="text">
             </label>
-            <label>
-                From :
-                <input type="text">
-            </label>
-            <label>
-                To : 
-                <input type="text">
-            </label>
-            
+            <button>Search</button>
         </fieldset>
+        
+        <fieldset style="display: inline-block;padding: 10px ;">
+            <legend>Filter</legend>
+            <div style="display: inline-block;">
+                From :<div style="display: inline-block;width: 90px;top: 5px;position: relative;">
+                    <datepicker date-format="dd-MM-yy">
+                        <input ng-model="filterOrders.fromDate" style="width: 75px;" type="text"/>
+                    </datepicker>
+                </div>
+                To :<div style="display: inline-block;width: 90px;top: 5px;position: relative;">
+                    <datepicker date-format="dd-MM-yy">
+                        <input ng-model="filterOrders.toDate" style="width: 75px;" type="text"/>
+                    </datepicker>
+                </div>
+            </div>
+            <label>
+                Payment Status: <select><option>All</option><option>Paid</option><option>Pending</option></select>
+            </label>
+                
+        </fieldset>
+        
+        
+        
         <div>
-            <table>
-                <tr>
+            <table cellspacing="0" cellpadding="0" style="font-size: 14px;">
+                <tr class="table-header">
                     <th></th>
-                    <th>ID</th>
+                    <th style="width: 5%;">ID</th>
                     <th>Date</th>
-                    <th>Customer</th>
+                    <th style="width: 34%;">Customer</th>
                     <th>Invoice Total</th>
                     <th>Payment Status</th>
+                    <th>Created By</th>
                 </tr>
                 <tr ng-repeat="invoice in invoices " >
                     <td>{{$index + 1}}</td>
                     <td><a href="./#/invoices/{{invoice.id}}">{{invoice.id}}</a></td>
                     <td>{{invoice.date}}</td>
                     <td>{{invoice.customerName}}</td>
-                    <td>{{invoice.amount}}</td>
-                    <td>{{(invoice.paymentStatus === 1)?'Paid':'Pending'}}</td>
+                    <td>Rs. {{invoice.total}}</td>
+                    <td style="width: 15%;">{{(invoice.paymentStatus === 1)?'Paid':'Pending'}}</td>
+                    <td style="width: 10%;">S.H.M Silmy</td>
                 </tr>
                     
             </table>

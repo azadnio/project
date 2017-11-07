@@ -1,25 +1,28 @@
 <div class="cheque-dialog" ng-controller="newChequeController">
     <div class='header'>New Cheque</div>
-    <fieldset>
+    <fieldset style="margin: 10px; padding: 20px 10px;">
         <legend>Enter Cheque Details</legend>
-        <div><label>Customer: <input type="text" ng-model="cheque.customer"></label></div>
-        <div><label>Amount: <input type="text" ng-model="cheque.amount"></label></div>
-        <div><label>Cheque No: <input type="text" ng-model="cheque.chequeNo"></label></div>
-        <div><label>Bank: <input type="text" ng-model="cheque.bank"></label></div>
-        <div><label>Account No: <input type="text" ng-model="cheque.accountNo"></label></div>
-        <div>
+        <div class="row"><label>Customer: <input style="margin-left: 20px;" type="text" ng-model="cheque.customer"></label></div>
+        <div class="row"><label>Amount: <input style="margin-left: 34px;" type="text" ng-model="cheque.amount"></label></div>
+        <div class="row"><label>Cheque No: <input style="margin-left: 10px;" type="text" ng-model="cheque.chequeNo"></label></div>
+        <div class="row"><label>Bank: <input style="margin-left: 54px;" type="text" ng-model="cheque.bank"></label></div>
+        <div class="row"><label>Account No: <input style="margin-left: 8px;" type="text" ng-model="cheque.accountNo"></label></div>
+        <div class="row">
             <label>
                 Status: 
-                <select ng-model="cheque.status">
+                <select ng-model="cheque.status" style="    margin-left: 44px;
+    width: 175px;">
                     <option value="0">Pending</option>
                     <option value="1">Returned</option>
                     <option value="2">Passed</option>
                 </select>
             </label>
         </div>
-        <div><label><div>Remarks:</div> <textarea ng-model="cheque.remarks"></textarea></label></div>
+        <div class="row"><label><div>Remarks:</div> <textarea style="width: 100%;
+    min-height: 50px;" ng-model="cheque.remarks"></textarea></label></div>
     </fieldset>
     <div class="footer">
-        <button ng-click="ok()">Ok</button><button ng-click="cancel()">Close</button>
+        <button class="btn gray-btn" ng-click="cancel()">Close</button>
+        <button ng-click="ok()" class="btn blue-btn">Ok</button>
     </div>
 </div>

@@ -1,3 +1,73 @@
+.tips{
+    text-align: center;
+    padding: 15px;
+    
+}
+
+.pending{
+    background: rgba(22, 153, 213, 0.19) !important;
+}
+
+.returned{
+    background: #F44336 !important;
+    color: white;
+}
+
+fieldset button{
+    border: none;
+    background: blue;
+    padding: 5px 17px;
+    color: white;
+    font-weight: bold;
+}
+
+.fnt-12{
+    font-size: 12px;
+}
+
+.tst i{
+    margin: 0 2px;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: white;
+}
+
+.tst .fa-money{
+    background:#009688;    
+}
+
+.tst .fa-file-text-o{
+    background: #3F51B5;
+}
+
+tr:not(.passed):not(.table-header):nth-child(odd){
+    background: rgba(217, 217, 217, 0.58)
+}
+
+.item-list-table td{
+    font-size: 13px;
+}
+
+tr.table-header{
+    background: #cfb3b7;
+}
+
+th{
+    border-bottom: 1px solid;
+    
+}
+
+table{
+    background: white;
+}
+
+td{
+    text-align: center;
+    padding: 4px 2px;
+    border-bottom: 1px solid #cbcbcb;
+}
+
 .new-button{
     margin-left: 28px;
     margin-top: 25px;
@@ -12,7 +82,7 @@
 }
 
 .link{
-        text-transform: uppercase;
+    text-transform: uppercase;
     font-weight: bold;
     padding: 6px;
     margin: 2px;
@@ -77,12 +147,13 @@ body{
 .right-selected-panel{
     flex: 1;
     background: rgba(130, 130, 130, 0.5);
-        padding: 12px;
+    padding: 12px;
+    
 }
 
 .col{
     display: inline-block;
-        display: inline-block;
+    display: inline-block;
     padding: 6px 0;
     text-align: center;
 }
@@ -135,8 +206,8 @@ body{
     font-size: 20px;
     font-weight: bold;
     color: #0f0f0f;
-    border-bottom: 1px solid #a8a8a8;
-    box-shadow: inset 0px 1px 6px #898989;
+/*    border-bottom: 1px solid #a8a8a8;
+    box-shadow: inset 0px 1px 6px #898989;*/
     text-align: center;
 }
 
@@ -197,12 +268,43 @@ button.add-to-order{
     color: gray;
 }
 
+.btn{
+    color: white;
+    padding: 10px 25px;
+    border-radius: 4px;
+    border: none;
+}
+
+.blue-btn{        
+    background: #2196F3;    
+}
+
+.red-btn{        
+       background: #F44336;
+}
+
+.gray-btn{        
+       background: #7a7a7a;
+}
+
+.formfield * {
+  vertical-align: top;
+}
+
+fieldset{
+    border: 1px solid gray;
+}
+
 .offer-price{
     background: #ebeb48;
     border-radius: 5px;
     padding: 2px;
     font-weight: bold;
     text-align: right;
+}
+
+.cheque-dialog .row{
+    padding: 5px 10px;
 }
 
 .vertical-menu a {
@@ -222,9 +324,14 @@ button.add-to-order{
     background-color: #77b3e8;
 }
 
+i.fa{
+    margin-right: 4px;
+}
+
 .item-view.item-edit{
-    
-    padding: 20px 100px;
+    width: 500px;
+    padding: 1px 100px;
+    background: #d9d9d9;
 }
 
 .item-edit label{
@@ -254,7 +361,7 @@ button.add-to-order{
 }
 
 .item-view .edit-images-wrap {
-    width: 482px;
+    width: 494px;
 }
 
 
@@ -489,7 +596,7 @@ th{
 }
 
 td{
-    padding: 2px;
+    padding: 4px 2px;
 }
 
 /*--------------modal dialogs -------------------*/

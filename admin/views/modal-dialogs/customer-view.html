@@ -1,0 +1,93 @@
+<div style="background: white;
+     width: 600px;
+     margin: auto;
+     top: 8%;
+     position: absolute;
+     left: 30%;">
+    <div class='header'>New Customer</div>
+    
+    <fieldset style="margin: 13px;">
+        <legend>Personal Info</legend>
+        <div style="margin: 5px 10px;">
+            <label>
+                Name : <input style="width: 100px;width: 250px;margin-left: 30px;" type="text" ng-model="customerInfo.name" > 
+            </label>
+        </div>
+        <div style="margin: 5px 10px;">
+            <p class="formfield" style="margin: 0">
+                <label for="textarea">Address:</label>
+                <textarea id="textarea" rows="5" style="margin-left: 19px;width: 250px;"></textarea>
+            </p>
+        </div>
+        <div style="margin: 5px 10px;">
+            <label>
+                City : <input style="width: 100px;width: 250px;margin-left: 45px;" type="text" ng-model="customerInfo.city" > 
+            </label>
+        </div>
+        <div style="margin: 5px 10px;">
+            <label>
+                Telephone : <input style="width: 100px;width: 250px;margin-left: 0px;" type="text" ng-model="customerInfo.telephone" > 
+            </label>
+        </div>
+        <div style="margin: 5px 10px;">
+            <label>
+                Mobile : <input style="width: 100px;width: 250px;margin-left: 27px;" type="text" ng-model="customerInfo.mobile" > 
+            </label>
+        </div>
+        <div style="margin: 5px 10px;">
+            <label>
+                E-mail : <input style="width: 100px;width: 250px;margin-left: 27px;" type="text" ng-model="customerInfo.email" > 
+            </label>
+        </div>
+        <div style="margin: 5px 10px;">
+            <label>
+                NIC : <input style="width: 100px;width: 250px;margin-left: 45px;" type="text" ng-model="customerInfo.email" > 
+            </label><span style="    font-size: 11px;
+    color: gray;
+    font-style: italic;">Do note enter special letter</span>
+        </div>
+        
+        <div style="position: absolute;
+    width: 188px;
+    height: 170px;    
+    right: 20px;
+    top: 80px;">
+            <span>Customer Photo (optional)</span>
+            <img style="width: 100%;border: 1px solid #aca3a3;height: 100%;">
+            <input type="file">
+        </div>
+        
+    </fieldset>
+    
+    <fieldset style="margin: 13px;">
+        <label>
+            Credit Limit: <input type="text" style="width: 250px;margin-left: 7px;" ng-model="customerInfo.creditLimit">
+        </label>
+    </fieldset>
+    
+    <fieldset  style="margin: 13px;" ng-if="!addingNewCustomer">
+        <legend>Set Login Credential</legend>
+        <div style="margin: 5px 10px;">
+            <label>
+            User Name:  <input type="text" style="width: 250px;margin-left: 20px;" ng-model="customerInfo.creditLimit">
+        </label>
+        </div>
+        <div style="margin: 5px 10px;">
+            <label>
+            Password:  <input type="text" style="width: 250px;margin-left: 31px;" ng-model="customerInfo.creditLimit">
+        </label>
+        </div>
+    </fieldset>
+    
+    <div ng-if="!addingNewCustomer" style="text-align: right;padding: 10px;">
+        <button class="btn gray-btn">Clear</button>
+        <button class="btn blue-btn">Save</button>
+        <button class="btn red-btn"  ng-click="cancel()">Close</button>
+    </div>
+    
+    <div ng-if="addingNewCustomer">
+        <button>Clear</button>
+        <button ng-click="addNew()">Save</button>
+    </div>
+    
+</div>
