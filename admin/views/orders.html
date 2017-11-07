@@ -1,9 +1,10 @@
 <div class="flex">
     
     <div class="left-view-panel">
-       <button>Create New Invoice</button>
-       <div>total invoices this month</div>
-       <div>total Payments last month</div>
+        <button class="new-button">Create New Invoice</button>
+        <div class="pad7"><a href="#" class="link">this month orders : 10</a></div>
+       <div class="pad7"><a href="#" class="link">pending orders : 3</a></div>
+       <div class="pad7"><a href="#" class="link">processing orders : 3</a></div>
     </div>
     
     <div class="right-selected-panel">
@@ -14,12 +15,17 @@
                 Customer:<input type="text">
             </label>
             <label>
-                From :
-                <input type="text">
+                Month :
+                <select>
+                    <option>October</option><option>October</option>
+                </select>
             </label>
             <label>
-                To : 
-                <input type="text">
+                Year : 
+                <input list="years" value='2017' style='width: 60px;'>
+                <datalist id="years">            
+                    <option value="2017"></option>
+                </datalist>
             </label>
             <label>
                 Status: 
@@ -32,32 +38,32 @@
             </label>
             
         </fieldset>
-        <div>
-            <table>
-                <tr>
-                    <th></th>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Customer</th>
-                    <th>Total</th>
-                    <th>Status</th>
-                    <th>Remarks</th>
-                </tr>
-                <tr ng-repeat="order in orders | filter: {status:filterOrders.status}" >
-                    <td>{{$index + 1}}</td>
-                    <td><a href="./#/orders/{{order.id}}">{{order.id}}</a></td>
-                    <td>{{order.date}}</td>
-                    <td>{{order.customerName}}</td>
-                    <td>{{order.total}}</td>
-                    <td ng-switch="order.status">
-                        <span ng-switch-when="0">Pending <button>Invoice</button></span>
-                        <span ng-switch-when="1">Processing</span>
-                        <span ng-switch-when="2">Dispatched</span>
-                    </td>
-                    <td>{{order.remarks}}</td>
-                </tr>
-                    
-            </table>
+        <div class="table">
+            <div class="table-header">
+                <div class='col col1'></div>
+                <div class='col col-id'>ID</div>
+                <div class='col col-date'>Date</div>
+                <div class='col col-name'>Customer</div>
+                <div class='col col-total'>Total</div>
+                <div class='col col-total'>Status</div>
+                <div class="col col-remarks">Remarks</div>
+            </div>
+            
+            <div class="table-row" ng-repeat="order in orders | filter: {status:filterOrders.status}">
+                <div class='col col1'>{{$index + 1}}</div>
+                <div class='col col-id'><a href="./#/orders/{{order.id}}">{{order.id}}</a></div>
+                <div class='col col-date'>{{order.date}}</div>
+                <div class='col col-name'>{{order.customerName}}</div>
+                <div class='col col-total'>Rs. {{order.total}}</div>
+                <div class='col col-total' ng-switch="order.status">
+                    <span ng-switch-when="0" class="red hover-button" >Pending <button>Invoice</button></span>
+                    <span ng-switch-when="1" class="green">Processing</span>
+                        <span ng-switch-when="2" >Dispatched</span>
+                </div>
+                <div class="col col-remarks">{{order.remarks}}</div>
+                <div ng-if='order.status =="0"' class="col col-float"></div>
+            </div>
+            
         </div>
     </div>
     

@@ -1,3 +1,27 @@
+.new-button{
+    margin-left: 28px;
+    margin-top: 25px;
+    padding: 15px;
+    margin-bottom: 36px;
+    background: green;
+    border-radius: 5px;
+    border: 1px solid;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+}
+
+.link{
+        text-transform: uppercase;
+    font-weight: bold;
+    padding: 6px;
+    margin: 2px;
+}
+
+.pad7{
+    padding: 7px;
+}
+
 body{
     /*background-image: url(../images/app/blobkgde.gif);*/
     font-family: "Lato", sans-serif;
@@ -53,7 +77,57 @@ body{
 .right-selected-panel{
     flex: 1;
     background: rgba(130, 130, 130, 0.5);
+        padding: 12px;
 }
+
+.col{
+    display: inline-block;
+        display: inline-block;
+    padding: 6px 0;
+    text-align: center;
+}
+
+.red{
+    color: red;
+}
+
+.green{
+    color: green;
+}
+.hover-button{
+    position:relative;
+}
+.table-header{
+    font-weight: bold;
+}
+.hover-button:hover button{
+    display: block;
+}
+.table-row{
+    cursor: pointer;
+}
+.hover-button > button{
+    display: none;
+    position: absolute;
+    right: 0;
+    border: none;
+    background: blue;
+    padding: 5px 10px;
+    top: -4px;
+    border-radius: 5px;
+    color: white;
+}
+
+.col-id{width: 65px;}
+.col-date{width: 85px;}
+.col-name{width: 225px;}
+.col-total{width: 90px;}
+.col5{width: 30px;}
+.col6{width: 30px;}
+.col-remarks{width: 200px;}
+.col1{width: 30px;}
+
+.col-float{float: right;}
 
 .left-view-panel .header,
 .right-selected-panel .header{
