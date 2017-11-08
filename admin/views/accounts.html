@@ -7,7 +7,7 @@
             </label>
         </div>
         <div class="vertical-menu">
-            <a href="" ng-repeat="customer in customers">{{customer.name}}</a>
+            <a href="" ng-class="($index == 0)?'selected-category':''" ng-repeat="customer in customers">{{customer.name}}</a>
         </div>
     </div>
         

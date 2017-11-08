@@ -4,6 +4,8 @@ app.controller('itemsViewController',['$scope','itmesProvider','$routeParams','$
         
     $scope.items = itmesProvider.loadItems();
     
+    $scope.locks = locks;
+    
     $scope.categoryId   = $routeParams.categoryId;
     $scope.itemId       = $routeParams.itemId;
     
@@ -74,7 +76,17 @@ app.controller('itemcontroller',['$scope','$routeParams','itmesProvider','$eleme
     
     $scope.categories = itmesProvider.getItemCatgories();
     
-    $scope.item = itmesProvider.getItemByItemId(itemId);
+    $scope.item = {
+        id: '001',
+        category:'Window Accessories',
+        categoryId:1,
+        item:'Brass Stay - lanka',
+        description: 'Top quality lankan made window brass stay',
+        price:'200',
+        quantity:1,
+        unit: 'Nos',
+        images:['doorhandle2.jpg','doorhandle.jpg','doorhanle.jpg']
+    };//itmesProvider.getItemByItemId(itemId);
     $scope.selectedCategory = $scope.item.category;
     
     $scope.slide = function(count){
@@ -140,10 +152,10 @@ app.factory('itmesProvider',[function(){
         },
         
         getItemByItemId:function(itemId){
-            
-            for(var i =0;i<items.length;i++)
-                if(items[i].id == itemId)
-                    return items[i];
+//            
+//            for(var i =0;i<items.length;i++)
+//                if(items[i].id == itemId)
+//                    return items[i];
             
             //send server request
             
@@ -152,7 +164,7 @@ app.factory('itmesProvider',[function(){
     };
 }]);
 
-app.directive('chItem',[function(){
+app.directive('chItem','itemProvider',[function(itemProvider){
     return{
         restrict: 'E',
         replace:true,
@@ -165,30 +177,14 @@ app.directive('chItem',[function(){
                 
                 //check this item already added to order if it is disable adding again to the order
                 $scope.isItemAddedToOrder = function(){
-                    
-                    for(var i = 0; i < $scope.$parent.orderedItems.length; i++)
-                        if($scope.$parent.orderedItems[i].id === $scope.itemId){
-                            $scope.itemAdded = true;
-                            return true;
-                        }
-                    
-                    $scope.itemAdded = false;
+                    return itemProvider.isItemAddedToOrder($scope.item);
                 };
                 
-                $scope.itemAdded = false;
+                $scope.itemAdded = $scope.isItemAddedToOrder();
                 
                 $scope.addToOrder = function(){
-                    if(!$scope.itemAdded)
-                    //add to order
-                        $scope.$parent.orderedItems.push($scope.item);
                     
-                    else
-                    //remove item from order
-                        for(var i = 0 ; i < $scope.$parent.orderedItems.length; i++)
-                            if($scope.$parent.orderedItems[i].id == $scope.item.id){
-                                $scope.$parent.orderedItems.splice(i, 1);
-                                break;
-                            }
+                    itemProvider.isItemAddedToOrder($scope.item);
                     
                     $scope.itemAdded = !$scope.itemAdded;
                 };
@@ -207,8 +203,8 @@ app.directive('chItem',[function(){
                     '<span class="item-price" ng-hide="item.oldPrice">Rs. {{item.price}}</span>'+
                     '<img ng-src="{{$parent.imageFolderPath + item.images[0]}}" class="item-prev-image">'+
                 '</div>'+
-                '<div class="offer-price"><span class="item-old-price">Rs. {{item.oldPrice}}</span>/<span class="item-new-price">Rs. {{item.price}}</span></div>'+
-                '<div class="item-offer">{{item.offerText}}</div>'+
+                '<div class="offer-price" ng-show="item.oldPrice"><span class="item-old-price">Rs. {{item.oldPrice}}</span>/<span class="item-new-price">Rs. {{item.price}}</span></div>'+
+                '<div class="item-offer" style="height:38px;">{{item.offerText || item.info}}</div>'+
                 '<button ng-if="$parent.userLogedIn" ng-class="{\'added-to-order\':itemAdded}" class="add-to-order" ng-click="addToOrder()">'+
                     '<i class="fa" ng-class="itemAdded?\'fa-cart-arrow-down\':\'fa-cart-plus\'" aria-hidden="true"></i>{{getBtnCaption()}}'+
                 '</button>'+

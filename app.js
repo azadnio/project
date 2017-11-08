@@ -60,6 +60,8 @@ app.controller('appController',['$scope','modalDialogProvider','$location',funct
     
     $scope.offerItems= offerItems ;
     
+    $scope.items = items;
+    
     $scope.orderedItems = [];
     
     $scope.imageFolderPath = './assets/images/items/';

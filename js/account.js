@@ -1,4 +1,4 @@
-app.config(["$routeProvider", "$locationProvider",function($routeProvider, $locationProvider) {
+app.config(["$routeProvider", "$locationProvider",function($routeProvider) {
     //config 'account' routing 
     $routeProvider.
             when('/account/:section', {
@@ -98,7 +98,7 @@ app.controller('newOrderController',['$scope','modalDialogProvider','ordersProvi
 
 app.controller('itemListController',['$scope','modalDialogProvider','itmesProvider','ordersProvider',function($scope, modalDialogProvider, itmesProvider,ordersProvider){
         
-    $scope.items = itmesProvider.loadItems();
+    $scope.items = items;//itmesProvider.loadItems();
         
     $scope.close = function(){
         modalDialogProvider.closeModalDialog();

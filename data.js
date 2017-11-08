@@ -95,40 +95,155 @@ var orders = [{
             status:3,
             remarks:'send it today'
         }];
-
-var items = [{
-        id: '001',
-        category:'Window Accessories',
-        categoryId:1,
-        item:'Brass Stay - lanka',
-        description: 'Top quality lankan made window brass stay',
-        price:'200',
-        quantity:1,
-        unit: 'Nos',
-        images:['doorhandle2.jpg','doorhandle.jpg','doorhanle.jpg']
-    },
-    {
-        id: '002',
-        category:'Window Accessories',
-        categoryId:1,
-        item:'Iron Casement tradsmann',
-        description: 'Tradesmann brand strong irron window casement stay',
-        price:'180',
-        quantity:1,
-        unit: 'Nos',
-        images:['doorhandle2.jpg','doorhandle.jpg','doorhanle.jpg']
-    },
-    {
-        id: '002',
-        category:'Window Accessories',
-        categoryId:1,
-        item:'Iron Casement - ceyco',
-        description: 'Top quality Ceyco brand strong irron window casement stay',
-        price:'180',
-        quantity:1,
-        unit: 'Nos',
-        images:['doorhandle2.jpg','doorhandle.jpg','doorhanle.jpg']
+    
+    var locks = [{
+            item   : "Shangai Door Lock",
+            id      : "15",
+            images:["doorhanle.jpg"],
+            info    : "Brass cauted door handles",
+            price   : "900",unit    : "Nos",
+            categoryId:'1',
+            category: "door Locks"
+    },{
+            item   : "Door Lock Silver",
+            id      : "18",
+            images:["doorhandle2.jpg"],
+            categoryId:'1',
+            info    : "Silver cauted door handle",
+            price   : "1000",unit    : "Nos",
+            category: "Screw Nails"
+    },{
+            item   : "Door Lock Gold",
+            id      : "12",unit    : "Nos",
+            images:["doorhandle.jpg"],
+            info    : "Gold colour plated door handle",
+            price   : "1000",
+            categoryId:'1',
+            category: "Screw Nails"
     }];
+    
+var items = [{
+            item   : "Brass Stay",
+            id      : "12",
+            images:["brassstay.jpg"],
+            info    : "Top quality lankan brass widow stay",
+            price   : "200",
+            unit    : "Nos",
+            categoryId:'CA1',
+            category: "Winow Accessories"
+    },{
+            item   : "Crocodile Hoe",
+            id      : "17",
+            images:["memoty.jpg"],
+            info    : "No1 Original Corocodile hoe",
+            price   : "1,000",unit    : "Nos",
+            category: "Screw Nails"
+    },{
+            item   : "Concrete Nail 2'",
+            id      : "21",unit    : "Nos",
+            images:["convrestenails.jpg"],
+            info    : "Imported Concrete naile",
+            price   : "175",
+            category: "PVC Ball Valve"
+    },{
+            item   : "Brass Door guard",
+            id      : "22",unit    : "Nos",
+            images:["doorguard.jpg"],
+            info    : "Srilankan hand made oxidized brass door guard",
+            price   : "490",
+            category: "PVC Ball Valve"
+    },{
+            item   : "Gate Lock",
+            id      : "12",unit    : "Nos",
+            images:["doorlock.jpg"],
+            info    : "Nickle quated gate locks",
+            price   : "270",
+            category: "PVC Ball Valve"
+    },{
+            item   : "Tile Cutter 12'",
+            id      : "123",unit    : "Nos",
+            images:["tilecutter.jpg"],
+            info    : "Chinese tile cutter",
+            price   : "900",
+            category: "PVC Ball Valve"
+    },{
+            item   : "Siver coat Tap",
+            id      : "26",unit    : "Nos",
+            images:["silvertap.jpg"],
+            info    : "This is quality lock",
+            price   : "1000",
+            category: "Roller Brush"
+    },{
+            item   : "Miter saw",
+            id      : "27",unit    : "Nos",
+            images:["mitersaw.jpg"],
+            info    : "This is quality lock",
+            price   : "1000",
+            category: "Roller Brush"
+    },{
+            item   : "Sandra door locks",
+            id      : "123",unit    : "Nos",
+            images:["doorlock.jpg"],
+            info    : "This is quality lock",
+            price   : "1000",
+            categoryId:'1',
+            category: "Painting brush"
+    },{
+            item   : "Crow Bars",
+            id      : "125",unit    : "Nos",
+            images:['doorlock.jpg'],
+            info    : "This is quality lock",
+            price   : "1000",
+            category: "Crow Bars"
+    },{
+            item   : "Jtech Handril",
+            id      : "16",
+            images:["handdril.jpg"],
+            info    : "This is quality lock",
+            price   : "1000",unit    : "Nos",
+            category: "Pad Locks"
+    },{
+            item   : "Combination Player 8",
+            id      : "20",unit    : "Nos",
+            images:["combinationplayer.jpg"],
+            info    : "This is quality lock",
+            price   : "1000",
+            category: "Screw Nails"
+    }];
+//
+//var items = [{
+//        id: '001',
+//        category:'Window Accessories',
+//        categoryId:1,
+//        item:'Brass Stay - lanka',
+//        description: 'Top quality lankan made window brass stay',
+//        price:'200',
+//        quantity:1,
+//        unit: 'Nos',
+//        images:[doorhandle2.jpg','doorhandle.jpg','doorhanle.jpg']
+//    },
+//    {
+//        id: '002',
+//        category:'Window Accessories',
+//        categoryId:1,
+//        item:'Iron Casement tradsmann',
+//        description: 'Tradesmann brand strong irron window casement stay',
+//        price:'180',
+//        quantity:1,
+//        unit: 'Nos',
+//        images:['doorhandle2.jpg','doorhandle.jpg','doorhanle.jpg']
+//    },
+//    {
+//        id: '002',
+//        category:'Window Accessories',
+//        categoryId:1,
+//        item:'Iron Casement - ceyco',
+//        description: 'Top quality Ceyco brand strong irron window casement stay',
+//        price:'180',
+//        quantity:1,
+//        unit: 'Nos',
+//        images:['doorhandle2.jpg','doorhandle.jpg','doorhanle.jpg']
+//    }];
 
 var offerItems = [{
         
@@ -284,4 +399,5 @@ var customers = [{id:'CU1',name:'Anuruddha Distributors', city:'Kalutara'},
 {id:'CU6',name:'Mr. Hussain', city:'Galioya'},
 {id:'CU7',name:'United Hardware', city:'Matale'},
 {id:'CU8',name:'Mr. Ariyapala', city:'Kurunegala'},
-{id:'CU9',name:'Golden Glass', city:'Kurunegala'},{id:'CU10',name:'Kandy Hardware', city:'Kandy'}];
+{id:'CU9',name:'Golden Glass', city:'Kurunegala'},
+{id:'CU10',name:'Kandy Hardware', city:'Kandy'}];
