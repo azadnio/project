@@ -1,7 +1,5 @@
-
 <div ng-if="!itemListView">
-    <ch-item ng-repeat="item in locks" 
-             url="item.images[0]" itm="item" id="item.id" description="item.description" categoryid="item.categoryId" name="item.name" price="item.price"></ch-item>
+    <ch-item ng-repeat="item in items" itm="item">test</ch-item>
 </div>
 <table class="item-list-table" cellspacing="0" cellpadding="0" ng-if="itemListView">
     <tr class="table-header">

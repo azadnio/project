@@ -252,11 +252,11 @@ a:hover{
     margin: auto;
 }
 
-.home-block:hover{
+.home-block-btn:hover{
     box-shadow: inset -1px 0px 9px 0px black;
 }
 
-.home-block{
+.home-block-btn{
     display: inline-block;
     width: 200px;
     height: 100px;

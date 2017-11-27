@@ -4,7 +4,7 @@ app.controller('itemsViewController',['$scope','itmesProvider','$routeParams','$
         
     $scope.items = itmesProvider.loadItems();
     
-    $scope.locks = locks;
+    //$scope.locks = locks;
     
     $scope.categoryId   = $routeParams.categoryId;
     $scope.itemId       = $routeParams.itemId;
@@ -164,30 +164,30 @@ app.factory('itmesProvider',[function(){
     };
 }]);
 
-app.directive('chItem','itemProvider',[function(itemProvider){
+app.directive('chItem',['itemsProvider',function(itemsProvider){
     return{
         restrict: 'E',
         replace:true,
-        scope: {itm: '=itm'},
+        scope: {item: '=itm'},
         controller: ['$scope','$element', '$attrs', function ($scope, element, attrs) {
                 
-                $scope.$watch('itm', function(item) {
-                    $scope.item = item; 
-                });
+//                $scope.$watch('itm', function(item) {
+//                    $scope.item = item; 
+//                });
                 
                 //check this item already added to order if it is disable adding again to the order
-                $scope.isItemAddedToOrder = function(){
-                    return itemProvider.isItemAddedToOrder($scope.item);
-                };
-                
-                $scope.itemAdded = $scope.isItemAddedToOrder();
-                
-                $scope.addToOrder = function(){
-                    
-                    itemProvider.isItemAddedToOrder($scope.item);
-                    
-                    $scope.itemAdded = !$scope.itemAdded;
-                };
+//                $scope.isItemAddedToOrder = function(){
+//                    return itemProvider.isItemAddedToOrder($scope.item);
+//                };
+//                
+//                $scope.itemAdded = $scope.isItemAddedToOrder();
+//                
+//                $scope.addToOrder = function(){
+//                    
+//                    itemProvider.isItemAddedToOrder($scope.item);
+//                    
+//                    $scope.itemAdded = !$scope.itemAdded;
+//                };
                 
                 $scope.getBtnCaption = function(){
                     return ($scope.itemAdded) ? "Remove from Order" : "Add to order";
