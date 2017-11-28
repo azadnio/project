@@ -80,7 +80,7 @@ app.directive('chTableSort',[function(){
 app.factory('messageDialog',['$compile','$rootScope','$q',function($compile,$rootScope,$q){
     var deferred, $messageDialog;
     function _appendDialog(text, dialogType){
-        $messageDialog = $compile("<ch-message-dialog type="+ dialogType +" message="+ text + "></ch-message-dialog>")($rootScope);
+        $messageDialog = $compile("<ch-message-dialog class='message-dialog' type="+ dialogType +" message='"+ text + "'></ch-message-dialog>")($rootScope);
         deferred = $q.defer();
         angular.element(document.body).append($messageDialog);
         return deferred.promise;
@@ -135,12 +135,10 @@ app.directive('chMessageDialog',[function(){
         replace:true,
         scope:{
             type:'@', //posible types (oc, ync, yn)
-            message:'@',
-            success: '&',
-            fails: '&'
+            'message':'@'
         },
         controller:['$scope','messageDialog',function($scope, messageDialog){
-                
+                                
             $scope.ok = function(){
                 messageDialog.setPromiseSuccess(true);
             };

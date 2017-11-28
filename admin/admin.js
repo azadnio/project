@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngRoute', '720kb.datepicker']);
+var app = angular.module("app", ['ngRoute', '720kb.datepicker','ngAnimate']);
 
 app.config(["$routeProvider", "$locationProvider",function($routeProvider, $locationProvider) {
 
@@ -95,6 +95,8 @@ app.controller('appController',['$scope','modalDialogProvider','$location','mess
         $scope.isActive =  function(viewLocation){
             return $location.path().toLowerCase().indexOf(viewLocation) > - 1;
         };
+        
+        messageDialog.yesNo('afasdf asdfuaskdfjb adsfugasdu fdusafg you yes the adsfsdaf aaor no');
         
         $scope.userLoggedIn = false;
                 
