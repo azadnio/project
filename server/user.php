@@ -102,7 +102,7 @@
         private $adress = 'ad';        private $city = 'asdf';
         private $telephone = 'dgg';     private $nic ='asfg';
         private $mobile ='adf';        private $creditlimit = 1451;
-        private $image = 'gdfd|din|iji';         private $email='dgg';  
+        private $image = '';
         
         //insert customer into data base
         function insertToDataBase(){
@@ -126,12 +126,11 @@
                 
                 //get the type
                 $pos  = strpos($this->image, ';');
-                $type = explode(':', substr($this->image, 0, $pos))[1];                
-                $ifp = fopen("../assets/images/$uniqueId.$type", 'wb' );
+                $type = explode('/', substr($this->image, 0, $pos))[1];             
+                $ifp = fopen("../assets/images/users/$uniqueId.$type", 'wb' );
                 $data = explode( ',', $this->image );
                 fwrite( $ifp, base64_decode( $data[ 1 ] ) );
-
-                $this->setImage($uniqueId.$type);
+                $this->setImage("$uniqueId.$type");
                 
                 // clean up the file resource
                 fclose( $ifp ); 
@@ -224,4 +223,4 @@
     }
     
 //    $c= new customer();
-//    echo $c->insert();
+//    echo $c->insertToDataBase();

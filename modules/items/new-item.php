@@ -1,6 +1,6 @@
 <div class="item-view item-edit" ng-controller="itemcontroller">
     
-    <h2>
+    <h2 style="margin: 10px 0;">
         <span>ADD NEW ITEM</span> {{item.id}}      
     </h2>
     
@@ -25,7 +25,7 @@
     
     <label>
         <span>Description: </span>
-        <textarea ng-model="item.description"></textarea>
+        <textarea ng-model="item.description" style="min-height: 60px;"></textarea>
     </label>
     
     <label>
@@ -40,7 +40,7 @@
             <img ng-src='{{$parent.imageFolderPath + image}}'/>
         </div>
         <div class="item-edit-image" ng-repeat="image in newImagesFiles">
-            <span class="modal-dialog-close" ng-click="deleteImageFile(image)" >X</span>
+            <span class="modal-dialog-close" ng-click="deleteImage(image)" >X</span>
             <img ng-src='{{image.bs64}}'/>
         </div>        
     </div>
@@ -57,13 +57,13 @@
         </label>
         <label>
             <span>Pormotion text: </span>
-            <textarea ng-model="item.promotionDescription"></textarea>
+            <textarea ng-model="item.promotionDescription" style="min-height: 50px;"></textarea>
         </label>
         </fieldset>
         
     </div>
     
-    <div class="footer" style="margin-top: 20px; text-align: right;">
+    <div class="footer" style="margin-top: 5px; text-align: right;">
         <button class="btn red-btn">Back</button> <button class="btn gray-btn">Clear</button> <button class="btn blue-btn">Save</button>
     </div>
 </div>

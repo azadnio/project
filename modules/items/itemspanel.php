@@ -23,7 +23,7 @@
                 <input type="checkbox" ng-model="filterItems.status" ng-value-true="" ng-value-false="1">
                 Include deleted
             </label>
-            <button style="margin-left: 55px;">ADD NEW ITEM</button>
+            <button style="margin-left: 55px;" ng-click="addNewItem()">ADD NEW ITEM</button>
         </fieldset>
         <div ng-include="view" class="views"></div>
     </div>

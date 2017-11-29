@@ -376,11 +376,16 @@ i.fa{
     width: 500px;
     padding: 1px 100px;
     background: #d9d9d9;
+    margin: auto;
+    top: 3%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .item-edit label{
     display: block;
-    padding: 5px;
+    padding: 1px;
 }
 
 .item-edit label span{
@@ -410,7 +415,7 @@ i.fa{
 
 
 .item-edit label textarea{
-    min-height: 75px;
+    /*min-height: 75px;*/
 }
 
 .item-edit label textarea,
@@ -421,14 +426,14 @@ i.fa{
 
 .edit-images-wrap{
     border: 1px solid #b6acac;
-    min-height: 110px;
+    /*min-height: 110px;*/
     
 }
 
 .item-edit .item-edit-image img,
 .item-edit .item-edit-image {
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
 }
 
 

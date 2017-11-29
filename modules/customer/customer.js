@@ -68,8 +68,20 @@ app.controller('customerDialogController',['$scope','customerProvider','modalDia
     //pass customer objec to caller
     $scope.ok = function(){
         
-        console.log($scope.customer.insert());
-        
+        //save the customer
+        customerProvider.addNewCustomer($scope.customer)
+            //handle the promises
+            .then(function(res){
+                //prompt relavent messages
+                if(res.status >= 200 && res.status < 300)
+                    alert('Customer successfully saved');
+                else
+                    alert('Customer Cannot be saved try again shortly');
+                
+            },function(){
+                //cannot connect to the server
+                alert('Cannot connect to the netwrok/internal server error');
+            });
         modalDialog.setPromiseSuccess($scope.customer);
     };
     
@@ -121,16 +133,16 @@ app.factory('customerProvider',['$http',function($http){
                 image: '',      imageFile:'',
                 userId:'',//user who created this customer
                 
-                insert:function(){
-                    $http.post('../server/customer.php',{data:this, method:'insertCustomer'}).then(function(response){
-                        console.log(response);
-                    });
-                }
+                
             };
         },
         
         loadCustomers:function(){
             return customers;
+        },
+        
+        addNewCustomer:function(customer){
+            return $http.post('../server/customer.php',{data:customer, method:'insertCustomer'});
         },
         
         getCustomerInfo:function(id){
@@ -151,8 +163,5 @@ app.factory('customerProvider',['$http',function($http){
             };
         },
         
-        addNewCustomer:function(customerData){
-            customers.push(customerData);
-        }
     };
 }]);
