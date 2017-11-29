@@ -52,8 +52,8 @@
     right: 20px;
     top: 80px;">
             <span>Customer Photo (optional)</span>
-            <img  ng-src="customer.image" style="width: 100%;border: 1px solid #aca3a3;height: 100%;">
-            <input type="file">
+            <img id="customer-image" ng-src="{{customer.image}}" style="width: 100%;border: 1px solid #aca3a3;height: 100%;">
+            <input id="file-upload-customer-image" style="width: 186px;" onchange="angular.element(this).scope().selectImageFile(this)" accept="image/*" type="file">
         </div>
         
     </fieldset>

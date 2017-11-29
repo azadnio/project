@@ -96,7 +96,7 @@ app.controller('appController',['$scope','modalDialogProvider','$location','mess
             return $location.path().toLowerCase().indexOf(viewLocation) > - 1;
         };
         
-        messageDialog.yesNo('afasdf asdfuaskdfjb adsfugasdu fdusafg you yes the adsfsdaf aaor no');
+       // messageDialog.yesNo('afasdf asdfuaskdfjb adsfugasdu fdusafg you yes the adsfsdaf aaor no');
         
         $scope.userLoggedIn = false;
                 

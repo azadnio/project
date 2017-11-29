@@ -42,7 +42,7 @@ app.controller('customersController',['$scope','$routeParams','customerProvider'
     };
     
     $scope.addNewCustomer = function(){
-        modalDialog.showModalDialog('views/modal-dialogs/customer-view.html', 'customer-dialog').then(function(cheque){
+        modalDialog.showModalDialog('../modules/customer/new-customer.html', 'customer-dialog').then(function(cheque){
             $scope.payment.chequesList.push(cheque);
         });
     };
@@ -51,7 +51,7 @@ app.controller('customersController',['$scope','$routeParams','customerProvider'
 
 
 //controller for customer modal dialog
-app.controller('customerDialogController',['$scope','customerProvider','modalDialog',function($scope, customerProvider, modalDialog){
+app.controller('customerDialogController',['$scope','customerProvider','modalDialog','$element',function($scope, customerProvider, modalDialog, $element){
     
     //init customer object
     $scope.customer = new customerProvider.customer();
@@ -59,20 +59,39 @@ app.controller('customerDialogController',['$scope','customerProvider','modalDia
     //reset customer object
     $scope.clear = function(){
         $scope.customer = new customerProvider.customer();
+        
+        //remove customer image
+        angular.element($element[0].querySelector('#customer-image')).removeAttr('src');
+        angular.element($element[0].querySelector('#file-upload-customer-image')).val('');
     };
     
     //pass customer objec to caller
     $scope.ok = function(){
+        
+        console.log($scope.customer.insert());
+        
         modalDialog.setPromiseSuccess($scope.customer);
     };
     
     //close the dialog 
     $scope.cancel = function(){
         modalDialog.setPromiseFails();
-    };    
+    };
+    
+    //upload customer image
+    $scope.selectImageFile = function(target){
+        var reader = new FileReader();
+        reader.onload = function(loadEvent) {
+            $scope.$apply(function() {
+                $scope.customer.image = loadEvent.target.result;
+            });
+        };
+        reader.readAsDataURL(target.files[0]);
+    };
+    
 }]);
 
-app.factory('customerProvider',[function(){
+app.factory('customerProvider',['$http',function($http){
     
     var customers = [];
         
@@ -99,7 +118,14 @@ app.factory('customerProvider',[function(){
                 mobile: '',     email: '',
                 nic: '',        creditLimit: '',
                 userName: '',   password: '',
-                image: ''
+                image: '',      imageFile:'',
+                userId:'',//user who created this customer
+                
+                insert:function(){
+                    $http.post('../server/customer.php',{data:this, method:'insertCustomer'}).then(function(response){
+                        console.log(response);
+                    });
+                }
             };
         },
         

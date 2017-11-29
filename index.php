@@ -10,7 +10,7 @@
         <title>Capital Hardware</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="assets/css/index.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/app.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
         <script src="assets/js/angular.min.js"></script>
         <script src="assets/js/angular-route.min.js"></script>
