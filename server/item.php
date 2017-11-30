@@ -178,5 +178,5 @@ class item{
     
 }
 
-    $c= new item();
-    echo $c->insertToDataBase();
+//    $c= new item();
+//    echo $c->insertToDataBase();

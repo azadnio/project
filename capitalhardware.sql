@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2017 at 12:50 PM
+-- Generation Time: Nov 30, 2017 at 03:09 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -58,6 +58,30 @@ INSERT INTO `customer` (`id`, `name`, `address`, `city`, `telephone`, `nic`, `mo
 ('C8', 'test', '', '', '', '', '', 343, '', '', '', '', 1, ''),
 ('C9', 'azad', '', '', '', '', '', 2345, '', '', 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD', '', 1, ''),
 ('C10', 'sdfdab', '', '', '', '', '', 214, '', '', 'C10image/jpeg', '', 1, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `items`
+--
+
+CREATE TABLE IF NOT EXISTS `items` (
+  `id` varchar(10) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `catid` varchar(5) NOT NULL,
+  `price` double NOT NULL,
+  `description` text NOT NULL,
+  `lastmodifieduser` varchar(5) NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  `images` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `items`
+--
+
+INSERT INTO `items` (`id`, `name`, `catid`, `price`, `description`, `lastmodifieduser`, `status`, `images`) VALUES
+('I1', 'test', '', 78, '', '', 1, '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -71,7 +71,7 @@ app.controller('customerDialogController',['$scope','customerProvider','modalDia
         //save the customer
         customerProvider.addNewCustomer($scope.customer)
             //handle the promises
-            .then(function(res){
+            .then(function(res){console.log(res);
                 //prompt relavent messages
                 if(res.status >= 200 && res.status < 300)
                     alert('Customer successfully saved');
