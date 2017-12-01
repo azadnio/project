@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2017 at 03:09 AM
+-- Generation Time: Dec 01, 2017 at 06:47 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -48,16 +48,28 @@ CREATE TABLE IF NOT EXISTS `customer` (
 --
 
 INSERT INTO `customer` (`id`, `name`, `address`, `city`, `telephone`, `nic`, `mobile`, `creditlimit`, `password`, `userid`, `image`, `email`, `status`, `username`) VALUES
-('a', 'df', 'ad', 'asdf', 'dgg', 'asfg', 'adf', 1451, 'd', 'sd', 'gdfd', 'dgg', 1, 'd'),
-('a', 'df', 'ad', 'asdf', 'dgg', 'asfg', 'adf', 1451, 'd', 'sd', 'gdfd', 'dgg', 1, 'd'),
-('a', 'df', 'ad', 'asdf', 'dgg', 'asfg', 'adf', 1451, 'd', 'sd', 'gdfd', 'dgg', 1, 'd'),
-('C4', 'df', 'ad', 'asdf', 'dgg', 'asfg', 'adf', 1451, 'd', 'sd', 'gdfd|din|iji', 'dgg', 1, 'd'),
-('C5', 'df', 'ad', 'asdf', 'dgg', 'asfg', 'adf', 1451, 'd', 'sd', 'gdfd|din|iji', 'dgg', 1, 'd'),
-('C6', 'df', 'ad', 'asdf', 'dgg', 'asfg', 'adf', 1451, 'd', 'sd', 'gdfd|din|iji', 'dgg', 1, 'd'),
-('C7', 'df', 'ad', 'asdf', 'dgg', 'asfg', 'adf', 1451, 'd', 'sd', 'gdfd|din|iji', 'dgg', 1, 'd'),
-('C8', 'test', '', '', '', '', '', 343, '', '', '', '', 1, ''),
-('C9', 'azad', '', '', '', '', '', 2345, '', '', 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD', '', 1, ''),
-('C10', 'sdfdab', '', '', '', '', '', 214, '', '', 'C10image/jpeg', '', 1, '');
+('', 'azad', '', '', '', '', '', 0, '', '', NULL, '', 1, ''),
+('', 'az ad', '', '', '', '', '', 0, '', '', NULL, '', 1, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item-category`
+--
+
+CREATE TABLE IF NOT EXISTS `item-category` (
+  `id` varchar(4) NOT NULL,
+  `description` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `item-category`
+--
+
+INSERT INTO `item-category` (`id`, `description`) VALUES
+('ct1', 'azad'),
+('CT1', 'vamsi'),
+('CT2', 'vamsi');
 
 -- --------------------------------------------------------
 
