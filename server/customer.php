@@ -21,6 +21,6 @@ switch ($request->method){
     
     case 'insertItem':
         $userProvider = new itemsProvider();
-        $userProvider->addNewItem($request->data);
+        echo $userProvider->addNewItem($request->data);
         break;
 }

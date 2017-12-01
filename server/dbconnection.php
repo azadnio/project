@@ -5,7 +5,7 @@ class dbConnection{
     public $con;
     
     private function createConnection(){
-        $this->con = mysqli_connect("localhost", "root", "","capitalHardware") or
+        $this->con = mysqli_connect("localhost", "root", "rootpassword","capitalHardware") or
                 die("Server Error : " . mysql_error());
     }
 

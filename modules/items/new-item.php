@@ -6,7 +6,7 @@
     
     <label>
         <span>Item Name:</span> 
-        <input type="text" ng-model="item.item">        
+        <input type="text" ng-model="item.name">        
     </label>
     
     <label>
@@ -16,7 +16,7 @@
     
     <label>
         <span>Item Category:</span> 
-        <input list="categories" ng-model="selectedCategory">
+        <input list="categories" ng-model="item.category">
         <datalist id="categories">            
             <option ng-repeat="item in categories" value="{{item.category}}"></option>
         </datalist>
@@ -30,19 +30,15 @@
     
     <label>
         <span>Pictures (max 4): </span>  
-        <input onchange="angular.element(this).scope().selectImageFile(this)" accept="image/*" type="file" id='item-image-select-file'>
+        <input id="item-image-upload" onchange="angular.element(this).scope().selectImageFile(this)" accept="image/*" type="file" id='item-image-select-file'>
         
     </label>
     
     <div class="edit-images-wrap">
         <div class="item-edit-image" ng-repeat="image in item.images">
             <span class="modal-dialog-close" ng-click="deleteImage(image)">X</span>
-            <img ng-src='{{$parent.imageFolderPath + image}}'/>
-        </div>
-        <div class="item-edit-image" ng-repeat="image in newImagesFiles">
-            <span class="modal-dialog-close" ng-click="deleteImage(image)" >X</span>
-            <img ng-src='{{image.bs64}}'/>
-        </div>        
+            <img ng-src='{{(image.bs64)?image.bs64 : ($parent.imageFolderPath + image.url)}}'/>
+        </div>  
     </div>
     
     <div class="promotion-wrap">
@@ -64,6 +60,8 @@
     </div>
     
     <div class="footer" style="margin-top: 5px; text-align: right;">
-        <button class="btn red-btn">Back</button> <button class="btn gray-btn">Clear</button> <button class="btn blue-btn">Save</button>
+        <button class="btn red-btn" ng-click="close()">Back</button> 
+        <button class="btn gray-btn" ng-click="clear()">Clear</button> 
+        <button class="btn blue-btn" ng-click="save()">Save</button>
     </div>
 </div>

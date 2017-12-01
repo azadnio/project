@@ -72,17 +72,21 @@ app.controller('itemcontroller',['$scope','$routeParams','itmesProvider','$eleme
         
         $scope.categories = itmesProvider.getItemCatgories();
         
-        $scope.item = {
-            id: '001',
-            category:'Window Accessories',
-            categoryId:1,
-            item:'Brass Stay - lanka',
-            description: 'Top quality lankan made window brass stay',
-            price:'200',
-            quantity:1,
-            unit: 'Nos',
-            images:['doorhandle2.jpg','doorhandle.jpg','doorhanle.jpg']
-        };//itmesProvider.getItemByItemId(itemId);
+//        $scope.item = {
+//            id: '001',
+//            category:'Window Accessories',
+//            categoryId:1,
+//            item:'Brass Stay - lanka',
+//            description: 'Top quality lankan made window brass stay',
+//            price:'200',
+//            quantity:1,
+//            unit: 'Nos',
+//            images:['doorhandle2.jpg','doorhandle.jpg','doorhanle.jpg']
+//        };//itmesProvider.getItemByItemId(itemId);
+        
+        //init item object
+        $scope.item = new itmesProvider.item();
+        
         $scope.selectedCategory = $scope.item.category;
         
         $scope.newImagesFiles = [];
@@ -90,11 +94,14 @@ app.controller('itemcontroller',['$scope','$routeParams','itmesProvider','$eleme
         $scope.selectImageFile = function(target){
             var reader = new FileReader();
             reader.onload = function(loadEvent) {
+                
+                //remove the last element if there are 4 images
+                if($scope.item.images.length === 4)
+                    $scope.item.images.pop();
+                
                 $scope.$apply(function() {
-                    $scope.newImagesFiles.push({
-                        file: target.files[0], 
-                        bs64: loadEvent.target.result,
-                        name: target.files[0].name
+                    $scope.item.images.push({
+                        bs64: loadEvent.target.result
                     });
                 });
             };
@@ -130,7 +137,28 @@ app.controller('itemcontroller',['$scope','$routeParams','itmesProvider','$eleme
         
         $scope.selectedImageIndex = 0;
         
+        //save new item into data base
+        $scope.save = function(){
+            
+            itmesProvider.addNewItem($scope.item)
+            //handle the promises
+            .then(function(res){console.log(res);
+                //prompt relavent messages
+                if(res.status >= 200 && res.status < 300 && res.data === '1')
+                    alert('Item successfully saved');
+                else
+                    alert('Item Cannot be saved try again shortly');
+                
+            },function(){
+                //cannot connect to the server
+                alert('Cannot connect to the netwrok/internal server error');
+            });            
+        };
         
+        //reset item object
+        $scope.clear = function(){
+            $scope.item = new itmesProvider.item();
+        };
         
         //supportive functions and variables for view user clicked image in original/zoomed view
         var clickedImageHolder = angular.element($element[0].querySelector('#clicked-image'));
@@ -165,6 +193,22 @@ app.factory('itmesProvider',['$http',function($http){
         
         return{
             
+            addNewItem: function(item){
+                return $http.post('../server/customer.php',{data:item, method:'insertItem'});
+            },
+            
+            item: function(){
+                
+                //common item object properties
+                return{
+                    id: '',             category:'',
+                    categoryId:'',      item:'',
+                    name: '',           price:'',
+                    description:'',
+                    unit: '',           images:[]
+                };
+            },
+            
             loadItems:function(){
                 //request php
                 return items;
@@ -181,12 +225,7 @@ app.factory('itmesProvider',['$http',function($http){
                 }
                 return op;
             },
-            
-            addNewItem: function(){
-                
-                
-            },
-            
+                        
             getItemByItemId:function(itemId){
                 //            
                 //            for(var i =0;i<items.length;i++)

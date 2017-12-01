@@ -5,7 +5,7 @@ require_once './dbconnection.php';
 //manipulate all items related actions received form front end
 class itemsProvider{
     
-    function addNewItem(){
+    function addNewItem($data){
         
         $item = new item();
         $item->setName($data->name);            $item->setDescription($data->description);
@@ -13,8 +13,8 @@ class itemsProvider{
         
         //set category details
         if(isset($data->categoryId))
-            $item->category->setId($data-categoryId);
-        $item->category->setDescription($data->category);
+            $item->setCategoryId($data->categoryId);
+        $item->setCategoryDescription($data->category);
         
         return $item->insertToDataBase();
     }
@@ -25,12 +25,12 @@ class item{
     
     private $id = '';           private $name= 'test';
     private $description = '';  
-    private $price = 78;        private $userId= '';
+    private $price = 78;        private $userId= '1';
     private $status = 1;        private $images = '';
     
     //generic public properties
     public $dbCon;
-    public $category;
+    private $category;
     
     
     //constructor 
@@ -50,7 +50,9 @@ class item{
 
         
         //insert new catgory if not in data base
-        if(!isset($this->category->getId()) && isset($this->category->getDescription())){
+        $catId      = $this->getCategoryId();
+        $catDesc    = $this->getCategoryDescription();
+        if((!isset($catId) || trim($catId) === '')  && trim($catDesc) !== ''){
             if(!$this->category->isCategoryExists())
                 $this->category->insertCategory();
         }
@@ -58,7 +60,9 @@ class item{
         
         //save the image file into the directory
         if(isset($this->images)){
-            $i = 1;
+            
+            $i      = 1;
+            $image  = '';
             foreach ($this->images as $value) {
                 
                 //newly added items has bs64 property
@@ -69,47 +73,32 @@ class item{
                     $type = explode('/', substr($value->bs64, 0, $pos))[1];   
 
                     //add the image file into folder
-                    $ifp = fopen("../assets/images/items/$uniqueId.$type", 'wb' );
+                    $imgeFileName = $this->getId() .'-'. ($i++) . '.' . $type;
+                    $ifp = fopen("../assets/images/items/$imgeFileName", 'wb' );
                     $data = explode( ',', $value->bs64 );
                     fwrite( $ifp, base64_decode( $data[ 1 ] ) );
-                    $this->setImage("$uniqueId.$type");
                     
-                    $i++;
-                }
-                
+                    $image .= $imgeFileName . '|';//add the seperator
+                }                
             }
+            
+            //remove the last seperator & set combined image names
+            $this->images =  rtrim($image,'|'); 
         }
         
-        if(isset($this->image) && trim($this->image) !== '' ){
-
-            //get the type
-            $pos  = strpos($this->image, ';');
-            $type = explode('/', substr($this->image, 0, $pos))[1];   
-            
-            //add the image file into folder
-            $ifp = fopen("../assets/images/users/$uniqueId.$type", 'wb' );
-            $data = explode( ',', $this->image );
-            fwrite( $ifp, base64_decode( $data[ 1 ] ) );
-            $this->setImage("$uniqueId-$i.$type");
-
-            // clean up the file resource
-            fclose( $ifp ); 
-
-        }
 
         //using mysqli prepare function to avoid sql injection
         $stmt = $con->prepare('INSERT INTO `items`(`id`, `name`, `catid`, `price`, `description`, '
                 . '`lastmodifieduser`, `status`, `images`) VALUES (?,?,?,?,?,?,?,?)');
 
         //set perameters
-        $stmt->bind_param('sssdssis', $id, $name,$catid,$price,$description,
-                $userid, $status, $images);
+        $stmt->bind_param('sssdssis', $id, $name,$catid,$price,$description,$userid, $status, $images);
 
         //set refrence variable values
-        $id         = $this->getId();       $name       = $this->getName();
-        $catid      = $this->catid;         $price      = $this->price;
-        $description= $this->description;   $userid     = $this->getUserid();   
-        $images      = $this->images;        $status     = $this->getStatus();         
+        $id         = $this->id;                $name       = $this->name;
+        $catid      = $this->category->getId(); $price      = $this->price;
+        $description= $this->description;       $userid     = $this->userId;   
+        $status     = $this->status;            $images     = $this->images;        
 
         return $stmt->execute();            
     }
@@ -151,10 +140,22 @@ class item{
         $this->description = $description;
     }
 
-    public function getCategory(){
-        return $this->category;
+    public function setCategoryDescription($desc){
+        return $this->category->setDescription($desc);
     }
     
+    public function getCategoryDescription(){
+        return $this->category->getDescription();
+    }
+    
+    public function setCategoryId($id){
+        $this->category->setId($id);
+    }
+    
+    public function getCategoryId(){
+        return $this->category->getId();
+    }
+        
     public function getPrice(){
         return $this->price;
     }
@@ -209,9 +210,9 @@ class itemCategroy{
     function insertCategory(){
         
         $db = $this->getConnection();
-        $uniqueId = $db->getTableNextUniqueId('item-category', 'CT');
+        $this->id = $db->getTableNextUniqueId('item-category', 'CT');
         
-        return $db->executeNonQuery("INSERT INTO `item-category` (`id`, `description`) VALUES ('$uniqueId','$this->description')");
+        return $db->executeNonQuery("INSERT INTO `item-category` (`id`, `description`) VALUES ('$this->id','$this->description')");
     }
     
     //check whether any item exists for this category
@@ -239,5 +240,6 @@ class itemCategroy{
     }
 }
 
+//UNIT TEST CODES
 //$d = new itemCategroy();
 //var_dump($d->insertCategory('vamsi'));
