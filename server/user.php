@@ -1,6 +1,6 @@
 <?php
     
-    require './dbconnection.php';
+    require_once './dbconnection.php';
 
     //manipulate all user actions received from front end
     class userProvider{
@@ -109,17 +109,9 @@
             
             //connection object
             $con = $this->dbCon->getcon();
-            
-            //create unique id (nth number of customer)
-            $noOfRecords = $this->dbCon->countTableRecord('customer');
-            $uniqueId = 'C'.($noOfRecords + 1);
-            
-            //increse unique id by 1 if already exists
-            while($this->dbCon->checkTableHasThisId($uniqueId, 'customer'))
-                $uniqueId = 'C'.($uniqueId + 1);
-            
+                        
             //set id
-            $this->setId($uniqueId);
+            $this->setId($this->dbCon->getTableNextUniqueId('customer', 'C'));
             
             //save the image file into the directory
             if(isset($this->image) && trim($this->image) !== '' ){

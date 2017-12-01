@@ -8,10 +8,7 @@ require './item.php';
 //recieve post data
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
-
-
-
-
+  
 
 
 //depends on method execute actions
@@ -19,7 +16,7 @@ switch ($request->method){
     
     case 'insertCustomer':
         $userProvider = new userProvider();
-        $userProvider->addNewCustomer($request->data);
+        echo $userProvider->addNewCustomer($request->data);
         break;
     
     case 'insertItem':

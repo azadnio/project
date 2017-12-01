@@ -73,7 +73,7 @@ app.controller('customerDialogController',['$scope','customerProvider','modalDia
             //handle the promises
             .then(function(res){console.log(res);
                 //prompt relavent messages
-                if(res.status >= 200 && res.status < 300)
+                if(res.status >= 200 && res.status < 300 && res.data === '1')
                     alert('Customer successfully saved');
                 else
                     alert('Customer Cannot be saved try again shortly');

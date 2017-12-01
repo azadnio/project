@@ -24,17 +24,18 @@ class dbConnection{
     function close() {
         if (isset($this->con))
             mysqli_close($this->con);
+        
+        unset($this->con);
     }
 
     //common routine for insert queries
     function executeNonQuery($query){
         
         //create connection if not
-        if (!isset($this->con))
-            $this->createConnection();
+        $con = $this->getcon();
         
         //execut query
-        if($this->con->query($query) === TRUE)
+        if($con->query($query) === TRUE)
             return true;
         else 
             return false;
@@ -43,9 +44,10 @@ class dbConnection{
     //common routine for selecting a single record from database
     function executeSelectSingleRecordQuery($query, $columnName){
         
-        $con = $this->getcon();
-        
-        $result = $con->query($query);
+        $con        = $this->getcon();
+        $result     = $con->query($query);
+        $row_array  = $result->fetch_array(MYSQLI_ASSOC);
+        return $row_array[$columnName];
     }
     
     //check whether the table has this id 
@@ -53,7 +55,7 @@ class dbConnection{
     function checkTableHasThisId($id, $tableName){
         
         $con = $this->getcon();
-        if ($result = mysqli_query($con, "SELECT * FROM $tableName WHERE id=$id")){
+        if ($result = mysqli_query($con, "SELECT * FROM $tableName WHERE id='$id'")){
             // Return the number of rows in result set
             $rowcount=mysqli_num_rows($result);
             // Free result set
@@ -69,11 +71,23 @@ class dbConnection{
     function countTableRecord($tableName){
         
         $con        = $this->getcon();
-        $result     = $con->query("SELECT COUNT(*) as TOTALFOUND from $tableName");
+        $result     = $con->query("SELECT COUNT(*) as TOTALFOUND from `$tableName`");
         $row_array  = $result->fetch_array(MYSQLI_ASSOC);
         return $row_array['TOTALFOUND']; 
     }
     
+    function getTableNextUniqueId($table, $prefix){
+        
+        //create unique id (nth number of the table)
+        $noOfRecords = $this->countTableRecord($table);
+        $uniqueId = $prefix.($noOfRecords++);
+
+        //increse unique id by 1 if already exists
+        while($this->checkTableHasThisId($uniqueId, $table))
+            $uniqueId = $prefix.($noOfRecords++);
+        
+        return $uniqueId;
+    }
 }
 //
 //$c = new dbConnection();
