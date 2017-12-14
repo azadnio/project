@@ -28,7 +28,7 @@
     </head> 
     <body ng-app="app" ng-controller="appController">
         
-        <div id="logo">   
+        <div id="logo" class="table-row">   
             <div>
                 <img src="../assets/images/app/logo.png" style="    height: 100px;">
                 <!--<img src="../assets/images/app/header.png" style="top: -20px; position: relative;     height: 75px;">-->
@@ -42,8 +42,8 @@
             </div>
         </div>
         
-        <div id="nav-bar">
-            <a href="./" style="    width: 28px;
+        <div id="nav-bar" class="table-row">
+            <a href="./#/home" style="    width: 28px;
                position: relative;
                height: 19px;"><i class="fa fa-home fa-2x" aria-hidden="true" style="position: absolute;
                  top: 5px;color: #891515;
@@ -55,26 +55,26 @@
             <a href="./#/invoices" ng-class="{ active: isActive('invoices')}">Invoices</a>
             <a href="./#/accounts" ng-class="{ active: isActive('accounts')}">Accounts</a>
             <a href="./#/items" ng-class="{ active: isActive('items')}">Items</a>           
-            <a href="./#/reports" ng-class="{ active: isActive('trn')}">Sales Return</a> 
+            <a href="./#/returns" ng-class="{ active: isActive('trn')}">Sales Return</a> 
             <a href="./#/reports" ng-class="{ active: isActive('reports')}">Reports</a>
             <a style="font-weight: bold;color: red;">Logout</a>
             <a style="float: right; font-style: italic; color: #3c3a3a;" href=""><i class="fa fa-user"></i>User : S.H.M Silmy</a>
         </div>
-        <section>
+        <section class="table-row">
             <div ng-view></div>
         </section>
         <div ng-include="modalDialogUrl"></div>
         
-        <div class="home-cont">
+        <div class="home-cont table-row" ng-show="isActive('home')">
             <div>
                 <div>
-                    <div class="home-block-btn" style="background: #2f78b2; color: white;">
+                    <a href="./#/invoices" class="home-block-btn" style="background: #2f78b2; color: white;">
                         <span>
                             <i class="fa fa-file-text-o fa-3x" aria-hidden="true" title="Create A Invoice"></i>
                             invoices
                         </span>
-                    </div>
-                    <div class="home-block-btn" style="background: #955151; color: white; position: relative;">
+                    </a>
+                    <a href="./#/orders" class="home-block-btn" style="background: #955151; color: white; position: relative;">
                         <span>
                             <i style="top:30px; color: #4CAF50;" class="fa fa-truck fa-3x" aria-hidden="true"></i>
                             orders
@@ -86,43 +86,49 @@
                               width: 94%;
                               font-size: 12px;
                               font-style: italic;">2 New Orders</span>
-                    </div>
-                    <div class="home-block-btn" style="background: #2f78b2; color: white;">
+                    </a>
+                    <a href="./#/payments" class="home-block-btn" style="background: #2f78b2; color: white;">
                         <span>
                             <i class="fa fa-money fa-3x" aria-hidden="true" title="Creat A Payment"></i>
                             payment
                         </span>
-                    </div>
+                    </a>
                 </div>
                 <div>
-                    <div class="home-block-btn" style="background: #955151; color: white; position: relative;">
+                    <a href="./#/customers" class="home-block-btn" style="background: #955151; color: white; position: relative;">
                         <span>
                             <i class="fa fa-users fa-3x" aria-hidden="true"></i>
                             customers
                         </span>
-                    </div>
+                    </a>
                     <div style="display: inline-block;
                          width: 220px;
                          position: relative;"><img style="position: absolute;
                            top: -36px;
                            width: 147px;
                            left: 27px;" src="../assets/images/app/logo.png"></div>
-                    <div class="home-block-btn" style="background: #955151; height: 100px;
-                         color: white; position: relative;"><span><i class="fa fa-list fa-3x" aria-hidden="true"></i>Items</span></div>
+                    <a href="./#/items" class="home-block-btn" style="background: #955151; height: 100px;
+                         color: white; position: relative;">
+                        <span><i class="fa fa-list fa-3x" aria-hidden="true"></i>Items</span>
+                    </a>
                 </div>
                 <div>
-                    <div class="home-block-btn" style="background: #2f78b2;
-                         color: white;"><span><i class="fa fa-book fa-3x" aria-hidden="true"></i>Accounts</span></div>
-                    <div class="home-block-btn" style="background: #955151; height: 100px;
+                    <a href="./#/accounts" class="home-block-btn" style="background: #2f78b2;
+                         color: white;">
+                        <span><i class="fa fa-book fa-3x" aria-hidden="true"></i>Accounts</span>
+                    </a>
+                    <a href="./#/cheques" class="home-block-btn" style="background: #955151; height: 100px;
                          color: white; position: relative;"><span><i style="left: 69px;
-    top: 29px;" class="fa fa-credit-card-alt fa-3x" aria-hidden="true"></i>Cheques</span></div>
-                    <div class="home-block-btn" style="background: #2f78b2;
-                         color: white;"><span><i class="fa fa-mail-reply-all fa-3x" aria-hidden="true"></i>Sales return</span></div>
+    top: 29px;" class="fa fa-credit-card-alt fa-3x" aria-hidden="true"></i>Cheques</span></a>
+                    <a href="./#/returns" class="home-block-btn" style="background: #2f78b2;
+                         color: white;"><span><i class="fa fa-mail-reply-all fa-3x" aria-hidden="true">
+                             
+                            </i>Sales return</span></a>
                 </div>
             </div>
         </div>
         
-        <div id='login' ng-if='!userLoggedIn'>
+        <div id='login' ng-if='!userLoggedIn' class="table-row">
             <div class="main">
                 <div class="login-form">
                     <h1>User Login</h1>
@@ -141,9 +147,6 @@
                     </form>
                 </div>
             </div>
-        </div>
-        <div id='about' style="background: green; height: 400px;">
-            <h2>this is the about us  screen</h2>
         </div>
     </body>
 </html>

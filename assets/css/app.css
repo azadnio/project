@@ -1,3 +1,24 @@
+body, html{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    display: table;
+    width: calc(100% - 20px);/*reduce the padding of two sides*/
+    padding: 10px;
+}
+
+.table-row{
+    display: table-row;
+    height: 0;
+}
+
+.home-cont.table-row{
+    height: auto;
+}
+
 .tips{
     text-align: center;
     padding: 15px;
@@ -248,8 +269,10 @@ a:hover{
 }
 
 .home-cont > div {
-    display: table;
-    margin: auto;
+    display: table-cell;
+    margin: 50%;
+    vertical-align: middle;
+    text-align: center;
 }
 
 .home-block-btn:hover{

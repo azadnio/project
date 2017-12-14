@@ -85,21 +85,20 @@ app.controller('appController',['$scope','modalDialogProvider','$location','mess
         
         $scope.test = 'this is home page';
         $scope.fn = function(){console.log('test');};
-        $scope.userLogedIn = true;
+        $scope.userLoggedIn = true;
     
         $scope.chNavigateCount = 0;
     
         $scope.modalDialogUrl = '';
         modalDialogProvider.setScope($scope);
     
+        
         $scope.isActive =  function(viewLocation){
             return $location.path().toLowerCase().indexOf(viewLocation) > - 1;
         };
         
        // messageDialog.yesNo('afasdf asdfuaskdfjb adsfugasdu fdusafg you yes the adsfsdaf aaor no');
         
-        $scope.userLoggedIn = false;
-                
         $scope.test = function(){
             messageDialog.ok(' ok message').then(function(){
                 console.log('yes');
