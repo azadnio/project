@@ -27,7 +27,7 @@ app.controller('customersController',['$scope','$routeParams','customerProvider'
         $scope.sort         = 'id';
         $scope.reverse      = false;
     }
-    
+    console.log($scope.customers);
     $scope.filterCustomer = {
         status:'',
         toDate:'',
@@ -37,7 +37,7 @@ app.controller('customersController',['$scope','$routeParams','customerProvider'
     $scope.addNew = function(){
         if($scope.addingNewCustomer){
             customerProvider.addNewCustomer($scope.customerInfo);
-            $location.path('/customers/' + $scope.customerInfo.id || '000')
+//            $location.path('/customers/' + $scope.customerInfo.id || '000')
         }
     };
     
@@ -107,19 +107,20 @@ app.factory('customerProvider',['$http',function($http){
     
     var customers = [];
         
-    for (var i = 0; i < 15; i++) {
-        customers.push({
-            id:'00' + i,
-            name:'customer ' + i,
-            city: 'city ' + i,
-            status: i%2,
-            unclearedCheques: 20000,
-            returnedCheques:200,
-            paymentBalance: 20000,
-            creditLimit: 100000,
-            
-        });
-    }
+//    for (var i = 0; i < 15; i++) {
+//        customers.push({
+//            id:'00' + i,
+//            name:'customer ' + i,
+//            city: 'city ' + i,
+//            status: i%2,
+//            unclearedCheques: 20000,
+//            returnedCheques:200,
+//            paymentBalance: 20000,
+//            creditLimit: 100000,
+//            
+//        });
+//    }
+    
     return{
         
         //customer object
@@ -137,7 +138,29 @@ app.factory('customerProvider',['$http',function($http){
             };
         },
         
+        //load all customers from database
         loadCustomers:function(){
+            
+            $http.post('../server/customer.php',{method:'loadCustomers'}).then(function(e){
+                
+                if(e.data && (e.status >= 200 && e.status < 300)){
+                    //customer list recieved add it to customer array
+                    e.data.forEach(function(cust){
+                        customers.push(cust);
+                    });
+                }
+                else{
+                    //error while loading customers
+                    console.error(e);
+                    alert('A error occured while loading customers try agin later');
+                }
+                
+            }, function(e){
+                //cannot connect the server path
+                alert('A network error occured try agin later');
+                console.error(e);
+            });
+            
             return customers;
         },
         

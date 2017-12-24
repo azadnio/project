@@ -60,8 +60,8 @@
             <a style="font-weight: bold;color: red;">Logout</a>
             <a style="float: right; font-style: italic; color: #3c3a3a;" href=""><i class="fa fa-user"></i>User : S.H.M Silmy</a>
         </div>
-        <section class="table-row">
-            <div ng-view></div>
+        <section class="table" ng-hide="isActive('home')">
+            <div ng-view class="dis-table"></div>
         </section>
         <div ng-include="modalDialogUrl"></div>
         

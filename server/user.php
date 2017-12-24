@@ -14,10 +14,26 @@
             $customer->setName($data->name);            $customer->setNic($data->nic);
             $customer->setPassword($data->password);    $customer->setTelephone($data->telephone);
             $customer->setUsername($data->userName);    $customer->setUserid($data->userId);
-           
+    return var_dump($customer);
             return $customer->insertToDataBase();
         }
         
+        //looad all customers
+        public function loadAllCustomers(){
+            $ra = [];
+            $r['id'] = 1;
+            $r['name'] = 2;
+            $r['city'] = 3;
+            $r['status'] = 1;
+            $r['unclearedCheques'] = 2;
+            $r['returnedCheques'] = 3;
+            $r['paymentBalance'] = 1;
+            $r['creditLimit'] = 2;
+                    
+            array_push($ra, $r);
+            return json_encode($ra);
+            
+        }
     }
     
     class user {

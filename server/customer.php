@@ -23,4 +23,9 @@ switch ($request->method){
         $userProvider = new itemsProvider();
         echo $userProvider->addNewItem($request->data);
         break;
+    
+    case 'loadCustomers':
+        $userProvider = new userProvider();
+        echo $userProvider->loadAllCustomers();
+        break;
 }

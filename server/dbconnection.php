@@ -89,6 +89,6 @@ class dbConnection{
         return $uniqueId;
     }
 }
-//
+//unit test
 //$c = new dbConnection();
 //echo $c->countTableRecord('customer');
