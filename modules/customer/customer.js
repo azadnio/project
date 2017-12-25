@@ -8,13 +8,18 @@ app.controller('customersController',['$scope','$routeParams','customerProvider'
         if($routeParams.id.toLowerCase() === 'new'){
             //adding a new customer
             $scope.addingNewCustomer = true;
-            $scope.customerInfo = {};
-            $scope.customerInfo.id = '020';
-            $scope.customerInfo.status = 0;
+            $scope.customer = {};
+//            $scope.customer.id = '020';
+//            $scope.customer.status = 0;
         }
         else{
             //viewing customer info by id
-            $scope.customerInfo = customerProvider.getCustomerInfo($routeParams.id);
+            customerProvider.getCustomerInfo($routeParams.id).then(function(response){
+                
+                
+                
+            });
+            $scope.customer = 
             $scope.addingNewCustomer = false;
             
         }        
@@ -36,7 +41,7 @@ app.controller('customersController',['$scope','$routeParams','customerProvider'
     
     $scope.addNew = function(){
         if($scope.addingNewCustomer){
-            customerProvider.addNewCustomer($scope.customerInfo);
+            customerProvider.addNewCustomer($scope.customer);
             //            $location.path('/customers/' + $scope.customerInfo.id || '000')
         }
     };
@@ -71,10 +76,12 @@ app.controller('customerDialogController',['$scope','customerProvider','modalDia
         //save the customer
         customerProvider.addNewCustomer($scope.customer)
             //handle the promises
-            .then(function(res){console.log(res);
+            .then(function(res){
                 //prompt relavent messages
-                if(res.status >= 200 && res.status < 300 && res.data === '1')
+                if(res.status >= 200 && res.status < 300 && res.data === '1'){
                     alert('Customer successfully saved');
+                    modalDialog.setPromiseSuccess($scope.customer);
+                }
                 else
                     alert('Customer Cannot be saved try again shortly');
                 
@@ -82,7 +89,7 @@ app.controller('customerDialogController',['$scope','customerProvider','modalDia
                 //cannot connect to the server
                 alert('Cannot connect to the netwrok/internal server error');
             });
-        modalDialog.setPromiseSuccess($scope.customer);
+        
     };
     
     //close the dialog 
@@ -141,6 +148,10 @@ app.factory('customerProvider',['$http','modalDialog',function($http, modalDialo
         //load all customers from database
         loadCustomers:function(){
             
+            //empty existing array
+            customers = [];
+            
+            //request server for all customers
             $http.post('../server/request.php',{method:'loadCustomers'}).then(function(e){
                 
                 if(e.data && (e.status >= 200 && e.status < 300)){
@@ -166,10 +177,14 @@ app.factory('customerProvider',['$http','modalDialog',function($http, modalDialo
         
         addNewCustomer:function(customer){
             
+            //save customer to database
             return $http.post('../server/request.php',{data:customer, method:'insertCustomer'});
         },
         
         getCustomerInfo:function(id){
+            
+            return $http.post('../server/request.php',{data:{id:id}, method:'getCustomerDetails'});
+            
             return {
                 id:id,
                 name:'vamsi',
@@ -189,8 +204,9 @@ app.factory('customerProvider',['$http','modalDialog',function($http, modalDialo
         
         showAddNewCustomerDialog:function(){
             
-            modalDialog.showModalDialog('../modules/customer/new-customer.html', 'customer-dialog').then(function(cheque){
-                customers.push(cheque);
+            //show the customer modal dialog for adding new customer
+            modalDialog.showModalDialog('../modules/customer/new-customer.html', 'customer-dialog').then(function(customer){
+                customers.push(customer);
             });
         }
         

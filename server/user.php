@@ -21,16 +21,11 @@
         //looad all customers
         public function loadAllCustomers(){
             
-            $dbCon  = new dbConnection();
-            $con    = $dbCon->getcon();
-            
             //query select all customers TO DO
-            
-            $result = mysqli_query($con,"SELECT * from customer");
-            
+            $dbCon = new dbConnection();
+            $result = $dbCon->executeSelectQuery("SELECT * from customer");  
             $return = [];
-            while($row = mysqli_fetch_assoc($result) ){
-                
+            foreach ($result as $row) {
                 $rowData = [];
                 $rowData['id']    = $row['id'];
                 $rowData['name']  = $row['name'];
@@ -46,8 +41,20 @@
                 array_push($return, $rowData);
             }
             
+            
+//            while($row = mysqli_fetch_assoc($result) ){
+//                
+//                
+//            }
+            
             //send as a JSON result to caller
             return json_encode($return);            
+        }
+        
+        //load customer data
+        public function getCustomer($id){
+            
+            $customer = new customer();
         }
     }
     
@@ -135,6 +142,16 @@
         private $mobile ='adf';        private $creditlimit = 1451;
         private $image = '';
         
+        //load customer data from database
+        public function create($id) {
+            
+            //connection object
+            $con = $this->dbCon->getcon();
+            
+            
+        }
+
+
         //insert customer into data base
         function insertToDataBase(){
             
@@ -178,6 +195,7 @@
             
             return $stmt->execute();            
         }
+        
         
         //getters and setters for properties
         public function getAdress(){

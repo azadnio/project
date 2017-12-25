@@ -28,4 +28,9 @@ switch ($request->method){
         $userProvider = new userProvider();
         echo $userProvider->loadAllCustomers();
         break;
+    
+    case 'getCustomerDetails':
+        $userProvider = new userProvider();
+        echo $userProvider->getCustomer($request->data->id);
+        break;
 }
