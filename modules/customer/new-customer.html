@@ -42,15 +42,15 @@
             <label>
                 NIC : <input ng-model="customer.nic" style="width: 100px;width: 250px;margin-left: 45px;" type="text"> 
             </label><span style="    font-size: 11px;
-    color: gray;
-    font-style: italic;">Do note enter special letter</span>
+                          color: gray;
+                          font-style: italic;">Do note enter special letter</span>
         </div>
         
         <div style="position: absolute;
-    width: 188px;
-    height: 170px;    
-    right: 20px;
-    top: 80px;">
+             width: 188px;
+             height: 170px;    
+             right: 20px;
+             top: 80px;">
             <span>Customer Photo (optional)</span>
             <img id="customer-image" ng-src="{{customer.image}}" style="width: 100%;border: 1px solid #aca3a3;height: 100%;">
             <input id="file-upload-customer-image" style="width: 186px;" onchange="angular.element(this).scope().selectImageFile(this)" accept="image/*" type="file">
@@ -68,13 +68,13 @@
         <legend>Set Login Credential</legend>
         <div style="margin: 5px 10px;">
             <label>
-            User Name:  <input type="text" style="width: 250px;margin-left: 20px;" ng-model="customer.usename">
-        </label>
+                User Name:  <input type="text" style="width: 250px;margin-left: 20px;" ng-model="customer.usename">
+            </label>
         </div>
         <div style="margin: 5px 10px;">
             <label>
-            Password:  <input type="text" style="width: 250px;margin-left: 31px;" ng-model="customerInfo.password">
-        </label>
+                Password:  <input type="text" style="width: 250px;margin-left: 31px;" ng-model="customerInfo.password">
+            </label>
         </div>
     </fieldset>
     

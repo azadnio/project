@@ -1,4 +1,4 @@
-app.controller('invoicesController',['$scope','$routeParams','invoicesProvider',function($scope, $routeParams, invoicesProvider){
+app.controller('invoicesController',['$scope','$routeParams','invoicesProvider','customerProvider','modalDialog',function($scope, $routeParams, invoicesProvider, customerProvider, modalDialog){
     
     if($routeParams.id){
         
@@ -28,6 +28,17 @@ app.controller('invoicesController',['$scope','$routeParams','invoicesProvider',
         fromDate:''
     };
     
+    
+    $scope.selectCutomer = function(){
+        modalDialog.showModalDialog('views/modal-dialogs/customer-list.html', 'customer-list').then(function(selectedCustomer){
+            
+            $scope.invoiceInfo.customerId = selectedCustomer.id;
+            $scope.invoiceInfo.customerName = selectedCustomer.name;
+        });
+    };
+    
+    //show new customer dialog when click on add new customer button
+    $scope.addNewCustomer = customerProvider.showAddNewCustomerDialog;
 }]);
 
 app.factory('invoicesProvider',[function(){

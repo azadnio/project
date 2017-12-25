@@ -13,7 +13,7 @@
     </fieldset>
     
         <table cellspacing="0" cellpadding="0">
-            <tr>
+            <tr class="table-header">
                 <th><ch-table-sort sort="sort" value="id" reverse="reverse" text="ID"></ch-table-sort></th>
             <th><ch-table-sort sort="sort" value="name" reverse="reverse" text="Name"></ch-table-sort></th>
             <th>City</th>
@@ -43,6 +43,7 @@
                 
         </table>
     <div class="footer">
-        <button ng-click="ok()" ng-disabled="!selectedCustomer">Ok</button><button ng-click="cancel()">Close</button>
+        <button ng-click="ok()" ng-disabled="!selectedCustomer">Ok</button>
+        <button ng-click="close()">Close</button>
     </div>
 </div>

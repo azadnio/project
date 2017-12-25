@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
         <link rel="stylesheet" type="text/css" href="../assets/css/app.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/modal-dialogs.css">
         <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="../assets/css/animation.css">
         <script src="../assets/js/angular.min.js"></script>

@@ -1,0 +1,3 @@
+
+
+* select a customer dialog default width and css styling

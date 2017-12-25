@@ -40,12 +40,9 @@ app.controller('customersController',['$scope','$routeParams','customerProvider'
             //            $location.path('/customers/' + $scope.customerInfo.id || '000')
         }
     };
-
-    $scope.addNewCustomer = function(){
-        modalDialog.showModalDialog('../modules/customer/new-customer.html', 'customer-dialog').then(function(cheque){
-            $scope.payment.chequesList.push(cheque);
-        });
-    };
+    
+    //show new customer dialog when click on add new customer button
+    $scope.addNewCustomer = customerProvider.showAddNewCustomerDialog;
     
 }]);
 
@@ -103,7 +100,7 @@ app.controller('customerDialogController',['$scope','customerProvider','modalDia
     
 }]);
 
-app.factory('customerProvider',['$http',function($http){
+app.factory('customerProvider',['$http','modalDialog',function($http, modalDialog){
     
     var customers = [];
         
@@ -185,6 +182,13 @@ app.factory('customerProvider',['$http',function($http){
                 status:1,
             };
         },
+        
+        showAddNewCustomerDialog:function(){
+            
+            modalDialog.showModalDialog('../modules/customer/new-customer.html', 'customer-dialog').then(function(cheque){
+                customers.push(cheque);
+            });
+        }
         
     };
 }]);
