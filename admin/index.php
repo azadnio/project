@@ -64,7 +64,7 @@
             <a href="./#/returns" ng-class="{ active: isActive('trn')}">Sales Return</a> 
             <a href="./#/reports" ng-class="{ active: isActive('reports')}">Reports</a>
             <a style="font-weight: bold;color: red;">Logout</a>
-            <a style="float: right; font-style: italic; color: #3c3a3a;" href=""><i class="fa fa-user"></i>User : S.H.M Silmy</a>
+            <a style="float: right; font-style: italic; color: #3c3a3a;" href=""><i class="fa fa-user"></i>User : {{loggedInUserName}}</a>
         </div>
         <section class="table" ng-hide="isActive('home')">
             <div ng-view class="dis-table"></div>

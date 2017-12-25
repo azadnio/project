@@ -1,3 +1,30 @@
 
 
 * select a customer dialog default width and css styling
+
+
+
+
+
+
+
+
+
+
+validattions------------------------
+* new customer dialog
+
+
+
+
+
+
+
+
+
+
+
+
+
+to do last
+scroll bar for table if data exceeds show scroll bar

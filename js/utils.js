@@ -219,7 +219,7 @@ app.directive('chModalDialog',[function(){
             
         }],
         template:   '<div class="ch-modal-dialog">'+
-                        '<div class="overlay" ng-dbclick="close()" title="Double Click To Close the Dialog"></div>'+
+                        '<div class="overlay" ng-dbclick="close()" title="Double Click To CLOSE the Dialog"></div>'+
                         '<div class="content" ng-class="userclass" ng-include="dialogurl"></div>'+
                     '</div>'
     };
@@ -249,4 +249,13 @@ app.constant('status',{
         returned: 2       
     }
     
+});
+
+//listen navigate event of browser to close all acitive modal dialogs
+window.addEventListener('popstate', function(){
+        
+    var elements = document.getElementsByClassName('ch-modal-dialog');
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
 });

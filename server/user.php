@@ -20,19 +20,34 @@
         
         //looad all customers
         public function loadAllCustomers(){
-            $ra = [];
-            $r['id'] = 1;
-            $r['name'] = 2;
-            $r['city'] = 3;
-            $r['status'] = 1;
-            $r['unclearedCheques'] = 2;
-            $r['returnedCheques'] = 3;
-            $r['paymentBalance'] = 1;
-            $r['creditLimit'] = 2;
-                    
-            array_push($ra, $r);
-            return json_encode($ra);
             
+            $dbCon  = new dbConnection();
+            $con    = $dbCon->getcon();
+            
+            //query select all customers TO DO
+            
+            $result = mysqli_query($con,"SELECT * from customer");
+            
+            $return = [];
+            while($row = mysqli_fetch_assoc($result) ){
+                
+                $rowData = [];
+                $rowData['id']    = $row['id'];
+                $rowData['name']  = $row['name'];
+                $rowData['city']  = $row['city'];
+                $rowData['status']= $row['status'];
+                $rowData['mobile']= $row['mobile'];
+                
+                $rowData['unclearedCheques']= 2;
+                $rowData['returnedCheques'] = 3;
+                $rowData['paymentBalance']  = 1;
+                $rowData['creditLimit']     = 2;
+                
+                array_push($return, $rowData);
+            }
+            
+            //send as a JSON result to caller
+            return json_encode($return);            
         }
     }
     
@@ -41,7 +56,7 @@
         //generic private properties
         private $username = 'd';  private $password = 'd';
         private $name = 'df';      private $status = 1;
-        private $id = 'a';        private $userid = 'sd';// the admin user who registered this user/customer
+        private $id = 'a';        private $userId = 'sd';// the admin user who registered this user/customer
         
         //generic public properties
         public $dbCon;
@@ -104,11 +119,11 @@
 	}
 
 	public function getUserid(){
-            return $this->userid;
+            return $this->userId;
 	}
 
 	public function setUserid($userid){
-            $this->userid = $userid;
+            $this->userId = $userid;
 	}
     }
     
@@ -116,7 +131,7 @@
         
         //properties
         private $adress = 'ad';        private $city = 'asdf';
-        private $telephone = 'dgg';     private $nic ='asfg';
+        private $telephone = 'dgg';    private $nic ='asfg';
         private $mobile ='adf';        private $creditlimit = 1451;
         private $image = '';
         
@@ -135,10 +150,10 @@
                 //get the type
                 $pos  = strpos($this->image, ';');
                 $type = explode('/', substr($this->image, 0, $pos))[1];             
-                $ifp = fopen("../assets/images/users/$uniqueId.$type", 'wb' );
+                $ifp = fopen("../assets/images/users/". $this->getId() .$type, 'wb' );
                 $data = explode( ',', $this->image );
                 fwrite( $ifp, base64_decode( $data[ 1 ] ) );
-                $this->setImage("$uniqueId.$type");
+                $this->setImage($this->getId() . $type);
                 
                 // clean up the file resource
                 fclose( $ifp ); 

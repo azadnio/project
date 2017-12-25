@@ -80,7 +80,7 @@ class dbConnection{
         
         //create unique id (nth number of the table)
         $noOfRecords = $this->countTableRecord($table);
-        $uniqueId = $prefix.($noOfRecords++);
+        $uniqueId = $prefix.(++$noOfRecords);
 
         //increse unique id by 1 if already exists
         while($this->checkTableHasThisId($uniqueId, $table))

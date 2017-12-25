@@ -1,16 +1,31 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<div ng-controller="ordersListModalDialogController">
+    <div class="header">Pick an order</div>
+    <fieldset>
+        <legend>Filter Orders</legend>
+        <label>
+            Customer Name :
+            <input type="text">
+        </label>
+    </fieldset>
+    TO DO LOAD ALL ORDERS
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <th></th>
+                <th><ch-table-sort sort="sort" value="id" reverse="reverse" text="ID"></ch-table-sort></th>
+                <th><ch-table-sort sort="sort" value="name" reverse="reverse" text="Description"></ch-table-sort></th>
+                <th>Quantity</th>
+            </tr>
+            <tr ng-click="selectItem(item, $event)" 
+                ng-if="item.status !== 0" 
+                ng-repeat="item in items |orderBy:sort:reverse | filter : {name:filterCustomer.name} track by $index" >
+                <td>$index</td>
+                <td><a href="./#/items/{{item.id}}">{{item.id}}</a></td>
+                <td>{{customer.description}}</td>
+                <td><input type="text" ng-model="customer.quantity"></td>
+            </tr>
+                
+        </table>
+    <div class="footer">
+        <button ng-click="ok()" ng-disabled="!selectedItems.length">Add Items</button><button ng-click="cancel()">Close</button>
+    </div>
+</div>

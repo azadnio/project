@@ -48,10 +48,13 @@ app.controller('customersController',['$scope','$routeParams','customerProvider'
 
 
 //controller for customer modal dialog
-app.controller('customerDialogController',['$scope','customerProvider','modalDialog','$element',function($scope, customerProvider, modalDialog, $element){
-    
+app.controller('customerDialogController',['$scope','customerProvider','modalDialog','$element','user',function($scope, customerProvider, modalDialog, $element, user){
+
     //init customer object
     $scope.customer = new customerProvider.customer();
+    
+    //set added user
+    $scope.customer.userId = user.id;
     
     //reset customer object
     $scope.clear = function(){
@@ -129,7 +132,7 @@ app.factory('customerProvider',['$http','modalDialog',function($http, modalDialo
                 nic: '',        creditLimit: '',
                 userName: '',   password: '',
                 image: '',      imageFile:'',
-                userId:'',//user who created this customer
+                userId:''//user who created this customer
                 
                 
             };
@@ -138,7 +141,7 @@ app.factory('customerProvider',['$http','modalDialog',function($http, modalDialo
         //load all customers from database
         loadCustomers:function(){
             
-            $http.post('../server/customer.php',{method:'loadCustomers'}).then(function(e){
+            $http.post('../server/request.php',{method:'loadCustomers'}).then(function(e){
                 
                 if(e.data && (e.status >= 200 && e.status < 300)){
                     //customer list recieved add it to customer array
@@ -162,7 +165,8 @@ app.factory('customerProvider',['$http','modalDialog',function($http, modalDialo
         },
         
         addNewCustomer:function(customer){
-            return $http.post('../server/customer.php',{data:customer, method:'insertCustomer'});
+            
+            return $http.post('../server/request.php',{data:customer, method:'insertCustomer'});
         },
         
         getCustomerInfo:function(id){

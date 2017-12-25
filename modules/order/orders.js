@@ -22,6 +22,16 @@ app.controller('ordersController',['$scope','modalDialogProvider','ordersProvide
     
 }]);
 
+app.controller('ordersListModalDialogController',['$scope','ordersProvider',function($scope, ordersProvider){
+        
+    $scope.orders = ordersProvider.loadPendingOrders();
+    
+    $scope.filterOrder = {
+        customerName:''
+    };
+    
+}]);
+
 app.factory('ordersProvider',[function(){
     
     var orders = [];
@@ -62,6 +72,12 @@ app.factory('ordersProvider',[function(){
     return{
         loadOrders:function(){
             return orders;
+        },
+        
+        loadPendingOrders:function(){
+            
+            //server load pending orders
+            return [];
         },
     };
 }]);

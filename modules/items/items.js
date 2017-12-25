@@ -194,7 +194,7 @@ app.factory('itemsProvider',['$http',function($http){
         return{
             
             addNewItem: function(item){
-                return $http.post('../server/customer.php',{data:item, method:'insertItem'});
+                return $http.post('../server/request.php',{data:item, method:'insertItem'});
             },
             
             item: function(){

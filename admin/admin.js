@@ -81,32 +81,41 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
     }]);
 
 
-app.controller('appController',['$scope','modalDialogProvider','$location','messageDialog','modalDialog',function($scope, modalDialogProvider, $location, messageDialog, modalDialog){
+app.controller('appController',['$scope','modalDialogProvider','$location','messageDialog','user',function($scope, modalDialogProvider, $location, messageDialog, user){
         
-        $scope.test = 'this is home page';
-        $scope.fn = function(){console.log('test');};
-        $scope.userLoggedIn = true;
-    
-        $scope.chNavigateCount = 0;
-    
-        $scope.modalDialogUrl = '';
-        modalDialogProvider.setScope($scope);
-    
-        
-        $scope.isActive =  function(viewLocation){
-            return $location.path().toLowerCase().indexOf(viewLocation) > - 1;
-        };
-        
-       // messageDialog.yesNo('afasdf asdfuaskdfjb adsfugasdu fdusafg you yes the adsfsdaf aaor no');
-        
-        $scope.test = function(){
-            messageDialog.ok(' ok message').then(function(){
-                console.log('yes');
-            },function(){
-                console.log('reject');
-            });
-        };
-        
-        $scope.user = 'admin';
-        $scope.imageFolderPath = '../assets/images/items/';
-    }]);
+    $scope.test = 'this is home page';
+    $scope.fn = function(){console.log('test');};
+    $scope.userLoggedIn = true;
+
+    $scope.chNavigateCount = 0;
+
+    $scope.modalDialogUrl = '';
+    modalDialogProvider.setScope($scope);
+
+    //save loggged in userdata
+    user.name       = 'S.H.M Silmy';//max 12 char
+    user.id         = 'US1';
+    user.sessionId  = 'abcd';
+
+    $scope.loggedInUserName = user.name;
+
+    $scope.isActive =  function(viewLocation){
+        return $location.path().toLowerCase().indexOf(viewLocation) > - 1;
+    };
+
+   // messageDialog.yesNo('afasdf asdfuaskdfjb adsfugasdu fdusafg you yes the adsfsdaf aaor no');
+
+    $scope.test = function(){
+        messageDialog.ok(' ok message').then(function(){
+            console.log('yes');
+        },function(){
+            console.log('reject');
+        });
+    };
+
+    $scope.user = 'admin';
+    $scope.imageFolderPath = '../assets/images/items/';
+}]);
+
+//shared variable to store logged in user data
+app.value('user', {});
