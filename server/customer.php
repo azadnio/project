@@ -5,7 +5,7 @@
 require './user.php';
 require './item.php';
 
-//recieve post data
+//recieve post data details
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
   

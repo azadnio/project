@@ -12,15 +12,20 @@
         <script src="../assets/js/angular.min.js"></script>
         <script src="../assets/js/angular-route.min.js"></script>
         <script src="../assets/js/angular-animate.min.js"></script>
-        <script src="../data.js"></script>
+        <!--<script src="../data.js"></script>-->
         <!--date picker-->        
-        <script type="text/javascript" src="../lib/datepicker/js/angular-datepicker.js"></script>
-        <link rel="stylesheet" type="text/css" href="../lib/datepicker/css/angular-datepicker.css">
+        <script type="text/javascript" src="../assets/lib/datepicker/js/angular-datepicker.js"></script>
+        <link rel="stylesheet" type="text/css" href="../assets/lib/datepicker/css/angular-datepicker.css">
         
         <script src="./admin.js"></script>
         <script src="../modules/items/items.js"></script>
         <script src="../modules/customer/customer.js"></script>
-        <script src="./controllers.js"></script>
+        <script src="../modules/cheque/cheque.js"></script>
+        <script src="../modules/payments/payment.js"></script>
+        <script src="../modules/account/accounts.js"></script>
+        <script src="../modules/invoice/invoice.js"></script>
+        <script src="../modules/order/orders.js"></script>
+        
         <script src="./modaldialogs.js"></script>
         <!--        <script src="./js/items.js"></script>
                 <script src="./js/account.js"></script>-->

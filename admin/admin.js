@@ -4,59 +4,59 @@ app.config(["$routeProvider", "$locationProvider",function($routeProvider, $loca
 
         $routeProvider.
             when('/customers', {
-                templateUrl: 'views/customers.html',
+                templateUrl: '../modules/customer/customers.html',
                 controller: 'customersController'
             }).
             when('/customers/:id', {
-                templateUrl: 'views/customer-view.html',
+                templateUrl: '../modules/customer/customer-view.html',
                 controller: 'customersController'
             }).
             when('/payments', {
-                templateUrl: 'views/payments.html',
+                templateUrl: '../modules/payments/payments.html',
                 controller: 'paymentsController'
             }).
             when('/payments/:id', {
-                templateUrl: 'views/payment-view.html',
+                templateUrl: '../modules/payments/payment-view.html',
                 controller: 'paymentsController'
             }).
             when('/cheques', {
-                templateUrl: 'views/cheques.html',
+                templateUrl: '../modules/cheque/cheques.html',
                 controller: 'chequesController'
             }).
             when('/cheques/:id', {
-                templateUrl: 'views/cheques.html',
+                templateUrl: '../modules/cheque/cheques.html',
                 controller: 'chequesController'
             }).
             when('/orders', {
-                templateUrl: 'views/orders.html',
+                templateUrl: '../modules/order/orders.html',
                 controller: 'ordersController'
             }).
             when('/orders/:id', {
-                templateUrl: 'views/orders-view.html',
+                templateUrl: '../modules/order/orders-view.html',
                 controller: 'ordersController'
             }).
-                when('/reports', {
+            when('/reports', {
 //                    templateUrl: 'views/invoices.html',
 //            controller: 'invoicesController'
             }).
             when('/accounts', {
-                templateUrl: 'views/accounts.html',
+                templateUrl: '../modules/account/accounts.html',
                 controller: 'accountsController'
             }).
             when('/accounts/:id', {
-                templateUrl: 'views/ledger-view.html',
+                templateUrl: '../modules/account/ledger-view.html',
                 controller: 'accountsController'
             }).
             when('/invoices', {
-                templateUrl: 'views/invoices.html',
+                templateUrl: '../modules/invoice/invoices.html',
                 controller: 'invoicesController'
             }).
             when('/invoices/:id', {
-                templateUrl: 'views/invoice-view.html',
+                templateUrl: '../modules/invoice/invoice-view.html',
                 controller: 'invoicesController'
             }).
             when('/accounts', {
-                templateUrl: 'views/accounts.html',
+                templateUrl: '../modules/account/accounts.html',
                 controller: 'accountsController'
             }).
             when('/items', {

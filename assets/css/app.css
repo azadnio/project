@@ -719,7 +719,7 @@ td{
 
 .ch-modal-dialog .cheque-dialog{
     width: 400px;
-    top: 30%;
+    top: 20%;
 }
 
 .ch-modal-dialog .customer-list,
@@ -735,7 +735,7 @@ td{
 .ch-modal-dialog .overlay{
     background: black;
     opacity: 0.5;
-    position: absolute;
+    position: fixed;
     z-index: -1;
 }
 

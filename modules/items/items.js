@@ -1,8 +1,8 @@
-app.controller('itemsViewController',['$scope','itmesProvider','$routeParams','modalDialog',function($scope, itmesProvider, $routeParams, modalDialog){
+app.controller('itemsViewController',['$scope','itemsProvider','$routeParams','modalDialog',function($scope, itemsProvider, $routeParams, modalDialog){
         
         $scope.parentScope = $scope.$parent;
         
-        $scope.items = itmesProvider.loadItems();
+        $scope.items = itemsProvider.loadItems();
         
         //$scope.locks = locks;
         
@@ -63,14 +63,14 @@ app.controller('itemsViewController',['$scope','itmesProvider','$routeParams','m
         
     }]);
 
-app.controller('itemcontroller',['$scope','$routeParams','itmesProvider','$element','modalDialog',function($scope, $routeParams,itmesProvider ,$element,modalDialog){
+app.controller('itemcontroller',['$scope','$routeParams','itemsProvider','$element','modalDialog',function($scope, $routeParams,itemsProvider ,$element,modalDialog){
         
         var itemId = $routeParams.itemId;
         
         $scope.selectedCategory = '';
         
         
-        $scope.categories = itmesProvider.getItemCatgories();
+        $scope.categories = itemsProvider.getItemCatgories();
         
 //        $scope.item = {
 //            id: '001',
@@ -85,7 +85,7 @@ app.controller('itemcontroller',['$scope','$routeParams','itmesProvider','$eleme
 //        };//itmesProvider.getItemByItemId(itemId);
         
         //init item object
-        $scope.item = new itmesProvider.item();
+        $scope.item = new itemsProvider.item();
         
         $scope.selectedCategory = $scope.item.category;
         
@@ -140,7 +140,7 @@ app.controller('itemcontroller',['$scope','$routeParams','itmesProvider','$eleme
         //save new item into data base
         $scope.save = function(){
             
-            itmesProvider.addNewItem($scope.item)
+            itemsProvider.addNewItem($scope.item)
             //handle the promises
             .then(function(res){console.log(res);
                 //prompt relavent messages
@@ -157,7 +157,7 @@ app.controller('itemcontroller',['$scope','$routeParams','itmesProvider','$eleme
         
         //reset item object
         $scope.clear = function(){
-            $scope.item = new itmesProvider.item();
+            $scope.item = new itemsProvider.item();
         };
         
         //supportive functions and variables for view user clicked image in original/zoomed view
@@ -173,7 +173,7 @@ app.controller('itemcontroller',['$scope','$routeParams','itmesProvider','$eleme
     }]);
 
 
-app.factory('itmesProvider',['$http',function($http){
+app.factory('itemsProvider',['$http',function($http){
         
         var items = [];
         

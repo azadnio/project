@@ -27,7 +27,7 @@ app.controller('customersController',['$scope','$routeParams','customerProvider'
         $scope.sort         = 'id';
         $scope.reverse      = false;
     }
-    console.log($scope.customers);
+
     $scope.filterCustomer = {
         status:'',
         toDate:'',
@@ -37,10 +37,10 @@ app.controller('customersController',['$scope','$routeParams','customerProvider'
     $scope.addNew = function(){
         if($scope.addingNewCustomer){
             customerProvider.addNewCustomer($scope.customerInfo);
-//            $location.path('/customers/' + $scope.customerInfo.id || '000')
+            //            $location.path('/customers/' + $scope.customerInfo.id || '000')
         }
     };
-    
+
     $scope.addNewCustomer = function(){
         modalDialog.showModalDialog('../modules/customer/new-customer.html', 'customer-dialog').then(function(cheque){
             $scope.payment.chequesList.push(cheque);

@@ -14,7 +14,7 @@
             $customer->setName($data->name);            $customer->setNic($data->nic);
             $customer->setPassword($data->password);    $customer->setTelephone($data->telephone);
             $customer->setUsername($data->userName);    $customer->setUserid($data->userId);
-    return var_dump($customer);
+
             return $customer->insertToDataBase();
         }
         
