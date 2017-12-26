@@ -11,81 +11,98 @@
             <legend>Personal Info</legend>
             <div style="margin: 5px 10px;">
                 <label>
-                    Name : <input ng-model="customer.name" style="width: 100px;width: 250px;margin-left: 30px;" type="text"> 
+                    Name : <input ng-model="customer.name" class="data-field" style="margin-left: 30px;" type="text"> 
                 </label>
             </div>
             <div style="margin: 5px 10px;">
                 <p class="formfield" style="margin: 0">
                     <label for="textarea">Address:</label>
-                    <textarea ng-model="customer.address" id="textarea" rows="5" style="margin-left: 19px;width: 250px;"></textarea>
+                    <textarea ng-model="customer.address" id="textarea" rows="5" style="margin-left: 19px;" class="data-field"></textarea>
                 </p>
             </div>
             <div style="margin: 5px 10px;">
                 <label>
-                    City : <input ng-model="customer.city" style="width: 100px;width: 250px;margin-left: 45px;" type="text" > 
+                    City : <input ng-model="customer.city" style="margin-left: 45px;" class="data-field" type="text" > 
                 </label>
             </div>
             <div style="margin: 5px 10px;">
                 <label>
-                    Telephone : <input ng-model="customer.telephone" style="width: 100px;width: 250px;margin-left: 0px;" type="text" > 
+                    Telephone : <input ng-model="customer.telephone" style="margin-left: 0px;" class="data-field" type="text" > 
                 </label>
             </div>
             <div style="margin: 5px 10px;">
                 <label>
-                    Mobile : <input ng-model="customer.mobile" style="width: 100px;width: 250px;margin-left: 27px;" type="text" > 
+                    Mobile : <input ng-model="customer.mobile" style="margin-left: 27px;" class="data-field" type="text" > 
                 </label>
             </div>
             <div style="margin: 5px 10px;">
                 <label>
-                    E-mail : <input ng-model="customer.email" style="width: 100px;width: 250px;margin-left: 27px;" type="text"  > 
+                    E-mail : <input ng-model="customer.email" style="margin-left: 27px;" class="data-field" type="text"  > 
                 </label>
             </div>
             <div style="margin: 5px 10px;">
                 <label>
-                    NIC : <input ng-model="customer.nic" style="width: 100px;width: 250px;margin-left: 45px;" type="text"> 
+                    NIC : <input ng-model="customer.nic" style="margin-left: 45px;" class="data-field" type="text"> 
                 </label><span style="    font-size: 11px;
                               color: gray;
                               font-style: italic;">Do note enter special letter</span>
             </div>
-            
+                
             <div style="position: absolute;
-    width: 188px;
-    height: 170px;
-    right: 20px;
-    top: 25px;">
+                 width: 188px;
+                 height: 170px;
+                 right: 20px;
+                 top: 25px;">
                 <span>Customer Photo (optional)</span>
                 <img id="customer-image" ng-src="{{customer.image}}" style="width: 100%;border: 1px solid #aca3a3;height: 100%;">
                 <input id="file-upload-customer-image" style="width: 186px;" onchange="angular.element(this).scope().selectImageFile(this)" accept="image/*" type="file">
             </div>
+                
+        </fieldset>
+            
+        <fieldset style="margin: 13px;">
+            <legend>Account Info</legend>            
+            <label style="margin: 5px 10px;">
+                Credit Limit: <input type="text" style="margin-left: 60px;" class="data-field" ng-model="customer.creditLimit">
+            </label>
+            <div style="margin: 5px 10px;">
+                <label>
+                    Payments balance: <input type="text" style="margin-left: 7px;" class="data-field" readonly="true" ng-value="{{00000}}|currency:'Rs. '">
+                </label>
+            </div>
+            <div style="margin: 5px 10px;">
+                <label>
+                    Returned Cheques: <input type="text" style="margin-left: 7px;" class="data-field" readonly="true" ng-value="{{00000}}|currency:'Rs. '">
+                </label>
+            </div>    
             
         </fieldset>
-        
-        <fieldset style="margin: 13px;">
-            <label>
-                Credit Limit: <input type="text" style="width: 250px;margin-left: 7px;" ng-model="customer.creditLimit">
-            </label>
-        </fieldset>
-        
+            
         <fieldset  style="margin: 13px;" ng-if="!addingNewCustomer">
-            <legend>Set Login Credential</legend>
+            <legend>Edit Login Credential(TO DO Only Admin)</legend>
             <div style="margin: 5px 10px;">
                 <label>
-                    User Name:  <input type="text" style="width: 250px;margin-left: 20px;" ng-model="customer.userName">
+                    User Name:  <input type="text" style="margin-left: 20px;" class="data-field" ng-model="customer.userName">
                 </label>
             </div>
             <div style="margin: 5px 10px;">
                 <label>
-                    Password:  <input type="text" style="width: 250px;margin-left: 31px;" ng-model="customer.password">
+                    Password:  <input type="text" style="margin-left: 31px;" class="data-field" ng-model="customer.password">
                 </label>
             </div>
+            <button class="btn blue-btn" ng-click='resetPassword()'>Reset</button>
         </fieldset>
+        
+        <div style="margin: 5px 10px;">
+            <i>Added By : S.H.M SILMY</i>
+        </div>
         
         <div style="text-align: right;padding: 10px;">
             <button class="btn gray-btn" ng-click="clear()">Clear</button>
             <button class="btn blue-btn" ng-click="ok()">Edit</button>
             <a href="" class="btn red-btn"  ng-click="cancel()"> < Back</a>
         </div>
-        
+            
     </div>
         
 </div>

@@ -49,6 +49,10 @@ app.controller('customersController',['$scope','$routeParams','customerProvider'
     //show new customer dialog when click on add new customer button
     $scope.addNewCustomer = customerProvider.showAddNewCustomerDialog;
     
+    //reset password incase of forgot
+    $scope.resetPassword = function(){
+        alert('resetting customer password');
+    };
 }]);
 
 

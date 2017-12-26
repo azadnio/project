@@ -23,9 +23,10 @@
             
             //query select all customers TO DO
             $dbCon = new dbConnection();
-            $result = $dbCon->executeSelectQuery("SELECT * from customer");  
+            $rows = $dbCon->executeSelectQuery("SELECT * from customer");
+            
             $return = [];
-            foreach ($result as $row) {
+            while($row = mysqli_fetch_assoc($rows) ){
                 $rowData = [];
                 $rowData['id']    = $row['id'];
                 $rowData['name']  = $row['name'];
@@ -40,21 +41,36 @@
                 
                 array_push($return, $rowData);
             }
-            
-            
-//            while($row = mysqli_fetch_assoc($result) ){
-//                
-//                
-//            }
-            
+                        
             //send as a JSON result to caller
             return json_encode($return);            
         }
         
-        //load customer data
+        //load customer data of selected id
         public function getCustomer($id){
             
+            //default return object
+            $result = array(
+                'result'=>'fail', 
+                'message'=>'Customer Not Found'
+            );
+            
             $customer = new customer();
+            if($customer->create($id)){
+                //add customer details into result array
+                $result['customer'] = array(
+                    'city'      => $customer->getCity(),        'creditLimit'   => $customer->getCreditlimit(), 
+                    'email'     => $customer->getEmail(),       'image'         => $customer->getImage(),
+                    'address'   => $customer->getAdress(),      'mobile'        => $customer->getMobile(),
+                    'name'      => $customer->getName(),        'nic'           => $customer->getNic(),
+                    'telephone' => $customer->getTelephone(),   'userId'        => $customer->getUserid()
+                );
+                
+                //load customer payment balance and returned cheques amounts
+                
+            }
+            
+            return json_encode($result);
         }
     }
     
@@ -143,10 +159,17 @@
         private $image = '';
         
         //load customer data from database
-        public function create($id) {
+        public function create($_id) {
             
             //connection object
             $con = $this->dbCon->getcon();
+            
+            //using mysqli prepare function to avoid sql injection
+            $stmt = $con->prepare("SELECT * FROM `customer` WHERE `id` = ?");
+            $stmt->bind_param('s', $id);
+            
+            //set refrence variable values
+            $id= $_id;
             
             
         }
@@ -174,7 +197,10 @@
                 
                 // clean up the file resource
                 fclose( $ifp ); 
-    
+                if($stmt->execute()){
+                    
+                }
+                return false;
             }
                         
             //using mysqli prepare function to avoid sql injection

@@ -19,6 +19,10 @@ body{
     height: auto;
 }
 
+.data-field{
+    width: 250px;
+}
+
 .tips{
     text-align: center;
     padding: 15px;

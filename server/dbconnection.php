@@ -5,7 +5,7 @@ class dbConnection{
     public $con;
     
     private function createConnection(){
-        $this->con = mysqli_connect("localhost", "root", "","capitalHardware") or //mysqli_connect("localhost", "root", "rootpassword","capitalHardware")
+        $this->con = mysqli_connect("localhost", "root", "rootpassword","capitalHardware") or //mysqli_connect("localhost", "root", "rootpassword","capitalHardware")
                 die("Server Error : " . mysql_error());
     }
 
@@ -44,9 +44,7 @@ class dbConnection{
     //common routin for non parameter select query, return result set
     function executeSelectQuery($query){
         
-        $con        = $this->getcon();
-        $result     = $con->query($query);
-        return $result->fetch_array(MYSQLI_ASSOC);        
+        return mysqli_query($this->getcon(), $query);        
     }
     
     //common routine for selecting a single record from database
