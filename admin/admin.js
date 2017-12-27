@@ -114,7 +114,7 @@ app.controller('appController',['$scope','modalDialogProvider','$location','mess
     };
 
     $scope.user = 'admin';
-    $scope.imageFolderPath = '../assets/images/items/';
+    $scope.imageFolderPath = '../assets/images/';
 }]);
 
 //shared variable to store logged in user data

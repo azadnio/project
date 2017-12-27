@@ -16,7 +16,7 @@ switch ($request->method){
     
     case 'insertCustomer':
         $userProvider = new userProvider();
-        echo $userProvider->addNewCustomer($request->data);
+        echo $userProvider->saveCustomer($request->data);
         break;
     
     case 'insertItem':

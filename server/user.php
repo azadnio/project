@@ -5,7 +5,7 @@
     //manipulate all user actions received from front end
     class userProvider{
         
-        public function addNewCustomer($data){
+        public function saveCustomer($data, $isNew = true){
             
             $customer = new customer();
             $customer->setCity($data->city);            $customer->setCreditlimit($data->creditLimit);
@@ -14,8 +14,16 @@
             $customer->setName($data->name);            $customer->setNic($data->nic);
             $customer->setPassword($data->password);    $customer->setTelephone($data->telephone);
             $customer->setUsername($data->userName);    $customer->setUserid($data->userId);
-
-            return $customer->insertToDataBase();
+            
+            //save new customer
+            if($isNew)
+                return $customer->insertToDataBase();
+            //update existing customer
+            else{
+                $customer->setId($data->$id);
+                return $customer->updateCustomer();
+            }
+                
         }
         
         //looad all customers
@@ -49,12 +57,7 @@
         //load customer data of selected id
         public function getCustomer($id){
             
-            //default return object
-            $result = array(
-                'result'=>'fail', 
-                'message'=>'Customer Not Found'
-            );
-            
+            $result = [];//status notify to front end
             $customer = new customer();
             if($customer->create($id)){
                 //add customer details into result array
@@ -68,10 +71,19 @@
                 
                 //load customer payment balance and returned cheques amounts
                 
+                //updatae result status
+                $result['status'] = true;
+            }
+            else{
+                
+                $result['status'] = false;
+                $result['message'] = 'Customer Not Found';
             }
             
             return json_encode($result);
         }
+        
+        
     }
     
     class user {
@@ -99,6 +111,25 @@
             }
         }
         
+        public function saveUserImageIntoDiretory(){
+            
+            //save or update existing user image
+            
+            try{
+                $pos  = strpos($this->image, ';');
+                $type = explode('/', substr($this->image, 0, $pos))[1];     
+
+                $imageName = $this->getId() . '.' . $type;
+                $ifp = fopen("../assets/images/users/". $imageName, 'wb' );
+                $data = explode( ',', $this->image );
+                fwrite( $ifp, base64_decode( $data[ 1 ] ) );
+                $this->setImage($imageName);
+
+                // clean up the file resource
+                fclose( $ifp ); 
+            }
+            catch(Exception $e){}
+        }
         
         //getters and setters for properties
         public function getUsername(){
@@ -170,8 +201,29 @@
             
             //set refrence variable values
             $id= $_id;
+                        
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if($result->num_rows == 0) 
+                return false;
             
+            $data = $result->fetch_assoc();
             
+            $this->setCity($data['city']);            $this->setCreditlimit($data['creditlimit']);
+            $this->setEmail($data['email']);          $this->setImage($data['image']);
+            $this->setAdress($data['address']);       $this->setMobile($data['mobile']);
+            $this->setName($data['name']);            $this->setNic($data['nic']);
+            $this->setPassword($data['password']);    $this->setTelephone($data['telephone']);
+            $this->setUsername($data['username']);    $this->setUserid($data['userid']);
+            $this->setId($data['id']);                $this->setStatus($data['status']);
+
+            return true;
+//            while ($myrow = $result->fetch_assoc()) {
+//
+//                // use your $myrow array as you would with any other fetch
+//                printf("%s is in district %s\n", $city, $myrow['district']);
+//
+//            }
         }
 
 
@@ -187,20 +239,10 @@
             //save the image file into the directory
             if(isset($this->image) && trim($this->image) !== '' ){
                 
-                //get the type
-                $pos  = strpos($this->image, ';');
-                $type = explode('/', substr($this->image, 0, $pos))[1];             
-                $ifp = fopen("../assets/images/users/". $this->getId() .$type, 'wb' );
-                $data = explode( ',', $this->image );
-                fwrite( $ifp, base64_decode( $data[ 1 ] ) );
-                $this->setImage($this->getId() . $type);
-                
-                // clean up the file resource
-                fclose( $ifp ); 
-                if($stmt->execute()){
-                    
-                }
-                return false;
+                $this->saveUserImageIntoDiretory();
+            }
+            else{
+                //no image so delete existing
             }
                         
             //using mysqli prepare function to avoid sql injection
@@ -222,6 +264,55 @@
             return $stmt->execute();            
         }
         
+        function updateCustomer(){
+            
+                 
+            if($this->dbCon->checkTableHasThisId($this->getId(), 'customer')){
+                
+                //connection object
+                $con = $this->dbCon->getcon();
+                
+                try{
+                    
+                    //save the image file into the directory
+                    if(isset($this->image) && trim($this->image) !== '' ){
+
+                        $this->saveUserImageIntoDiretory();
+                    }
+
+                    //using mysqli prepare function to avoid sql injection
+                    $stmt = $con->prepare('INSERT INTO `customer` '
+                            . '(id, name, address, city, telephone, nic, mobile, creditlimit, username,'
+                            . 'password, userid, image, email, status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+
+                    $stmt->bind_param('sssssssdsssssi', $id, $name,$adress,$city,$telephone,$nic,$mobile,$creditlimit,$username, $password, $userid, $iamge, $email, $status);
+
+                    //set refrence variable values
+                    $id         = $this->getId();       $name       = $this->getName();
+                    $adress     = $this->adress;        $city       = $this->city;
+                    $telephone  = $this->telephone;     $nic        = $this->nic;
+                    $mobile     = $this->mobile;        $creditlimit= $this->creditlimit;
+                    $username   = $this->getUsername(); $password   = $this->getPassword(); 
+                    $userid     = $this->getUserid();   $iamge      = $this->image;
+                    $email      = $this->email;         $status     = $this->getStatus();         
+
+                    return $stmt->execute();     
+                    
+                }
+                catch(ErrorException $e){
+                    
+                    
+                }
+                
+                $result['status'] = true;
+            }
+            else{
+                $result['status'] = false;
+                $result['message'] = 'Customer not found. UserId: ' .$this->getId();
+            }
+            
+            return json_encode($result);
+        }
         
         //getters and setters for properties
         public function getAdress(){

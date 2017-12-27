@@ -4,7 +4,7 @@
         <button class="action-button" ng-click="addNewCustomer()">Add new Customer</button>
     </div>
         
-    <div class="right-selected-panel">
+    <div class="right-selected-panel" ng-hide="customerNotFound">
         
         <div class='header' style="color: black;">Customer Details</div>
         <fieldset style="margin: 13px; position: relative;">
@@ -54,10 +54,9 @@
                  right: 20px;
                  top: 25px;">
                 <span>Customer Photo (optional)</span>
-                <img id="customer-image" ng-src="{{customer.image}}" style="width: 100%;border: 1px solid #aca3a3;height: 100%;">
+                <img id="customer-image" ng-src="{{$parent.imageFolderPath +'/users/'+ customer.image}}" style="width: 100%;border: 1px solid #aca3a3;height: 100%;">
                 <input id="file-upload-customer-image" style="width: 186px;" onchange="angular.element(this).scope().selectImageFile(this)" accept="image/*" type="file">
             </div>
-                
         </fieldset>
             
         <fieldset style="margin: 13px;">
@@ -105,4 +104,8 @@
             
     </div>
         
+    <div ng-if="customerNotFound">
+        <h1>Oops cannot find the Customer you looking for</h1>
+        TO DO STYLE it
+    </div>
 </div>

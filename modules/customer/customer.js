@@ -3,6 +3,10 @@
 //main controller for customer tab
 app.controller('customersController',['$scope','$routeParams','customerProvider','$location','modalDialog', function($scope, $routeParams, customerProvider, $location, modalDialog){
     
+    //to show the cannot find customer template
+    $scope.customerNotFound = false;
+    
+    //url has customer id
     if($routeParams.id){
         
         if($routeParams.id.toLowerCase() === 'new'){
@@ -16,12 +20,18 @@ app.controller('customersController',['$scope','$routeParams','customerProvider'
             //viewing customer info by id
             customerProvider.getCustomerInfo($routeParams.id).then(function(response){
                 
+                if(response.status >= 200 && response.status < 300 && response.data && response.data.status){
+                    $scope.customer = response.data.customer;
+                    console.log($scope.customer);
+                }
+                else
+                    $scope.customerNotFound = true;
                 
-                
+            }, function(){
+                alert('Error in contecting to server');
             });
-            $scope.customer = 
-            $scope.addingNewCustomer = false;
             
+            $scope.addingNewCustomer = false;
         }        
     }
     else{
